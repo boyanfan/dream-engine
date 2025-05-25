@@ -9,7 +9,7 @@ add_library(${PROJECT_NAME} STATIC
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core/includes>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core/include>
     $<INSTALL_INTERFACE:include>
 )
 

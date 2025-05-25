@@ -60,14 +60,14 @@ namespace DreamEngine {
         /// @param index Index into the texture sequence.
         /// @return Reference to SDL_Texture* at index.
         ///
-        SDL_Texture*& operator [](size_t index);
+        public: SDL_Texture*& operator [](size_t index);
 
         /// Access texture by index (const).
         ///
         /// @param index Index into the texture sequence.
         /// @return Const reference to SDL_Texture* at index.
         ///
-        const SDL_Texture* operator [](size_t index) const;
+        public: const SDL_Texture* operator [](size_t index) const;
     };
 }
 
