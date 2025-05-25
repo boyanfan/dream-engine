@@ -47,6 +47,8 @@ number of textures using `std::vector::reserve`.
 Preferred for performance when you know the number of 
 textures beforehand. Reduces heap re-allocations.
 
+<br>
+
 ### Destructors
 
 ```c++
@@ -59,6 +61,8 @@ destroys each `SDL_Texture*` using
 **Usage:**  
 Automatically called when the object goes out of scope.
 Ensures no texture memory leaks.
+
+<br>
 
 ### loadSequence()
 
@@ -83,6 +87,8 @@ sequence.
 Textures that fail to load are logged with `SDL_Log` 
 but skipped.
 
+<br>
+
 ### clearSequence()
 
 ```c++
@@ -96,6 +102,8 @@ destroy the `SDL_Texture*` objects.
 Use this only if you manage texture lifetimes manually 
 and want to reuse the object without deleting textures.
 
+<br>
+
 ### getSequenceSize()
 
 ```c++
@@ -107,6 +115,8 @@ the sequence.
 
 **Returns:**  
 Number of elements in the internal vector.
+
+<br>
 
 ### getTextureByIndex()
 
@@ -128,6 +138,8 @@ out of bounds.
 Safe access method for rendering or processing 
 specific frames, alternative to `operator[]` access.
 
+<br>
+
 ### addTexture()
 
 ```c++
@@ -143,6 +155,8 @@ Adds an externally created texture to the sequence.
 **Usage:**  
 Useful when textures are loaded manually or generated
 from other sources.
+
+<br>
 
 ### Operators
 
