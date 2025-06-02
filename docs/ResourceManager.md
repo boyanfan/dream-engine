@@ -20,6 +20,22 @@ and storing them in memory for later access.
 Below is a list and explanation of all public methods
 provided by the `ResourceManager` class.
 
+### getInstance()
+
+```c++
+static ResourceManager* getInstance();
+```
+
+Returns the singleton instance of `ResourceManager`. 
+This method is defined and inherited from the 
+`Singleton<ResourceManager>` base class.
+
+**Returns:**
+A pointer to the single, global `ResourceManager` 
+instance.
+
+<br>
+
 ### loadFromDirectory()
 
 ```c++
