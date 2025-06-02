@@ -84,4 +84,3 @@ SomeManager b = std::move(*SomeManager::getInstance());
 a = *SomeManager::getInstance();
 b = std::move(*SomeManager::getInstance());
 ```
-
