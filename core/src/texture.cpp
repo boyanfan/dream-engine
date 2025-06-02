@@ -13,7 +13,7 @@ namespace DreamEngine {
         for (SDL_Texture* texture : textureSequence) SDL_DestroyTexture(texture);
     }
 
-    void TextureSequence::loadSequence(SDL_Renderer* renderer, const char* pathTemplate, size_t size) {
+    void TextureSequence::loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size) {
         // Avoids repeated reallocation for textureSequence
         textureSequence.reserve(size);
 
@@ -31,11 +31,32 @@ namespace DreamEngine {
         }
     }
 
+    void TextureSequence::loadSequenceFromPool(const char* nameTemplate, size_t size) {
+        // Avoids repeated reallocation for textureSequence
+        textureSequence.reserve(size);
+
+        // Get ResourceManager to load textures from it
+        ResourceManager* manager = ResourceManager::getInstance();
+
+        for (int index = 0; index < size; index++) {
+            // Construct the templated texture name for each of the texture source
+            char textureName[128];
+            snprintf(textureName, sizeof(textureName), nameTemplate, index + 1);
+
+            // Get from the texture pool and add the specified texture
+            SDL_Texture* texture = manager->getTexture(textureName);
+            if (texture) textureSequence.push_back(texture);
+
+            // Throw an error if unable to find the specified texture
+            else SDL_Log("[ERROR]: Texture key not found in pool: %s", textureName);
+        }
+    }
+
     void TextureSequence::clearSequence() { textureSequence.clear(); }
 
     size_t TextureSequence::getSequenceSize() { return textureSequence.size(); }
 
-    SDL_Texture *TextureSequence::getTextureByIndex(int index) {
+    SDL_Texture* TextureSequence::getTextureByIndex(int index) {
         if (index < 0 || index >= TextureSequence::getSequenceSize()) return nullptr;
         return textureSequence[index];
     }

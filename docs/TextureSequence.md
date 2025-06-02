@@ -64,10 +64,10 @@ Ensures no texture memory leaks.
 
 <br>
 
-### loadSequence()
+### loadSequenceFromPath()
 
 ```c++
-void loadSequence(SDL_Renderer* renderer, const char* pathTemplate, size_t size);
+void loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size);
 ```
 
 Loads a sequence of textures using a printf-style 
@@ -75,7 +75,7 @@ file path template.
 
 **Parameters:**
 - `renderer`: The SDL renderer used to create the textures.
-- `pathTemplate`: A C-style formatted string with formatting placeholders.
+- `pathTemplate`: A C-style formatted string with formatting placeholders for file paths like `frame_%`, where %d is replaced by the index.
 - `size`: The number of textures to load.
 
 **Usage:**  
@@ -85,6 +85,31 @@ sequence.
 
 **Note:**  
 Textures that fail to load are logged with `SDL_Log` 
+but skipped.
+
+<br>
+
+### loadSequenceFromPool()
+```c++
+void loadSequenceFromPool(const char* nameTemplate, size_t size);
+```
+
+Loads a sequence of textures from the 
+`ResourceManager`'s texture pool using a formatted key 
+name template. This function is useful when your 
+textures are preloaded into `ResourceManager`.
+
+**Parameters:**
+- `pathTemplate`: A C-style formatted string with formatting placeholders for file paths like `frame_%`, where %d is replaced by the index.
+- `size`: The number of textures to load.
+
+**Usage:**  
+For each index from 1 to `size`, retrieves each 
+texture from the texture pool, and adds the texture to 
+the sequence if found.
+
+**Note:**  
+Textures that fail to load are logged with `SDL_Log`
 but skipped.
 
 <br>
@@ -207,7 +232,7 @@ SDL_Renderer* renderer = /* initialized renderer */;
 TextureSequence sequence(10);
 
 // Load textures named "frame_1.png", ..., "frame_10.png"
-sequence.loadSequence(renderer, "assets/frame_%d.png", 10);
+sequence.loadSequenceFromPath(renderer, "resources/frame_%d.png", 10);
 
 // Render the 3rd texture
 SDL_Texture* texture = sequence.getTextureByIndex(2);

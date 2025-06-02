@@ -5,13 +5,17 @@
 #ifndef DREAM_ENGINE_TEXTURE_H
 #define DREAM_ENGINE_TEXTURE_H
 
+#include "resource.h"
+
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <vector>
 #include <string>
 
 namespace DreamEngine {
-    /// Manages a sequence of SDL_Textures for rendering animations or image sequences.
+    /// TextureSequence is a utility class for managing a sequence of SDL_Texture* objects, typically used for
+    /// loading and displaying animated image sequences in SDL-based applications.
+    ///
     class TextureSequence {
         /// Constructs an empty TextureSequence.
         public: TextureSequence();
@@ -30,10 +34,19 @@ namespace DreamEngine {
         /// Loads a sequence of textures using a formatted path template.
         ///
         /// @param renderer The SDL_Renderer used to create textures.
-        /// @param pathTemplate A C-style formatted string with a printf-style format.
+        /// @param pathTemplate A C-style formatted string for file paths like 'frame_%d', where %d is replaced
+        ///                     by the index.
         /// @param size The number of textures to load.
         ///
-        public: void loadSequence(SDL_Renderer* renderer, const char* pathTemplate, size_t size);
+        public: void loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size);
+
+        /// Loads a sequence of textures from the ResourceManager's texture pool.
+        ///
+        /// @param nameTemplate The base name used to look up textures like 'frame_%d', where %d is replaced
+        ///                     by the index.
+        /// @param size The number of textures to load from the pool.
+        ///
+        public: void loadSequenceFromPool(const char* nameTemplate, size_t size);
 
         /// Clears the texture sequence. Does not destroy textures.
         public: void clearSequence();
