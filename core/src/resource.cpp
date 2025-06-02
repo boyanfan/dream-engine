@@ -25,7 +25,7 @@ namespace DreamEngine {
                     texturePool[path.stem().u8string()] = texture;
                 }
 
-                    // Load audio files as (with '.mp3' extension) Mix_Chunk audio
+                // Load audio files as (with '.mp3' extension) Mix_Chunk audio
                 else if (path.extension() == ".mp3") {
                     Mix_Chunk* audio = Mix_LoadWAV(path.u8string().c_str());
                     audioPool[path.stem().u8string()] = audio;

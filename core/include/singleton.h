@@ -10,7 +10,7 @@ namespace DreamEngine {
     /// declare the derived class as a friend class.
     ///
     template<typename T> class Singleton {
-        /// Private default constructor to prevent external instantiation.
+        /// Protected default constructor to prevent external instantiation.
         protected: Singleton();
 
         /// Virtual destructor to allow safe cleanup in derived classes.
