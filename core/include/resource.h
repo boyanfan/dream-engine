@@ -5,6 +5,8 @@
 #ifndef DREAM_ENGINE_RESOURCE_H
 #define DREAM_ENGINE_RESOURCE_H
 
+#include "singleton.h"
+
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_mixer/SDL_mixer.h>
@@ -16,32 +18,18 @@ namespace DreamEngine {
     /// ResourceManager is a singleton class responsible for loading image and audio files from a given directory
     /// and storing them for efficient reuse during runtime. It supports `.png` images and `.mp3` audio files.
     ///
-    class ResourceManager {
+    class ResourceManager final : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
         /// Private constructor to enforce singleton pattern.
         private: ResourceManager();
 
         /// Private destructor.
-        private: ~ResourceManager();
-
-        /// Deleted copy constructor to prevent copying of the singleton instance.
-        public: ResourceManager(const ResourceManager&) = delete;
-
-        /// Deleted move constructor to prevent moving of the singleton instance.
-        public: ResourceManager(ResourceManager&&) = delete;
-
-        /// Singleton instance pointer.
-        private: static ResourceManager* resourceManager;
+        private: ~ResourceManager() override;
 
         /// Pool of loaded textures, keyed by base filename.
         private: std::unordered_map<std::string, SDL_Texture*> texturePool;
 
         ///  Pool of loaded audio chunks, keyed by base filename.
         private: std::unordered_map<std::string, Mix_Chunk*> audioPool;
-
-        /// Returns the singleton instance of ResourceManager.
-        /// @return Pointer to the shared ResourceManager instance.
-        ///
-        public: static ResourceManager* getInstance();
 
         /// Loads all `.png` and `.mp3` files from a directory.
         ///
@@ -63,12 +51,6 @@ namespace DreamEngine {
         /// @return Mix_Chunk* pointer if found, nullptr otherwise.
         ///
         public: Mix_Chunk* getAudio(const std::string& audioName);
-
-        /// Deleted copy assignment operator to prevent reassignment of the singleton instance.
-        public: ResourceManager& operator =(const ResourceManager&) = delete;
-
-        /// Deleted move assignment operator to prevent move-assignment of the singleton instance.
-        public: ResourceManager& operator =(ResourceManager&&) = delete;
     };
 }
 

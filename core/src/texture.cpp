@@ -36,7 +36,7 @@ namespace DreamEngine {
         textureSequence.reserve(size);
 
         // Get ResourceManager to load textures from it
-        ResourceManager* manager = ResourceManager::getInstance();
+        ResourceManager* textureManager = ResourceManager::getInstance();
 
         for (int index = 0; index < size; index++) {
             // Construct the templated texture name for each of the texture source
@@ -44,7 +44,7 @@ namespace DreamEngine {
             snprintf(textureName, sizeof(textureName), nameTemplate, index + 1);
 
             // Get from the texture pool and add the specified texture
-            SDL_Texture* texture = manager->getTexture(textureName);
+            SDL_Texture* texture = textureManager->getTexture(textureName);
             if (texture) textureSequence.push_back(texture);
 
             // Throw an error if unable to find the specified texture

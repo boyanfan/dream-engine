@@ -5,16 +5,9 @@
 #include "resource.h"
 
 namespace DreamEngine {
-    ResourceManager* ResourceManager::resourceManager = nullptr;
-
     ResourceManager::ResourceManager() = default;
 
     ResourceManager::~ResourceManager() = default;
-
-    ResourceManager* ResourceManager::getInstance() {
-        if (!resourceManager) resourceManager = new ResourceManager();
-        return resourceManager;
-    }
 
     SDL_Texture *ResourceManager::getTexture(const std::string &textureName) { return texturePool[textureName]; }
 
