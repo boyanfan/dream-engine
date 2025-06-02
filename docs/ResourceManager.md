@@ -89,3 +89,42 @@ ResourceManager::getInstance()->loadFromDirectory(renderer, "resources/");
 SDL_Texture* playerTexture = ResourceManager::getInstance()->getTexture("player");
 Mix_Chunk* jumpSound = ResourceManager::getInstance()->getAudio("jump");
 ```
+
+---
+
+## Deleted Methods
+To ensure that `ResourceManager` remains a singleton, 
+all copy and move operations are explicitly deleted. 
+This prevents accidental duplication or reassignment 
+of the singleton instance, which could lead to 
+multiple resource pools and undefined behavior.
+
+```c++
+ResourceManager(const ResourceManager&) = delete;
+ResourceManager(ResourceManager&&) = delete;
+ResourceManager& operator=(const ResourceManager&) = delete;
+ResourceManager& operator=(ResourceManager&&) = delete;
+```
+
+In the singleton pattern, it is critical that only one
+instance of the class exists throughout the program's
+lifetime. By deleting:
+
+- Copy constructor: prevents creating a new instance by copying.
+- Move constructor: prevents moving the instance into a new object.
+- Copy assignment operator: prevents assigning one ResourceManager to another.
+- Move assignment operator: prevents moving one ResourceManager into another.
+
+This guarantees that the singleton instance created 
+via getInstance() remains unique and immutable in 
+identity.
+
+### Example Misuses Prevented
+
+```c++
+// These would be compile-time errors:
+ResourceManager a = *ResourceManager::getInstance();
+ResourceManager b = std::move(*ResourceManager::getInstance());
+a = *ResourceManager::getInstance();
+b = std::move(*ResourceManager::getInstance());
+```

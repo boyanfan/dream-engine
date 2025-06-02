@@ -23,6 +23,12 @@ namespace DreamEngine {
         /// Private destructor.
         private: ~ResourceManager();
 
+        /// Deleted copy constructor to prevent copying of the singleton instance.
+        public: ResourceManager(const ResourceManager&) = delete;
+
+        /// Deleted move constructor to prevent moving of the singleton instance.
+        public: ResourceManager(ResourceManager&&) = delete;
+
         /// Singleton instance pointer.
         private: static ResourceManager* resourceManager;
 
@@ -57,6 +63,12 @@ namespace DreamEngine {
         /// @return Mix_Chunk* pointer if found, nullptr otherwise.
         ///
         public: Mix_Chunk* getAudio(const std::string& audioName);
+
+        /// Deleted copy assignment operator to prevent reassignment of the singleton instance.
+        public: ResourceManager& operator =(const ResourceManager&) = delete;
+
+        /// Deleted move assignment operator to prevent move-assignment of the singleton instance.
+        public: ResourceManager& operator =(ResourceManager&&) = delete;
     };
 }
 
