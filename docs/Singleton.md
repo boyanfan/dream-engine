@@ -1,6 +1,6 @@
 # Singleton\<T\>
 
-`Singleton<T>` is a generic base class for enforcing 
+[Singleton\<T\>](Singleton.md) is a generic base class for enforcing 
 the singleton pattern in C++ applications. It provides 
 a centralized, reusable, and type-safe implementation 
 that ensures only one instance of a derived class can exist at runtime.
@@ -18,7 +18,7 @@ inheritance and virtual destruction for cleanup.
 ## Methods
 
 Below is a list and explanation of all public methods
-provided by the `Singleton<T>` class.
+provided by the [Singleton\<T\>](Singleton.md) class.
 
 ### getInstance()
 ```c++
@@ -47,7 +47,7 @@ SomeManager* manager = SomeManager::getInstance();
 ---
 
 ## Deleted Operations
-To ensure that `Singleton<T>` remains a singleton,
+To ensure that [Singleton\<T\>](Singleton.md) remains a singleton,
 all copy and move operations are explicitly deleted.
 This prevents accidental duplication or reassignment
 of the singleton instance, which could lead to

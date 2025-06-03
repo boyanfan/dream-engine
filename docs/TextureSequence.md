@@ -1,5 +1,5 @@
 # TextureSequence
-`TextureSequence` is a utility class for managing a 
+[TextureSequence](TextureSequence.md) is a utility class for managing a 
 sequence of `SDL_Texture*` objects, typically used for 
 loading and displaying animated image sequences in 
 SDL-based applications.
@@ -8,15 +8,18 @@ SDL-based applications.
 class TextureSequence;
 ```
 
-It supports dynamic loading, retrieval, and cleanup of 
-textures and provides basic access functions for 
-sequence manipulation.
+All textures used in [TextureSequence](TextureSequence.md) should be loaded 
+from the [ResourceManager](ResourceManager.md). The sequence does not 
+own any of the textures in the sequence. It only 
+clears internal references, avoiding double-free 
+errors and ensures consistent centralized resource 
+management.
 
 ---
 
 ## Methods
 Below is a list and explanation of all public methods 
-provided by the `TextureSequence` class.
+provided by the [TextureSequence](TextureSequence.md) class.
 
 ### Constructors
 
@@ -54,13 +57,31 @@ textures beforehand. Reduces heap re-allocations.
 ```c++
 ~TextureSequence();
 ```
-Destructor. Iterates over the texture sequence and 
-destroys each `SDL_Texture*` using 
-`SDL_DestroyTexture()`.
+Clears the texture sequence vector. This does not
+destroy the `SDL_Texture*` objects. The
+[ResourceManager](ResourceManager.md) is responsible for managing the 
+lifetime of these textures.
 
-**Usage:**  
-Automatically called when the object goes out of scope.
-Ensures no texture memory leaks.
+<br>
+
+### loadSequenceFromPool()
+```c++
+void loadSequenceFromPool(const char* nameTemplate, size_t size);
+```
+
+Safely loads textures by name from the
+[ResourceManager](ResourceManager.md)’s texture pool. 
+This is the recommended and safe method because the 
+textures are centrally managed and not duplicated.
+
+
+**Parameters:**
+- `pathTemplate`: A C-style formatted string with formatting placeholders for file paths like `frame_%`, where `%d` is replaced by the index.
+- `size`: The number of textures to load.
+
+**Note:**
+Textures that fail to load are logged with `SDL_Log`
+but skipped.
 
 <br>
 
@@ -70,45 +91,23 @@ Ensures no texture memory leaks.
 void loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size);
 ```
 
-Loads a sequence of textures using a printf-style 
-file path template.
+Loads textures directly from file paths. 
+This bypasses the [ResourceManager](ResourceManager.md), 
+and the resulting textures are not tracked or 
+automatically cleaned up. Using this method is 
+unsafe and may lead to resource leaks or duplicate 
+textures in memory. Avoid this unless you have a 
+clear reason and manage the textures manually, and
+call `destroyTextureByIndex()` to manually destroy
+them.
+
 
 **Parameters:**
 - `renderer`: The SDL renderer used to create the textures.
-- `pathTemplate`: A C-style formatted string with formatting placeholders for file paths like `frame_%`, where %d is replaced by the index.
+- `pathTemplate`: A C-style formatted string with formatting placeholders for file paths like `frame_%`, where `%d` is replaced by the index.
 - `size`: The number of textures to load.
 
-**Usage:**  
-For each index from 1 to `size`, generates the 
-filename, loads the texture, and adds it to the 
-sequence.
-
-**Note:**  
-Textures that fail to load are logged with `SDL_Log` 
-but skipped.
-
-<br>
-
-### loadSequenceFromPool()
-```c++
-void loadSequenceFromPool(const char* nameTemplate, size_t size);
-```
-
-Loads a sequence of textures from the 
-`ResourceManager`'s texture pool using a formatted key 
-name template. This function is useful when your 
-textures are preloaded into `ResourceManager`.
-
-**Parameters:**
-- `pathTemplate`: A C-style formatted string with formatting placeholders for file paths like `frame_%`, where %d is replaced by the index.
-- `size`: The number of textures to load.
-
-**Usage:**  
-For each index from 1 to `size`, retrieves each 
-texture from the texture pool, and adds the texture to 
-the sequence if found.
-
-**Note:**  
+**Note:**
 Textures that fail to load are logged with `SDL_Log`
 but skipped.
 
@@ -120,12 +119,25 @@ but skipped.
 void clearSequence();
 ```
 
-Clears the `textureSequence` vector. This does not 
-destroy the `SDL_Texture*` objects.
+Clears the texture sequence vector. This does not
+destroy the `SDL_Texture*` objects. The
+[ResourceManager](ResourceManager.md) is responsible for managing the
+lifetime of these textures.
 
-**Usage:**  
-Use this only if you manage texture lifetimes manually 
-and want to reuse the object without deleting textures.
+<br>
+
+### destroyTextureByIndex()
+```c++
+void destroyTextureByIndex(int index);
+```
+Destroy the texture at the given index and removes it 
+from the sequence. This should only be used if the 
+texture was manually created or loaded outside the
+[ResourceManager](ResourceManager.md) 
+and thus is not managed by it.
+
+**Parameters:**
+- Index of the texture to destroy.
 
 <br>
 
@@ -152,8 +164,7 @@ SDL_Texture* getTextureByIndex(int index);
 Fetches a texture pointer by index.
 
 **Parameters:**
-- `index`: The position in the sequence to retrieve 
-- from.
+- `index`: The position in the sequence to retrieve from.
 
 **Returns:**  
 Pointer to the texture at `index`, or `nullptr` if 
@@ -174,12 +185,13 @@ void addTexture(SDL_Texture* texture);
 Adds an externally created texture to the sequence.
 
 **Parameters:**
-- `texture`: Pointer to an existing `SDL_Texture` 
-- to store.
+- `texture`: Pointer to an existing `SDL_Texture` to store.
 
-**Usage:**  
-Useful when textures are loaded manually or generated
-from other sources.
+**Note:** 
+if the texture was manually created or loaded 
+outside the [ResourceManager](ResourceManager.md)
+and thus is not managed by it, you must call `destroyTextureByIndex()` 
+to manually destroy it.
 
 <br>
 
@@ -205,39 +217,20 @@ at the given index.
 
 ---
 
-## Performance Considerations
-
-Using `std::vector::push_back()` repeatedly 
-without pre-allocation can lead to repeated memory 
-re-allocations and internal copying. 
-Even though `SDL_Texture*` is a pointer 
-(so copying is cheap), these re-allocations can 
-become a performance bottleneck if the sequence 
-is large.
-
-Reserving capacity before loading textures is 
-recommended, either call 
-`textureSequence.reserve(size)` manually or 
-use the constructor** `TextureSequence(size_t)` 
-to pre-allocate.
-
----
-
 ## Example Usage
 
 ```cpp
-SDL_Renderer* renderer = /* initialized renderer */;
-
 // Create with pre-allocated space for 10 textures
 TextureSequence sequence(10);
 
 // Load textures named "frame_1.png", ..., "frame_10.png"
-sequence.loadSequenceFromPath(renderer, "resources/frame_%d.png", 10);
+sequence.loadSequenceFromPool("frame_%d.png", 10);
 
 // Render the 3rd texture
 SDL_Texture* texture = sequence.getTextureByIndex(2);
+
 if (texture) {
-    SDL_RenderCopy(renderer, tex, nullptr, &destRect);
+    SDL_RenderCopy(renderer, texture, nullptr, &destRect);
 }
 
 // Cleanup happens automatically in destructor

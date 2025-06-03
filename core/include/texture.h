@@ -31,15 +31,6 @@ namespace DreamEngine {
         /// Stores the sequence of SDL_Texture pointers.
         private: std::vector<SDL_Texture*> textureSequence;
 
-        /// Loads a sequence of textures using a formatted path template.
-        ///
-        /// @param renderer The SDL_Renderer used to create textures.
-        /// @param pathTemplate A C-style formatted string for file paths like 'frame_%d', where %d is replaced
-        ///                     by the index.
-        /// @param size The number of textures to load.
-        ///
-        public: void loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size);
-
         /// Loads a sequence of textures from the ResourceManager's texture pool.
         ///
         /// @param nameTemplate The base name used to look up textures like 'frame_%d', where %d is replaced
@@ -48,8 +39,24 @@ namespace DreamEngine {
         ///
         public: void loadSequenceFromPool(const char* nameTemplate, size_t size);
 
+        /// Loads a sequence of textures using a formatted path template.
+        ///
+        /// @param renderer The SDL_Renderer used to create textures.
+        /// @param pathTemplate A C-style formatted string for file paths like 'frame_%d', where `%d` is replaced
+        ///                     by the index.
+        /// @param size The number of textures to load.
+        ///
+        public: void loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size);
+
         /// Clears the texture sequence. Does not destroy textures.
         public: void clearSequence();
+
+        /// Destroy the texture at the given index and removes it from the sequence. This should only be used if
+        /// the texture was manually created or loaded outside the `ResourceManager` and thus is not managed by it.
+        ///
+        /// @param index Index of the texture to delete.
+        ///
+        public: void destroyTextureByIndex(int index);
 
         /// Get the number of textures currently in the sequence.
         /// @return The size of the texture sequence.

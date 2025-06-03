@@ -1,8 +1,8 @@
 # ResourceManager
 
-`ResourceManager` is a singleton utility class in C++ 
-that inherits from the generic 
-`Singleton<ResourceManager>` base class and provides 
+[ResourceManager](ResourceManager.md) is a singleton 
+utility class in C++ that inherits from the generic
+[Singleton\<T\>](Singleton.md) base class and provides 
 centralized loading and access to texture and audio 
 assets.
 
@@ -18,7 +18,7 @@ and storing them in memory for later access.
 
 ## Methods
 Below is a list and explanation of all public methods
-provided by the `ResourceManager` class.
+provided by the [ResourceManager](ResourceManager.md) class.
 
 ### getInstance()
 
@@ -27,8 +27,8 @@ static ResourceManager* getInstance();
 ```
 
 Returns the singleton instance of `ResourceManager`. 
-This method is defined and inherited from the 
-`Singleton<ResourceManager>` base class.
+This method is defined and inherited from the
+[Singleton\<T\>](Singleton.md) base class.
 
 **Returns:**
 A pointer to the single, global `ResourceManager` 

@@ -9,27 +9,7 @@ namespace DreamEngine {
 
     TextureSequence::TextureSequence(size_t size)  { textureSequence.reserve(size); }
 
-    TextureSequence::~TextureSequence() {
-        for (SDL_Texture* texture : textureSequence) SDL_DestroyTexture(texture);
-    }
-
-    void TextureSequence::loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size) {
-        // Avoids repeated reallocation for textureSequence
-        textureSequence.reserve(size);
-
-        for (int index = 0; index < size; index++) {
-            // Construct the templated file path for each of the texture source
-            char filePath[128];
-            snprintf(filePath, sizeof(filePath), pathTemplate, index + 1);
-
-            // Load and add the specified texture
-            SDL_Texture* texture = IMG_LoadTexture(renderer, filePath);
-            if (texture) textureSequence.push_back(texture);
-
-            // Throw an error if unable to load the specified texture
-            else SDL_Log("[ERROR]: Failed to load texture: %s, SDL Error: %s", filePath, SDL_GetError());
-        }
-    }
+    TextureSequence::~TextureSequence() { clearSequence(); }
 
     void TextureSequence::loadSequenceFromPool(const char* nameTemplate, size_t size) {
         // Avoids repeated reallocation for textureSequence
@@ -52,7 +32,32 @@ namespace DreamEngine {
         }
     }
 
+    void TextureSequence::loadSequenceFromPath(SDL_Renderer* renderer, const char* pathTemplate, size_t size) {
+        // Avoids repeated reallocation for textureSequence
+        textureSequence.reserve(size);
+
+        for (int index = 0; index < size; index++) {
+            // Construct the templated file path for each of the texture source
+            char filePath[128];
+            snprintf(filePath, sizeof(filePath), pathTemplate, index + 1);
+
+            // Load and add the specified texture
+            SDL_Texture* texture = IMG_LoadTexture(renderer, filePath);
+            if (texture) textureSequence.push_back(texture);
+
+                // Throw an error if unable to load the specified texture
+            else SDL_Log("[ERROR]: Failed to load texture: %s, SDL Error: %s", filePath, SDL_GetError());
+        }
+    }
+
     void TextureSequence::clearSequence() { textureSequence.clear(); }
+
+    void TextureSequence::destroyTextureByIndex(int index) {
+        if (index >= 0 && index < static_cast<int>(textureSequence.size())) {
+            SDL_DestroyTexture(textureSequence[index]);
+            textureSequence.erase(textureSequence.begin() + index);
+        }
+    }
 
     size_t TextureSequence::getSequenceSize() { return textureSequence.size(); }
 

@@ -7,7 +7,15 @@
 namespace DreamEngine {
     ResourceManager::ResourceManager() = default;
 
-    ResourceManager::~ResourceManager() = default;
+    ResourceManager::~ResourceManager() {
+        // Destroy textures
+        for (std::pair<const std::string, SDL_Texture*>& pair : texturePool) { SDL_DestroyTexture(pair.second); }
+        texturePool.clear();
+
+        // Free audio chunks
+        for (std::pair<const std::string, Mix_Chunk*>& pair : audioPool) { Mix_FreeChunk(pair.second); }
+        audioPool.clear();
+    }
 
     SDL_Texture *ResourceManager::getTexture(const std::string &textureName) { return texturePool[textureName]; }
 
