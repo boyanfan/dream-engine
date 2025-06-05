@@ -58,7 +58,7 @@ Keys used in resource maps are the base filenames (without extensions).
 ### getTexture()
 
 ```c++
-SDL_Texture* getTexture(const std::string& textureName);
+SDL_Texture* getTexture(const std::string& textureName) const;
 ```
 Retrieves a loaded texture from the texture pool.
 
@@ -73,7 +73,7 @@ Pointer to SDL_Texture if found, or nullptr.
 ### getAudio()
 
 ```c++
-Mix_Chunk* getAudio(const std::string& audioName);
+Mix_Chunk* getAudio(const std::string& audioName) const;
 ```
 
 Retrieves a loaded audio chunk from the audio pool.
