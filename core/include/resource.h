@@ -14,6 +14,9 @@
 #include <string>
 #include <filesystem>
 
+#define DREAM_ENGINE_IMAGE_EXTENSION ".png"
+#define DREAM_ENGINE_AUDIO_EXTENSION ".mp3"
+
 namespace DreamEngine {
     /// ResourceManager is a singleton class responsible for loading image and audio files from a given directory
     /// and storing them for efficient reuse during runtime. It supports `.png` images and `.mp3` audio files.
@@ -43,14 +46,14 @@ namespace DreamEngine {
         /// @param textureName Base filename (without extension) of the texture.
         /// @return SDL_Texture* pointer if found, nullptr otherwise.
         ///
-        public: SDL_Texture* getTexture(const std::string& textureName);
+        public: SDL_Texture* getTexture(const std::string& textureName) const;
 
         /// Retrieves a loaded audio chunk by name.
         ///
         /// @param audioName Base filename (without extension) of the audio.
         /// @return Mix_Chunk* pointer if found, nullptr otherwise.
         ///
-        public: Mix_Chunk* getAudio(const std::string& audioName);
+        public: Mix_Chunk* getAudio(const std::string& audioName) const;
     };
 }
 
