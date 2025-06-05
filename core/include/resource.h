@@ -17,9 +17,10 @@
 
 namespace DreamEngine {
     /// ResourceManager is a singleton class responsible for loading image and audio files from a given directory
-    /// and storing them for efficient reuse during runtime. It supports `.png` images and `.mp3` audio files.
+    /// and storing them for efficient reuse during runtime.
     ///
     class ResourceManager final : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
+
         using AnyRenderable = std::shared_ptr<void>;
         using Loader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
 
