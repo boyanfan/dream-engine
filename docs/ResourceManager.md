@@ -11,7 +11,8 @@ class ResourceManager final : public Singleton<ResourceManager>;
 ```
 
 It is designed to simplify asset management by loading 
-all `.png` and `.mp3` files from a specified directory
+different files, both build-in supported or user-defined
+arbitrary resource types, from a specified directory
 and storing them in memory for later access.
 
 ---
@@ -38,7 +39,7 @@ instance.
 
 ### registerLoader()
 ```c++
-void registerLoader(const std::string& extension, const Loader& loader);
+void registerLoader(const std::string& extension, const ResourceManager::Loader& loader);
 ```
 
 Registers a custom resource loader for a specific file 
@@ -56,28 +57,33 @@ using Loader = std::function<void(SDL_Renderer* renderer, const std::filesystem:
 
 This means that the registered function must accept 
 an `SDL_Renderer*` and a file path, and perform the 
-logic needed to load and store the resource.
-
-If you are adding new resource types, they should be 
-considered SDL-renderable or at least SDL-context-aware. 
-Even if your custom loader doesn't use the `SDL_Renderer*`, 
+logic needed to load and store the resource. 
+If you are adding new resource types, they should be
+considered SDL-renderable or at least SDL-context-aware.
+Even if your custom loader doesn't use the `SDL_Renderer*`,
 the function signature must accept it.
 
 Custom resource types that are not built into
 [ResourceManager](ResourceManager.md) and should be 
-stored in the genericPool using:
+stored in the `genericPool` using:
 
 ```c++
-std::unordered_map<std::string, std::shared_ptr<void>> genericPool;
+std::unordered_map<std::string, ResourceManager::AnyRenderable> genericPool;
 ```
 
-To ensure type safety and shared ownership, 
+Where `AnyRenderable` is defined by
+
+```c++
+using AnyRenderable = std::shared_ptr<void>
+```
+
+This means that to ensure type safety and shared ownership, 
 all custom resource objects must be wrapped in 
 `std::shared_ptr<T>`, where `T` is your custom type, 
 using `std::make_shared<T>()` function.
 
 **Notes:**
-- Call `registerLoader()` before calling `loadFromDirectory()`.
+- Call `registerLoader()` before calling `loadFromDirectory()` only if you have custom resource type.
 - Use `getGeneric<T>(name)` to retrieve user-defined resource types.
 - For any custom resource stored in `genericPool`, developers are responsible for managing memory and cleanup themselves.
 
@@ -88,16 +94,12 @@ using `std::make_shared<T>()` function.
 ResourceManager* manager = ResourceManager::getInstance();
 
 // Register loader
-manager->registerLoader(".config", [&](SDL_Renderer*, const std::filesystem::path& path) {
+manager->registerLoader(".atlas", [&](SDL_Renderer*, const std::filesystem::path& path) {
     ...
-    auto config = std::make_shared<...>();
-    manager->genericPool[path.stem().u8string()] = config;
+    auto atlas = std::make_shared<...>();
+    manager->genericPool[path.stem().u8string()] = atlas;
 }
-
-// Load your custom resources
-manager->loadFromDirectory(renderer, "assets/configs");
 ```
-
 
 <br>
 
@@ -107,12 +109,14 @@ manager->loadFromDirectory(renderer, "assets/configs");
 void loadFromDirectory(SDL_Renderer* renderer, const std::string& directory);
 ```
 
-Loads all .png and .mp3 files from the specified 
-directory into memory, where `.png` files are loaded 
-using `IMG_LoadTexture`, and `.mp3` files are loaded 
-using Mix_LoadWAV.
+Scans the specified directory and attempts to load each 
+file using a registered loader based on its file 
+extension. Keys used in resource maps are the base filenames, without extensions.
 
-Keys used in resource maps are the base filenames (without extensions).
+Built-in support is typically provided 
+for `.png` (textures) and `.mp3` (audio), but developers 
+can extend support to custom file types by registering 
+additional loaders via `registerLoader()`.
 
 **Parameters**
 - renderer: Pointer to SDL_Renderer, required for texture creation.
@@ -128,7 +132,7 @@ SDL_Texture* getTexture(const std::string& textureName) const;
 Retrieves a loaded texture from the texture pool.
 
 **Parameters**
-- textureName: The base filename of the texture (e.g., "player" for player.png).
+- textureName: The base filename of the texture.
 
 **Returns:**
 Pointer to SDL_Texture if found, or nullptr.
@@ -144,7 +148,7 @@ Mix_Chunk* getAudio(const std::string& audioName) const;
 Retrieves a loaded audio chunk from the audio pool.
 
 **Parameters**
-- audioName: The base filename of the audio (e.g., "jump" for jump.mp3).
+- audioName: The base filename of the audio.
 
 **Returns:**
 Pointer to Mix_Chunk if found, or nullptr.
@@ -162,7 +166,7 @@ cast to the expected type `T`.
 
 This method is intended for accessing user-defined 
 resources that were loaded via `registerLoader()` 
-and stored as `ResourceManager::AnyRenderable` in the generic 
+and stored as `AnyRenderable` in the generic 
 resource pool. It performs a `static_pointer_cast<T>` 
 internally. 
 
@@ -194,5 +198,5 @@ manager->loadFromDirectory(renderer, "resources/");
 
 // Get and use resources
 SDL_Texture* playerTexture = manager->getTexture("player");
-Mix_Chunk* jumpSound =manager->getAudio("jump");
+Mix_Chunk* jumpSound = manager->getAudio("jump");
 ```
