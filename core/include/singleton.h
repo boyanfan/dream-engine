@@ -28,7 +28,7 @@ namespace DreamEngine {
         /// Get the singleton instance of the derived class `T`.
         /// @return A pointer to the singleton instance of type `T`.
         ///
-        static T* getInstance();
+        public: static T* getInstance();
 
         /// Deleted copy assignment operator to prevent reassignment.
         public: Singleton& operator =(const Singleton&) = delete;
