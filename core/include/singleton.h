@@ -11,10 +11,10 @@ namespace DreamEngine {
     ///
     template<typename T> class Singleton {
         /// Protected default constructor to prevent external instantiation.
-        protected: Singleton();
+        protected: Singleton() = default;
 
         /// Virtual destructor to allow safe cleanup in derived classes.
-        protected: virtual ~Singleton();
+        protected: virtual ~Singleton() = default;
 
         /// Deleted copy constructor to prevent copying of the singleton instance.
         public: Singleton(const Singleton&) = delete;
@@ -25,17 +25,24 @@ namespace DreamEngine {
         /// Singleton instance pointer.
         private: static T* instance;
 
+        /// Get the singleton instance of the derived class `T`.
+        /// @return A pointer to the singleton instance of type `T`.
+        ///
+        static T* getInstance();
+
         /// Deleted copy assignment operator to prevent reassignment.
         public: Singleton& operator =(const Singleton&) = delete;
 
         /// Deleted move assignment operator to prevent move-assignment.
         public: Singleton& operator =(Singleton&&) = delete;
-
-        /// Get the singleton instance of the derived class `T`.
-        /// @return A pointer to the singleton instance of type `T`.
-        ///
-        static T* getInstance();
     };
+
+    template<typename T> inline T* Singleton<T>::instance = nullptr;
+
+    template<typename T> inline T* Singleton<T>::getInstance() {
+        if (!instance) instance = new T();
+        return instance;
+    }
 }
 
 #endif //DREAM_ENGINE_MANAGER_H
