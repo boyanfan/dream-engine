@@ -5,7 +5,19 @@
 #include "resource.h"
 
 namespace DreamEngine {
-    ResourceManager::ResourceManager() = default;
+    ResourceManager::ResourceManager() {
+        // Register loading method for image files (with '.png' extension)
+        registerLoader(".png", [&](SDL_Renderer* renderer, const std::filesystem::path& path) -> void {
+            SDL_Texture* texture = IMG_LoadTexture(renderer, path.u8string().c_str());
+            if (texture) texturePool[path.stem().u8string()] = texture;
+        });
+
+        // Register loading method for audio files (with '.mp3' extension)
+        registerLoader(".mp3", [&](SDL_Renderer* renderer, const std::filesystem::path& path) -> void {
+            Mix_Chunk* audio = Mix_LoadWAV(path.u8string().c_str());
+            if (audio) audioPool[path.stem().u8string()] = audio;
+        });
+    }
 
     ResourceManager::~ResourceManager() {
         // Destroy textures
@@ -15,48 +27,63 @@ namespace DreamEngine {
         // Free audio chunks
         for (std::pair<const std::string, Mix_Chunk*>& pair : audioPool) { Mix_FreeChunk(pair.second); }
         audioPool.clear();
+
+        // Clear registered loader mappings and generic resources
+        resourceLoaders.clear();
+        genericPool.clear();
     }
 
-    void ResourceManager::loadFromDirectory(SDL_Renderer *renderer, const std::string &directory) {
+    void ResourceManager::registerLoader(const std::string &extension, const ResourceManager::Loader& loader) {
+        // Register the specific `Loader` for the given extension
+        resourceLoaders[extension] = loader;
+    }
+
+    void ResourceManager::loadFromDirectory(SDL_Renderer* renderer, const std::string &directory) {
         // Iterate over each regular file in the given directory
         for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(directory)) {
             if (entry.is_regular_file()) {
+                using ConstIterator = std::unordered_map<std::string, ResourceManager::Loader>::const_iterator;
+
+                // Try to find the `Loader` registered for the current iterating file
                 const std::filesystem::path& path = entry.path();
+                ConstIterator iterator = resourceLoaders.find(path.extension().u8string());
 
-                // Load image files (with '.png' extension) as SDL_Textures
-                if (path.extension() == DREAM_ENGINE_IMAGE_EXTENSION) {
-                    SDL_Texture* texture = IMG_LoadTexture(renderer, path.u8string().c_str());
-                    texturePool[path.stem().u8string()] = texture;
-                }
-
-                    // Load audio files as (with '.mp3' extension) Mix_Chunk audio
-                else if (path.extension() == DREAM_ENGINE_AUDIO_EXTENSION) {
-                    Mix_Chunk* audio = Mix_LoadWAV(path.u8string().c_str());
-                    audioPool[path.stem().u8string()] = audio;
-                }
+                // Load resource if its `Loader` is found
+                if (iterator != resourceLoaders.end()) iterator->second(renderer, path);
             }
         }
     }
 
-    SDL_Texture *ResourceManager::getTexture(const std::string &textureName) const {
-        using ConstTextureIterator = std::unordered_map<std::string, SDL_Texture*>::const_iterator;
+    SDL_Texture* ResourceManager::getTexture(const std::string &textureName) const {
+        using ConstIterator = std::unordered_map<std::string, SDL_Texture*>::const_iterator;
 
         // Try to use const methods to find the texture
-        ConstTextureIterator iterator = texturePool.find(textureName);
+        ConstIterator iterator = texturePool.find(textureName);
 
         // Return texture or a nullptr if nothing is found
         if (iterator != texturePool.end()) return iterator->second;
         return nullptr;
     }
 
-    Mix_Chunk *ResourceManager::getAudio(const std::string &audioName) const {
-        using ConstAudioIterator = std::unordered_map<std::string, Mix_Chunk*>::const_iterator;
+    Mix_Chunk* ResourceManager::getAudio(const std::string &audioName) const {
+        using ConstIterator = std::unordered_map<std::string, Mix_Chunk*>::const_iterator;
 
         // Try to use const methods to find the audio
-        ConstAudioIterator iterator = audioPool.find(audioName);
+        ConstIterator iterator = audioPool.find(audioName);
 
         // Return audio or a nullptr if nothing is found
         if (iterator != audioPool.end()) return iterator->second;
+        return nullptr;
+    }
+
+    template<typename T> std::shared_ptr<T> ResourceManager::getGeneric(const std::string& name) const {
+        using ConstIterator = std::unordered_map<std::string, AnyRenderable>::const_iterator;
+
+        // Try to find the generic resource
+        ConstIterator iterator = genericPool.find(name);
+
+        // Return the resource or a nullptr if nothing is found
+        if (iterator != genericPool.end()) return std::static_pointer_cast<T>(iterator->second);
         return nullptr;
     }
 }
