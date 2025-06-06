@@ -20,8 +20,7 @@ namespace DreamEngine {
     /// and storing them for efficient reuse during runtime.
     ///
     class ResourceManager final : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
-
-        using AnyRenderable = std::shared_ptr<void>;
+        /// Type alias for specific resource loading methods
         using Loader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
 
         /// Private constructor to enforce singleton pattern.
@@ -36,9 +35,6 @@ namespace DreamEngine {
         /// Pool of loaded audio chunks, keyed by base filename.
         private: std::unordered_map<std::string, Mix_Chunk*> audioPool;
 
-        /// Pool of generic user-defined resources, keyed by base filename to support arbitrary types.
-        public: std::unordered_map<std::string, AnyRenderable> genericPool;
-
         /// The collection of loaders specified for different types of resources.
         private: std::unordered_map<std::string, Loader> resourceLoaders;
 
@@ -50,7 +46,7 @@ namespace DreamEngine {
         ///               loading logic for that file type. It should insert loaded resources
         ///               into the appropriate internal pool.
         ///
-        public: void registerLoader(const std::string& extension, const Loader& loader);
+        private: void registerLoader(const std::string& extension, const Loader& loader);
 
         /// Loads all files in the specified directory using the registered loaders.
         ///
@@ -72,14 +68,6 @@ namespace DreamEngine {
         /// @return Mix_Chunk* pointer if found, nullptr otherwise.
         ///
         public: Mix_Chunk* getAudio(const std::string& audioName) const;
-
-        /// Retrieves a generic resource by name and type.
-        ///
-        /// @tparam T Expected type of the resource.
-        /// @param name Resource name, the base filename without extension.
-        /// @return `std::shared_ptr<T>` to the resource, or `nullptr` if not found or type mismatch.
-        ///
-        public: template<typename T> std::shared_ptr<T> getGeneric(const std::string& name) const;
     };
 }
 

@@ -30,7 +30,6 @@ namespace DreamEngine {
 
         // Clear registered loader mappings and generic resources
         resourceLoaders.clear();
-        genericPool.clear();
     }
 
     void ResourceManager::registerLoader(const std::string &extension, const ResourceManager::Loader& loader) {
@@ -73,17 +72,6 @@ namespace DreamEngine {
 
         // Return audio or a nullptr if nothing is found
         if (iterator != audioPool.end()) return iterator->second;
-        return nullptr;
-    }
-
-    template<typename T> std::shared_ptr<T> ResourceManager::getGeneric(const std::string& name) const {
-        using ConstIterator = std::unordered_map<std::string, AnyRenderable>::const_iterator;
-
-        // Try to find the generic resource
-        ConstIterator iterator = genericPool.find(name);
-
-        // Return the resource or a nullptr if nothing is found
-        if (iterator != genericPool.end()) return std::static_pointer_cast<T>(iterator->second);
         return nullptr;
     }
 }
