@@ -34,6 +34,10 @@ namespace DreamEngine {
         for (std::pair<const std::string, Mix_Chunk*>& pair : audioPool) { Mix_FreeChunk(pair.second); }
         audioPool.clear();
 
+        // Close fonts
+        for (std::pair<const std::string, Font*>& pair : fontPool) { delete pair.second; }
+        fontPool.clear();
+
         // Clear registered loader mappings and generic resources
         resourceLoaders.clear();
     }

@@ -1,5 +1,5 @@
 # Copyable
-The [Copyable](Copyable.md) class defines a standard 
+The [Copyable](Copyable.md) interface defines a standard 
 interface for creating deep or customized copies of engine
 objects.
 

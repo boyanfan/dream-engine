@@ -1,6 +1,6 @@
 # Font
-[Font](Font.md) is a wrapper class for `TTF_Font` struct, 
-providing a convenient and efficient way to load and reuse 
+[Font](Font.md) is a wrapper class for SDL `TTF_Font` struct, 
+it provides a convenient and efficient way to load and reuse 
 font resources with multiple sizes.
 
 ```c++

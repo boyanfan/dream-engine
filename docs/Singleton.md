@@ -1,6 +1,6 @@
 # Singleton\<T\>
 
-[Singleton\<T\>](Singleton.md) is a generic base class for enforcing 
+[Singleton\<T\>](Singleton.md) is a generic interface for enforcing 
 the singleton pattern in C++ applications. It provides 
 a centralized, reusable, and type-safe implementation 
 that ensures only one instance of a derived class can exist at runtime.
