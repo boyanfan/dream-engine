@@ -97,8 +97,6 @@ Retrieves a loaded font from the font pool.
 **Returns:**
 Pointer to [Font](Font.md) if found, or nullptr.
 
-<br>
-
 ---
 
 ## Example Usage

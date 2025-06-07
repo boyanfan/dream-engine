@@ -28,8 +28,6 @@ Returns a pointer to the singleton instance of type T.
 If it has not been created yet, it will be constructed 
 using the default constructor.
 
-<br>
-
 ---
 
 ## Example Usage
@@ -93,7 +91,6 @@ b = std::move(*SomeManager::getInstance());
 Below is the position of [Singleton\<T\>](Singleton.md) 
 within the type hierarchy, including which classes inherit 
 from it and which base classes it derives from.
-
 
 ### Conforming Types
 [ResourceManager](ResourceManager.md)

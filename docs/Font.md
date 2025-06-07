@@ -64,8 +64,6 @@ the requested size already exists in the internal cache,
 it is returned immediately. Otherwise, it is loaded from 
 disk using `TTF_OpenFont()`, cached, and then returned.
 
-<br>
-
 ---
 
 ## Example Usage
