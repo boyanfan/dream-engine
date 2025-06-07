@@ -28,9 +28,11 @@ Returns a pointer to the singleton instance of type T.
 If it has not been created yet, it will be constructed 
 using the default constructor.
 
+<br>
+
 ---
 
-## Usage
+## Example Usage
 
 To make a class a singleton, inherit from 
 `Singleton<T>` and declare `friend class Singleton<T>`.
@@ -73,7 +75,7 @@ This guarantees that the singleton instance created
 via `getInstance()` remains unique and immutable in
 identity.
 
-### Example Misuses Prevented
+### Misuses Prevented
 
 ```c++
 class SomeManager : public Singleton<SomeManager>;
@@ -84,3 +86,14 @@ SomeManager b = std::move(*SomeManager::getInstance());
 a = *SomeManager::getInstance();
 b = std::move(*SomeManager::getInstance());
 ```
+
+---
+
+## Relationships 
+Below is the position of [Singleton\<T\>](Singleton.md) 
+within the type hierarchy, including which classes inherit 
+from it and which base classes it derives from.
+
+
+### Conforming Types
+[ResourceManager](ResourceManager.md)

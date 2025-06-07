@@ -1,6 +1,6 @@
 # Dream Engine Documentation
 
-Welcome to the documentation for **Dream Engine**. This section serves as a comprehensive
+Welcome to the documentation for Dream Engine. This section serves as a comprehensive
 guide for developers aiming to understand, extend, and build with the engine. Whether 
 you're integrating Dream Engine into a new game project or exploring its internal 
 architecture, the documentation provides structured insights into how the engine works 

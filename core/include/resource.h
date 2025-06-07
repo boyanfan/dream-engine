@@ -6,6 +6,7 @@
 #define DREAM_ENGINE_RESOURCE_H
 
 #include "singleton.h"
+#include "font.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -19,15 +20,9 @@ namespace DreamEngine {
     /// ResourceManager is a singleton class responsible for loading image and audio files from a given directory
     /// and storing them for efficient reuse during runtime.
     ///
-    class ResourceManager final : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
+    class ResourceManager : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
         /// Type alias for specific resource loading methods
         using Loader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
-
-        /// Private constructor to enforce singleton pattern.
-        private: ResourceManager();
-
-        /// Private destructor.
-        private: ~ResourceManager() override;
 
         /// Pool of loaded textures, keyed by base filename.
         private: std::unordered_map<std::string, SDL_Texture*> texturePool;
@@ -35,8 +30,17 @@ namespace DreamEngine {
         /// Pool of loaded audio chunks, keyed by base filename.
         private: std::unordered_map<std::string, Mix_Chunk*> audioPool;
 
+        /// Pool of loaded fonts, keyed by base font name.
+        private: std::unordered_map<std::string, Font*> fontPool;
+
         /// The collection of loaders specified for different types of resources.
         private: std::unordered_map<std::string, Loader> resourceLoaders;
+
+        /// Private constructor to enforce singleton pattern.
+        private: ResourceManager();
+
+        /// Private destructor.
+        private: ~ResourceManager() override;
 
         /// Registers a resource loading function for a specific file extension. This allows developers to extend
         /// the ResourceManager with support for additional resource types.
@@ -68,6 +72,13 @@ namespace DreamEngine {
         /// @return Mix_Chunk* pointer if found, nullptr otherwise.
         ///
         public: Mix_Chunk* getAudio(const std::string& audioName) const;
+
+        /// Retrieves a loaded font by name.
+        ///
+        /// @param fontName Base font name (without extension) of the font.
+        /// @return Font* pointer if found, nullptr otherwise.
+        ///
+        public: Font* getFont(const std::string& fontName) const;
     };
 }
 

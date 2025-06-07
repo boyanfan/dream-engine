@@ -7,7 +7,7 @@ centralized loading and access to texture and audio
 assets.
 
 ```c++
-class ResourceManager final : public Singleton<ResourceManager>;
+class ResourceManager : public Singleton<ResourceManager>;
 ```
 
 It is designed to simplify asset management by loading 
@@ -60,10 +60,10 @@ SDL_Texture* getTexture(const std::string& textureName) const;
 Retrieves a loaded texture from the texture pool.
 
 **Parameters**
-- textureName: The base filename of the texture.
+- textureName: The base filename of the texture, without the extension.
 
 **Returns:**
-Pointer to SDL_Texture if found, or nullptr.
+Pointer to `SDL_Texture` if found, or nullptr.
 
 <br>
 
@@ -76,10 +76,28 @@ Mix_Chunk* getAudio(const std::string& audioName) const;
 Retrieves a loaded audio chunk from the audio pool.
 
 **Parameters**
-- audioName: The base filename of the audio.
+- audioName: The base filename of the audio, without the extension.
 
 **Returns:**
-Pointer to Mix_Chunk if found, or nullptr.
+Pointer to `Mix_Chunk` if found, or nullptr.
+
+<br>
+
+### getFont()
+
+```c++
+Font* getFont(const std::string& fontName) const;
+```
+
+Retrieves a loaded font from the font pool.
+
+**Parameters**
+- fontName: The base filename of the font, without the extension.
+
+**Returns:**
+Pointer to [Font](Font.md) if found, or nullptr.
+
+<br>
 
 ---
 
@@ -96,3 +114,16 @@ manager->loadFromDirectory(renderer, "resources/");
 SDL_Texture* playerTexture = manager->getTexture("player");
 Mix_Chunk* jumpSound = manager->getAudio("jump");
 ```
+
+---
+
+## Relationships
+Below is the position of [ResourceManager](ResourceManager.md)
+within the type hierarchy, including which classes inherit
+from it and which base classes it derives from.
+
+### Conforms To
+[Singleton\<T\>](Singleton.md)
+
+### See Also
+[Font](Font.md)

@@ -10,6 +10,9 @@ namespace DreamEngine {
     /// declare the derived class as a friend class.
     ///
     template<typename T> class Singleton {
+        /// The pointer to the only global instance of a singleton class.
+        private: static T* instance;
+
         /// Protected default constructor to prevent external instantiation.
         protected: Singleton() = default;
 
@@ -21,9 +24,6 @@ namespace DreamEngine {
 
         /// Deleted move constructor to prevent moving of the singleton instance.
         public: Singleton(Singleton&&) = delete;
-
-        /// Singleton instance pointer.
-        private: static T* instance;
 
         /// Get the singleton instance of the derived class `T`.
         /// @return A pointer to the singleton instance of type `T`.

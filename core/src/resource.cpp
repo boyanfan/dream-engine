@@ -6,16 +6,22 @@
 
 namespace DreamEngine {
     ResourceManager::ResourceManager() {
-        // Register loading method for image files (with '.png' extension)
+        // Register the loader for image files (with '.png' extension)
         registerLoader(".png", [&](SDL_Renderer* renderer, const std::filesystem::path& path) -> void {
             SDL_Texture* texture = IMG_LoadTexture(renderer, path.u8string().c_str());
             if (texture) texturePool[path.stem().u8string()] = texture;
         });
 
-        // Register loading method for audio files (with '.mp3' extension)
+        // Register the loader for audio files (with '.mp3' extension)
         registerLoader(".mp3", [&](SDL_Renderer* renderer, const std::filesystem::path& path) -> void {
             Mix_Chunk* audio = Mix_LoadWAV(path.u8string().c_str());
             if (audio) audioPool[path.stem().u8string()] = audio;
+        });
+
+        // Register the loader for font files (with '.mp3' extension)
+        registerLoader(".ttf", [&](SDL_Renderer*, const std::filesystem::path& path) -> void {
+            Font* font = new Font(path.u8string());
+            fontPool[path.stem().u8string()] = font;
         });
     }
 
@@ -72,6 +78,17 @@ namespace DreamEngine {
 
         // Return audio or a nullptr if nothing is found
         if (iterator != audioPool.end()) return iterator->second;
+        return nullptr;
+    }
+
+    Font* ResourceManager::getFont(const std::string &fontName) const {
+        using ConstIterator = std::unordered_map<std::string, Font*>::const_iterator;
+
+        // Try to use const methods to find the font
+        ConstIterator iterator = fontPool.find(fontName);
+
+        // Return font or a nullptr if nothing is found
+        if (iterator != fontPool.end()) return iterator->second;
         return nullptr;
     }
 }
