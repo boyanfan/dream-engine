@@ -6,15 +6,13 @@
 #define DREAM_ENGINE_FONT_H
 
 #include <SDL3/SDL.h>
-#include <SDL3_ttf//SDL_ttf.h>
-
+#include <SDL3_ttf/SDL_ttf.h>
 #include <string>
 #include <unordered_map>
-#include <utility>
 
 namespace DreamEngine {
     /// Represents a font resource loaded from a file, supporting multiple font sizes.
-    /// It ensures each font size is only loaded once, and handles proper cleanup on destruction.
+    /// It ensures each font size is only loaded once and handles proper cleanup on destruction.
     ///
     class Font {
         /// Path to the font file, with an extension of ".ttf".

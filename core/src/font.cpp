@@ -11,13 +11,13 @@ namespace DreamEngine {
         for (std::pair<const int, TTF_Font*>& pair : fontSizePool) { TTF_CloseFont(pair.second); }
     }
 
-    TTF_Font *Font::getSizedFont(int fontSize) {
-        // Try to find font with the given size from the pool
+    TTF_Font *Font::getSizedFont(const int fontSize) {
+        // Try to find a font with the given size from the pool
         TTF_Font* font = fontSizePool[fontSize];
 
         // If the font of the given size has not been loaded, load it
         if (!font) {
-            font = TTF_OpenFont(path.c_str(), (float) fontSize);
+            font = TTF_OpenFont(path.c_str(), static_cast<float>(fontSize));
             fontSizePool[fontSize] = font;
         }
 

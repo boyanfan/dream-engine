@@ -20,23 +20,23 @@ namespace DreamEngine {
     /// ResourceManager is a singleton class responsible for loading image and audio files from a given directory
     /// and storing them for efficient reuse during runtime.
     ///
-    class ResourceManager : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
+    class ResourceManager final : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
         /// Type alias for specific resource loading methods
-        using Loader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
+        using ResourceLoader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
 
-        /// Pool of loaded textures, keyed by base filename.
+        /// Pool of loaded textures, keyed by the base filename.
         private: std::unordered_map<std::string, SDL_Texture*> texturePool;
 
         /// Pool of loaded audio chunks, keyed by base filename.
         private: std::unordered_map<std::string, Mix_Chunk*> audioPool;
 
-        /// Pool of loaded fonts, keyed by base font name.
+        /// Pool of loaded fonts, keyed by the base font name.
         private: std::unordered_map<std::string, Font*> fontPool;
 
         /// The collection of loaders specified for different types of resources.
-        private: std::unordered_map<std::string, Loader> resourceLoaders;
+        private: std::unordered_map<std::string, ResourceLoader> resourceLoaders;
 
-        /// Private constructor to enforce singleton pattern.
+        /// Private constructor to enforce the singleton pattern.
         private: ResourceManager();
 
         /// Private destructor.
@@ -46,11 +46,11 @@ namespace DreamEngine {
         /// the ResourceManager with support for additional resource types.
         ///
         /// @param extension File extension to register the loader for (including the dot, e.g., ".png").
-        /// @param loader A function that takes an SDL_Renderer pointer and a file path, and performs custom
+        /// @param resourceLoader A function that takes an SDL_Renderer pointer and a file path and performs custom
         ///               loading logic for that file type. It should insert loaded resources
         ///               into the appropriate internal pool.
         ///
-        private: void registerLoader(const std::string& extension, const Loader& loader);
+        private: void registerLoader(const std::string& extension, const ResourceLoader& resourceLoader);
 
         /// Loads all files in the specified directory using the registered loaders.
         ///

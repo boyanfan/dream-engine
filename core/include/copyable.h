@@ -10,6 +10,9 @@ namespace DreamEngine {
     /// Implementing classes must define the `copy()` method with precise control over which should be duplicated.
     ///
     class Copyable {
+        /// Requires the conforming types to implement the appropriate destructor.
+        public: virtual ~Copyable() = default;
+
         /// Creates a copy of the object. The exact behavior is defined by the implementing class.
         /// @return A new dynamically allocated instance with copied data.
         ///
