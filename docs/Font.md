@@ -29,9 +29,7 @@ actual font data is not loaded until `getSizedFont()` is called,
 enabling lazy loading.
 
 **Parameters:**
-- path: Path to the font file, with an extension of ".ttf".
-
-<br>
+- path: Path to the font file, with an extension of `.ttf`.
 
 ### Destructor
 ```c++
@@ -40,8 +38,6 @@ enabling lazy loading.
 Releases all loaded font resources. It iterates through 
 the font size catching and calls `TTF_CloseFont()` for 
 each cached font to prevent memory leaks.
-
-<br>
 
 ### getSizedFont()
 

@@ -37,16 +37,12 @@ Constructs a 2D vector with the given components.
 - `x`: The horizontal component.
 - `y`: The vertical component.
 
-<br>
-
 ### Destructor
 
 ```c++
 ~Vector2();
 ```
 Default destructor.
-
-<br>
 
 ### magnitude()
 
@@ -56,8 +52,6 @@ float magnitude() const;
 
 Computes the magnitude of the vector.  
 **Returns**: The length as a float.
-
-<br>
 
 ### normalize()
 

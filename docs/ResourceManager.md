@@ -34,8 +34,6 @@ This method is defined and inherited from the
 A pointer to the single, global `ResourceManager` 
 instance.
 
-<br>
-
 ### loadFromDirectory()
 
 ```c++
@@ -50,8 +48,6 @@ extension. Keys used in resource maps are the base filenames, without extensions
 - renderer: Pointer to SDL_Renderer, required for texture creation.
 - directory: Path to the folder containing asset files.
 
-<br>
-
 ### getTexture()
 
 ```c++
@@ -64,8 +60,6 @@ Retrieves a loaded texture from the texture pool.
 
 **Returns:**
 Pointer to `SDL_Texture` if found, or nullptr.
-
-<br>
 
 ### getAudio()
 
@@ -80,8 +74,6 @@ Retrieves a loaded audio chunk from the audio pool.
 
 **Returns:**
 Pointer to `Mix_Chunk` if found, or nullptr.
-
-<br>
 
 ### getFont()
 
