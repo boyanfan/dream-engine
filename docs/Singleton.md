@@ -93,4 +93,5 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### Conforming Types
-[ResourceManager](ResourceManager.md)
+[ResourceManager](ResourceManager.md) <br>
+[Logger](Logger.md)
