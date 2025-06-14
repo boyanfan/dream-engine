@@ -45,7 +45,7 @@ Cleans up SDL resources by destroying the window and renderer.
 void run();
 ```
 
-Starts the main loop. This loop polls SDL events and 
+It starts the main loop. This loop polls SDL events and 
 dispatches them to `onEvent()`, calculates `interval` 
 between frames and calls `onUpdate()` to 
 update game logic, calls onRender() to render the frame,
@@ -87,6 +87,19 @@ the provided SDL renderer.
 
 ---
 
+## Reflection
+
+The [Application](Application.md) class provides basic 
+reflection by storing its own class name, which can be 
+accessed via `Application::self`. This feature is commonly 
+used by other classes such as [Logger](Logger.md).
+
+```c++
+static inline std::string self;
+```
+
+---
+
 ## Summary
 
 To build your own game using the [Application](Application.md) class:
@@ -106,4 +119,5 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### See Also
-[WindowConfiguration](WindowConfiguration.md)
+[WindowConfiguration](WindowConfiguration.md) <br>
+[Logger](Logger.md)

@@ -6,6 +6,7 @@
 #define APPLICATION_H
 
 #include "symbols.h"
+#include "logger.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -21,6 +22,9 @@ namespace DreamEngine {
     /// the SDL window when creating an Application instance.
     ///
     class WindowConfiguration {
+        /// Class Name for reflection implementation.
+        public: static inline std::string self = WINDOW_CONFIGURATION;
+
         /// The title of the application window.
         public: std::string title = DEFAULT_WINDOW_TITLE;
 
@@ -41,16 +45,19 @@ namespace DreamEngine {
 
         /// Loads configuration values from a file. The config file should contain key-value pairs:
         ///
-        /// @param path Path to the configuration file.
+        /// @param filepath Path to the configuration file.
         /// @return True if the file was successfully loaded and parsed.
         ///
-        public: bool configurateFromFile(const std::string& path);
+        public: bool configurateFromFile(const std::string& filepath);
     };
 
     /// A basic application class which initializes SDL, creates a window and renderer, and handles the main loop.
     /// Games should inherit from it and implement run(), onUpdate() and onRender() methods to specify game logic.
     ///
     class Application {
+        /// Class Name for reflection implementation.
+        public: static inline std::string self = APPLICATION_TYPE;
+
         /// Pointer to the SDL window created by the application.
         private: SDL_Window* window = nullptr;
 

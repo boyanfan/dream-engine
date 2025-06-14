@@ -29,7 +29,7 @@ namespace DreamEngine {
         /// Destructor. Frees all loaded TTF_Font resources.
         public: ~Font();
 
-        /// Retrieves a font of the specified size. If the font size has already been loaded, returns the cached font.
+        /// Retrieves a font of the specified size. If the font size has already been loaded, return the cached font.
         /// Otherwise, loads the font and caches it for future use.
         ///
         /// @param fontSize The desired font size in points.

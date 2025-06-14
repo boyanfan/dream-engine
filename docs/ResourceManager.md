@@ -26,13 +26,12 @@ provided by the [ResourceManager](ResourceManager.md) class.
 static ResourceManager* getInstance();
 ```
 
-Returns the singleton instance of `ResourceManager`. 
+Returns the singleton instance of [ResourceManager](ResourceManager.md). 
 This method is defined and inherited from the
 [Singleton\<T\>](Singleton.md) base class.
 
 **Returns:**
-A pointer to the single, global `ResourceManager` 
-instance.
+A pointer to the single, global [ResourceManager](ResourceManager.md) instance.
 
 ### loadFromDirectory()
 
@@ -53,7 +52,7 @@ extension. Keys used in resource maps are the base filenames, without extensions
 ```c++
 SDL_Texture* getTexture(const std::string& textureName) const;
 ```
-Retrieves a loaded texture from the texture pool.
+Retrieve a loaded texture from the texture pool.
 
 **Parameters**
 - textureName: The base filename of the texture, without the extension.
@@ -67,7 +66,7 @@ Pointer to `SDL_Texture` if found, or nullptr.
 Mix_Chunk* getAudio(const std::string& audioName) const;
 ```
 
-Retrieves a loaded audio chunk from the audio pool.
+Retrieve a loaded audio chunk from the audio pool.
 
 **Parameters**
 - audioName: The base filename of the audio, without the extension.
@@ -81,7 +80,7 @@ Pointer to `Mix_Chunk` if found, or nullptr.
 Font* getFont(const std::string& fontName) const;
 ```
 
-Retrieves a loaded font from the font pool.
+Retrieve a loaded font from the font pool.
 
 **Parameters**
 - fontName: The base filename of the font, without the extension.

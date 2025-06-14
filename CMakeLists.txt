@@ -9,6 +9,7 @@ add_library(${PROJECT_NAME} STATIC
     core/src/resource.cpp
     core/src/font.cpp
     core/src/vector2.cpp
+    core/src/logger.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -28,3 +29,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     PkgConfig::SDL3_MIXER
     PkgConfig::SDL3_TTF
 )
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(DEBUG)
+endif()

@@ -5,10 +5,15 @@
 #include "application.h"
 
 namespace DreamEngine {
-    bool WindowConfiguration::configurateFromFile(const std::string &path) {
+    bool WindowConfiguration::configurateFromFile(const std::string &filepath) {
         // Try to open the configuration file
-        std::ifstream file(path);
-        if (!file.is_open()) return false;
+        std::ifstream file(filepath);
+
+        if (!file.is_open()) {
+            LOG_ERROR(Logger::onFileLoad(WindowConfiguration::self, filepath, LOG_FAILURE));
+            return false;
+        }
+        LOG_INFO(Logger::onFileLoad(WindowConfiguration::self, filepath, LOG_SUCCESS));
 
         // Parse the key-value pairs from the configuration file line by line
         std::string line;
@@ -17,32 +22,41 @@ namespace DreamEngine {
             std::string key, value;
 
             // Get the key and the value
-            if (std::getline(stream, key, '=') && std::getline(stream, value)) {
-                if (key == "title") title = value;
-                else if (key == "width") width = std::stoi(value);
-                else if (key == "height") height = std::stoi(value);
-                else if (key == "frameRate") frameRate = std::stoi(value);
+            if (std::getline(stream, key, WINDOW_CONFIGURATION_SEPARATOR) && std::getline(stream, value)) {
+                if (key == WINDOW_CONFIGURATION_TITLE_KEY) title = value;
+                else if (key == WINDOW_CONFIGURATION_WIDTH_KEY) width = std::stoi(value);
+                else if (key == WINDOW_CONFIGURATION_HEIGHT_KEY) height = std::stoi(value);
+                else if (key == WINDOW_CONFIGURATION_FRAME_RATE_KEY) frameRate = std::stoi(value);
             }
         }
 
-        // The file was successfully loaded and parsed
+        file.close();
+        LOG_INFO(Logger::onFileUnload(WindowConfiguration::self, filepath));
         return true;
     }
 
-
     Application::Application(const WindowConfiguration& configuration) {
         // Initialize SDL image and audio
-        if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) SDL_Log("[ERROR]: %s\n", SDL_GetError());
+        if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS)) LOG_ERROR(Logger::onInitialize(Application::self, SDL_TYPE, LOG_FAILURE));
+        else LOG_INFO(Logger::onInitialize(Application::self, SDL_TYPE, LOG_SUCCESS));
 
-        // Create the window and renderer
+        // Initialize SDL window
         window = SDL_CreateWindow(configuration.title.c_str(), configuration.width, configuration.height, NONE);
+        if (!window) LOG_ERROR(Logger::onInitialize(Application::self, SDL_WINDOW_TYPE, LOG_FAILURE));
+        else LOG_INFO(Logger::onInitialize(Application::self, SDL_WINDOW_TYPE, LOG_SUCCESS));
+
+        // Initialize SDL renderer
         renderer = SDL_CreateRenderer(window, nullptr);
+        if (!renderer) LOG_ERROR(Logger::onInitialize(Application::self, SDL_RENDERER_TYPE, LOG_FAILURE));
+        else LOG_INFO(Logger::onInitialize(Application::self, SDL_RENDERER_TYPE, LOG_SUCCESS));
 
         // Initialize SDL mixer
-        if (!Mix_OpenAudio(NONE, nullptr)) SDL_Log("[ERROR]: %s\n", SDL_GetError());
+        if (!Mix_OpenAudio(NONE, nullptr)) LOG_ERROR(Logger::onInitialize(Application::self, SDL_MIXER_TYPE, LOG_FAILURE));
+        else LOG_INFO(Logger::onInitialize(Application::self, SDL_MIXER_TYPE, LOG_SUCCESS));
 
         // Initialize SDL TTF
-        if (!TTF_Init()) SDL_Log("[ERROR]: %s\n", SDL_GetError());
+        if (!TTF_Init()) LOG_ERROR(Logger::onInitialize(Application::self, SDL_TTF_TYPE, LOG_FAILURE));
+        else LOG_INFO(Logger::onInitialize(Application::self, SDL_TTF_TYPE, LOG_SUCCESS));
 
         // Set the fixed frame rate
         frameRate = configuration.frameRate;
@@ -52,14 +66,19 @@ namespace DreamEngine {
     }
 
     Application::~Application() {
-        // Quit SDL mixer and TTF for audio and fonts
         Mix_Quit();
+        LOG_INFO(Logger::onDeinitialize(Application::self, SDL_MIXER_TYPE));
         TTF_Quit();
+        LOG_INFO(Logger::onDeinitialize(Application::self, SDL_TTF_TYPE));
 
-        // Destroy the renderer and the window before closing the application
         SDL_DestroyRenderer(renderer);
+        LOG_INFO(Logger::onDeinitialize(Application::self, SDL_RENDERER_TYPE));
         SDL_DestroyWindow(window);
+        LOG_INFO(Logger::onDeinitialize(Application::self, SDL_WINDOW_TYPE));
+
+        SDL_QuitSubSystem(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS);
         SDL_Quit();
+        LOG_INFO(Logger::onDeinitialize(Application::self, SDL_TYPE));
     }
 
     void Application::run() {

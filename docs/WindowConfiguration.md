@@ -54,7 +54,7 @@ Default destructor. Performs no special cleanup.
 ### configurateFromFile()
 
 ```c++
-bool configurateFromFile(const std::string& path);
+bool configurateFromFile(const std::string& filepath);
 ```
 
 Loads configuration values from a plain text file 
@@ -70,10 +70,23 @@ frameRate=60
 ```
 
 **Parameters:**
-- path: The file path to the configuration file.
+- filepath: The file path to the configuration file.
 
 **Returns:**
 true if the file was successfully loaded and all values were parsed.
+
+---
+
+## Reflection
+
+The [WindowConfiguration](WindowConfiguration.md) class provides basic
+reflection by storing its own class name, which can be
+accessed via `WindowConfiguration::self`. This feature is commonly
+used by other classes such as [Logger](Logger.md).
+
+```c++
+static inline std::string self;
+```
 
 ---
 
