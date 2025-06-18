@@ -5,9 +5,9 @@
 #ifndef DREAM_ENGINE_SYMBOLS_H
 #define DREAM_ENGINE_SYMBOLS_H
 
-// Reflection
+// DreamEngine Type system for Reflection
 #define APPLICATION_TYPE "DreamEngine::Application"
-#define WINDOW_CONFIGURATION "DreamEngine::WindowConfiguration"
+#define WINDOW_CONFIGURATION_TYPE "DreamEngine::WindowConfiguration"
 #define SDL_TYPE "SDL"
 #define SDL_WINDOW_TYPE "SDL::Window"
 #define SDL_RENDERER_TYPE "SDL::Renderer"
@@ -26,7 +26,7 @@
 #define WINDOW_CONFIGURATION_HEIGHT_KEY "height"
 #define WINDOW_CONFIGURATION_FRAME_RATE_KEY "frameRate"
 
-// Logger Utility
+// DreamEngine::Logger Utility
 #define LOG_STYLE_PLAIN "\033[0m"
 #define LOG_STYLE_BOLD_RED   "\033[31m\033[1m"
 #define LOG_STYLE_BOLD_GREEN "\033[32m\033[1m"

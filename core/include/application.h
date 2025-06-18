@@ -2,8 +2,8 @@
 // Created by fanboyan on 2025/6/11.
 //
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef DREAM_ENGINE_APPLICATION_H
+#define DREAM_ENGINE_APPLICATION_H
 
 #include "symbols.h"
 #include "logger.h"
@@ -23,7 +23,7 @@ namespace DreamEngine {
     ///
     class WindowConfiguration {
         /// Class Name for reflection implementation.
-        public: static inline std::string self = WINDOW_CONFIGURATION;
+        public: static inline std::string self = WINDOW_CONFIGURATION_TYPE;
 
         /// The title of the application window.
         public: std::string title = DEFAULT_WINDOW_TITLE;
@@ -81,7 +81,7 @@ namespace DreamEngine {
         /// Starts the application main loop.
         /// This function runs until the application receives a quit event or is explicitly stopped.
         ///
-        public: void run();
+        public: void execute();
 
         /// Called whenever an SDL event is polled from the event queue. Override this to handle input events.
         /// @param event The SDL_Event to handle, including input, window, and system events.
@@ -100,4 +100,4 @@ namespace DreamEngine {
     };
 }
 
-#endif //APPLICATION_H
+#endif //DREAM_ENGINE_APPLICATION_H

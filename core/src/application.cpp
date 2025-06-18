@@ -81,7 +81,7 @@ namespace DreamEngine {
         LOG_INFO(Logger::onDeinitialize(Application::self, SDL_TYPE));
     }
 
-    void Application::run() {
+    void Application::execute() {
         using namespace std::chrono;
         
         // Get the duration of one frame in nanosecond for the given frame rate

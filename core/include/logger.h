@@ -2,11 +2,12 @@
 // Created by fanboyan on 2025/6/14.
 //
 
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef DREAM_ENGINE_LOGGER_H
+#define DREAM_ENGINE_LOGGER_H
 
 #include "singleton.h"
 #include "symbols.h"
+
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -92,4 +93,4 @@ namespace DreamEngine {
     };
 }
 
-#endif //LOGGER_H
+#endif //DREAM_ENGINE_LOGGER_H

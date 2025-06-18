@@ -34,15 +34,15 @@ Initializes the application, creates the window and renderer using the provided 
 ### Destructor
 
 ```c++
-virtual ~Application()
+virtual ~Application();
 ```
 
 Cleans up SDL resources by destroying the window and renderer.
 
-### run()
+### execute()
 
 ```c++
-void run();
+void execute();
 ```
 
 It starts the main loop. This loop polls SDL events and 
@@ -109,7 +109,7 @@ To build your own game using the [Application](Application.md) class:
 - Override `onEvent()` to handle input such as key presses, mouse movement, and SDL window events.
 - Override `onUpdate()` to update your game logic using delta time. This is where you move objects, check collisions, and apply game rules.
 - Override `onRender()` to draw your game visuals every frame.
-- Call `run()` on your game class to start the game loop.
+- Call `execute()` on your game class to start the game loop.
 
 ---
 

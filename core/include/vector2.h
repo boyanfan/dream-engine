@@ -2,8 +2,8 @@
 // Created by fanboyan on 2025/6/10.
 //
 
-#ifndef VECTOR2_H
-#define VECTOR2_H
+#ifndef DREAM_ENGINE_VECTOR2_H
+#define DREAM_ENGINE_VECTOR2_H
 
 #include <cmath>
 
@@ -99,4 +99,4 @@ namespace DreamEngine {
     };
 }
 
-#endif //VECTOR2_H
+#endif //DREAM_ENGINE_VECTOR2_H

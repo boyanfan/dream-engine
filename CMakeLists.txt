@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} STATIC
     core/src/font.cpp
     core/src/vector2.cpp
     core/src/logger.cpp
+    core/src/timer.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

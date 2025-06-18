@@ -2,8 +2,8 @@
 // Created by fanboyan on 2025/6/2.
 //
 
-#ifndef DREAM_ENGINE_MANAGER_H
-#define DREAM_ENGINE_MANAGER_H
+#ifndef DREAM_ENGINE_SINGLETON_H
+#define DREAM_ENGINE_SINGLETON_H
 
 namespace DreamEngine {
     /// A generic base class for implementing the Singleton pattern. To use this class, inherit from it and
@@ -45,4 +45,4 @@ namespace DreamEngine {
     }
 }
 
-#endif //DREAM_ENGINE_MANAGER_H
+#endif //DREAM_ENGINE_SINGLETON_H
