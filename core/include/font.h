@@ -14,7 +14,7 @@ namespace DreamEngine {
     /// Represents a font resource loaded from a file, supporting multiple font sizes.
     /// It ensures each font size is only loaded once and handles proper cleanup on destruction.
     ///
-    class Font {
+    struct Font {
         /// Path to the font file, with an extension of ".ttf".
         private: std::string path;
 

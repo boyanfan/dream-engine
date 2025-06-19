@@ -21,7 +21,7 @@ confirm the [Copyable](Copyable.md) interface.
 
 ### copy()
 ```c++
-Copyable* copy() const;
+virtual Copyable* copy() const;
 ```
 Creates a copy of the object. The exact behavior is 
 defined by the implementing class. 

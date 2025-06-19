@@ -19,6 +19,22 @@ updated every frame.
 Below is a list and explanation of all public methods
 provided by the [Timer](Timer.md) class.
 
+### Constructor
+
+```c++
+Timer();
+```
+
+The default constructor for the Timer class.
+
+### Destructor
+
+```c++
+~Timer();
+```
+
+The default destructor for the Timer class.
+
 ### restart()
 
 ```c++

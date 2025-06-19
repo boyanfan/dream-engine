@@ -13,6 +13,7 @@
 #define SDL_RENDERER_TYPE "SDL::Renderer"
 #define SDL_MIXER_TYPE "SDL::Mixer"
 #define SDL_TTF_TYPE "SDL::TTF"
+#define VIDEO_DECODER_TYPE "DreamEngine::VideoDecoder"
 
 // Window Utility
 #define NANOSECONDS_PER_SECOND 1000000000
@@ -40,9 +41,9 @@
 #define LOG_FAILURE false
 
 #ifdef DEBUG
-#define LOG_INFO(message)    Logger::getInstance()->log(LogScope::Info, message)
+#define LOG_INFO(message) Logger::getInstance()->log(LogScope::Info, message)
 #define LOG_WARNING(message) Logger::getInstance()->log(LogScope::Warning, message)
-#define LOG_ERROR(message)   Logger::getInstance()->log(LogScope::Error, message)
+#define LOG_ERROR(message) Logger::getInstance()->log(LogScope::Error, message)
 #else
 #define LOG_INFO(message)    ((void)0)
 #define LOG_WARNING(message) ((void)0)
@@ -51,5 +52,13 @@
 
 // DreamEngine Utility
 #define NONE 0
+#define DREAM_ENGINE_OPENING_LOGO "resources/engine-logo-video.mp4"
+#define DREAM_ENGINE_OPENING_SOUND "resources/engine-logo-audio.mp3"
+#define FIRST_FREE_CHANNEL (-1)
+
+// DreamEngine::ResourceManager Utility
+#define DREAM_ENGINE_PNG_EXTENSION ".png"
+#define DREAM_ENGINE_MP3_EXTENSION ".mp3"
+#define DREAM_ENGINE_TTF_EXTENSION ".ttf"
 
 #endif //DREAM_ENGINE_SYMBOLS_H

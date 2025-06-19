@@ -20,7 +20,7 @@ conform to the [Updatable](Updatable.md) interface.
 ### onUpdate()
 
 ```c++
-void onUpdate(float interval);
+virtual void onUpdate(float interval);
 ```
 
 Called once per frame to update the object’s internal logic.

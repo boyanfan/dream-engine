@@ -93,6 +93,11 @@ namespace DreamEngine {
         // Polling input events to handle any user input
         SDL_Event event;
 
+        // DreamEngine opening presentation
+        VideoDecoder openingLogo = VideoDecoder(DREAM_ENGINE_OPENING_LOGO, 1280, 720);
+        Mix_Chunk* openingSound = Mix_LoadWAV(DREAM_ENGINE_OPENING_SOUND);
+        Mix_PlayChannel(FIRST_FREE_CHANNEL, openingSound, NONE);
+
         while (isRunning) {
             // Poll all SDL events to handel user input
             while (SDL_PollEvent(&event)) {
@@ -103,6 +108,9 @@ namespace DreamEngine {
             // Record the time point right before this frame's update logic and compute delta time for updating
             time_point<steady_clock> tickDidUpdate = steady_clock::now();
             const float interval = duration_cast<duration<float>>(tickDidUpdate - tickBeforeUpdate).count();
+
+            // Display the DreamEngine opening presentation if the game is launching
+            if (!openingLogo.hasFinished) openingLogo.onRender(renderer);
 
             // Update game logic, render the current frame and present it to the screen
             onUpdate(interval);
@@ -116,5 +124,7 @@ namespace DreamEngine {
             if (tickWillUpdate > nanoseconds(0)) std::this_thread::sleep_for(tickWillUpdate);
             tickBeforeUpdate = steady_clock::now();
         }
+
+        Mix_FreeChunk(openingSound);
     }
 }

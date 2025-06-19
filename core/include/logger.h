@@ -82,7 +82,14 @@ namespace DreamEngine {
         /// @param module The name of the module.
         /// @return A color-styled string with the module name.
         ///
-        private: static std::string getMessageModule(const std::string& module);
+        public: static std::string getMessageModule(const std::string& module);
+
+        /// Formats and stylizes the given file path for logging purposes.
+        ///
+        /// @param filepath The file path to be stylized and included in log messages.
+        /// @return A formatted string containing the stylized file path.
+        ///
+        public: static std::string getFilepath(const std::string& filepath);
 
         /// Returns the formatted log header prefix based on the severity scope.
         ///

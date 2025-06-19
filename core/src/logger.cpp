@@ -34,19 +34,25 @@ namespace DreamEngine {
         if (state) action = " successfully loaded ";
         else action = " failed to load ";
 
-        buffer << getMessageModule(module) << action << "the file " << LOG_STYLE_MAGENTA << filepath << LOG_STYLE_PLAIN << ".";
+        buffer << getMessageModule(module) << action << "the file " << getFilepath(filepath) << ".";
         return buffer.str();
     }
 
     std::string Logger::onFileUnload(const std::string& module, const std::string& filepath) {
         std::ostringstream buffer;
-        buffer << "File " << LOG_STYLE_MAGENTA << filepath << LOG_STYLE_PLAIN << " has been closed by " << getMessageModule(module) << ".";
+        buffer << "File " << getFilepath(filepath) << " has been closed by " << getMessageModule(module) << ".";
         return buffer.str();
     }
 
     std::string Logger::getMessageModule(const std::string& module) {
         std::ostringstream buffer;
         buffer << LOG_STYLE_BLUE << module << LOG_STYLE_PLAIN;
+        return buffer.str();
+    }
+
+    std::string Logger::getFilepath(const std::string& filepath) {
+        std::ostringstream buffer;
+        buffer << LOG_STYLE_MAGENTA << filepath << LOG_STYLE_PLAIN;
         return buffer.str();
     }
 

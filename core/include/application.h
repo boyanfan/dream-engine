@@ -7,6 +7,7 @@
 
 #include "symbols.h"
 #include "logger.h"
+#include "video.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -21,7 +22,7 @@ namespace DreamEngine {
     /// Holds window properties and desired frame rate for the application, it is used to configure
     /// the SDL window when creating an Application instance.
     ///
-    class WindowConfiguration {
+    struct WindowConfiguration {
         /// Class Name for reflection implementation.
         public: static inline std::string self = WINDOW_CONFIGURATION_TYPE;
 
@@ -68,7 +69,7 @@ namespace DreamEngine {
         private: int frameRate;
 
         /// Controls whether the main loop is currently running.
-        protected: bool isRunning;
+        protected: bool isRunning = true;
 
         /// Constructs the application using the specified window configuration.
         /// @param configuration The window settings and frame rate for the application.
