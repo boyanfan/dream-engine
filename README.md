@@ -53,7 +53,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE dream-engine/core/include)
 
 ## Next Step
 
-To get the most out of DreamEngine, we highly encourage 
+To get the most out of the Dream Engine, we highly encourage 
 developers to explore the [Dream Engine Documentation](docs/README.md),
 It provides clear, structured guidance on how to use 
 core classes, extend engine features, and build 
