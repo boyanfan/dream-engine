@@ -6,7 +6,16 @@ you're integrating Dream Engine into a new game project or exploring its interna
 architecture, the documentation provides structured insights into how the engine works 
 and how to use it effectively.
 
-The docs are designed to support you through every stage of development—from setup and 
-configuration to advanced customization and best practices. You'll find overviews, 
-conceptual explanations, usage examples, and architectural references to help you 
-make the most of Dream Engine.
+At the heart of every DreamEngine game is the 
+[Application](Application.md) class — a virtual base 
+class that serves as the program’s entry point. 
+It encapsulates all the core runtime behaviors,
+so developers can focus purely on implementing game logic. 
+By inheriting from Application and overriding key methods, 
+you can build your entire game without worrying about 
+the underlying system setup.
+
+The [ResourceManager](ResourceManager.md) class is a 
+global singleton designed to simplify asset management
+across your game. It handles automatic loading, caching, 
+and unloading of various kinds of resources.

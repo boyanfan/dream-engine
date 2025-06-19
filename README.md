@@ -17,7 +17,7 @@ cd dream-engine
 ```
 
 Before building Dream Engine, make sure **SDL3**, 
-**CMake**, and **PkgConfig** has been installed. 
+**CMake**, and **PkgConfig** have been installed. 
 You can check them from your terminal using the
 following commands.
 
@@ -38,7 +38,7 @@ cmake .. && make
 ## Using Dream Engine in Your Project
 To use Dream Engine in your own CMake-based 
 projects, you can either install Dream Engine 
-to a system or local path, or include it as a 
+to a system or local path or include it as a 
 subdirectory. If you choose the latter 
 (without installation), your `CMakeLists.txt`
 configuration may include the following fields.
@@ -48,3 +48,13 @@ add_subdirectory(dream-engine)
 target_link_libraries(${PROJECT_NAME} PRIVATE dream_engine)
 target_include_directories(${PROJECT_NAME} PRIVATE dream-engine/core/include)
 ```
+
+---
+
+## Next Step
+
+To get the most out of DreamEngine, we highly encourage 
+developers to explore the [Dream Engine Documentation](docs/README.md),
+It provides clear, structured guidance on how to use 
+core classes, extend engine features, and build 
+polished 2D games efficiently.
