@@ -31,7 +31,7 @@ namespace DreamEngine {
         public: static inline std::string self = VIDEO_DECODER_TYPE;
 
         /// SDL texture used to render the current video frame.
-        private: SDL_Texture* texture = nullptr;
+        private: mutable SDL_Texture* texture = nullptr;
 
         /// Width of the rendering window.
         private: int windowWidth;
@@ -67,13 +67,13 @@ namespace DreamEngine {
         private: AVRational videoTimeBase{};
 
         /// Timestamp marking the beginning of video playback.
-        private: Uint64 startTicks = 0;
+        private: mutable Uint64 startTicks = 0;
 
         /// Internal buffer for the converted color space frame data.
         private: uint8_t* colorSpaceBuffer = nullptr;
 
         /// Indicates whether the video has finished playing.
-        public: bool hasFinished  = false;
+        public: mutable bool hasFinished  = false;
 
         /// Constructs a new `VideoDecoder`.
         ///
@@ -86,12 +86,13 @@ namespace DreamEngine {
         /// Destructor. Cleans up all FFmpeg and SDL resources used during decoding.
         public: ~VideoDecoder() override;
 
-        /// Renders the next frame of the video to the given SDL renderer. This method decodes the next frame if the
-        /// time has come, performs scaling and pixel format conversion, and then copies it to the SDL renderer.
+        /// Renders the next video frame using the provided camera.
+        /// This function decodes and displays a single frame from the video stream, automatically synchronizing
+        /// playback based on presentation timestamps (PTS).
         ///
-        /// @param renderer Pointer to the SDL renderer to draw onto.
+        /// @param camera A reference to the Dream Engine camera used for rendering.
         ///
-        void onRender(SDL_Renderer* renderer) override;
+        void onRender(const Camera& camera) const override;
 
         /// Initializes all FFmpeg contexts and prepares for decoding. This method opens the video file, locates the
         /// video stream, and sets up the codec, scaling context, and frame buffers.

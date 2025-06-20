@@ -12,7 +12,7 @@ namespace DreamEngine {
     /// 2D vectors, such as addition, subtraction, scalar division, dot product, normalization, and more.
     /// It is useful for applications like graphics and physics simulations.
     ///
-    class Vector2 {
+    struct Vector2 {
         /// Horizontal components of the 2D vector.
         public: float x = 0;
 

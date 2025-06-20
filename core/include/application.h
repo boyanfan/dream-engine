@@ -10,6 +10,7 @@
 #include "video.h"
 #include "geometry.h"
 #include "resource.h"
+#include "vector2.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -31,11 +32,8 @@ namespace DreamEngine {
         /// The title of the application window.
         public: std::string title = DEFAULT_WINDOW_TITLE;
 
-        /// The width of the application window in pixels.
-        public: int width = DEFAULT_WINDOW_WIDTH;
-
-        /// The height of the application window in pixels.
-        public: int height = DEFAULT_WINDOW_HEIGHT;
+        /// The width and the height of the application window in pixels.
+        public: Vector2 size = Vector2(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
 
         /// The target frame rate per second of the application.
         public: int frameRate = DEFAULT_WINDOW_FRAME_RATE;
@@ -65,7 +63,7 @@ namespace DreamEngine {
         private: SDL_Window* window = nullptr;
 
         /// Pointer to the SDL renderer used for rendering.
-        private: SDL_Renderer* renderer = nullptr;
+        protected: SDL_Renderer* renderer = nullptr;
 
         /// Target frame rate per second for the main loop.
         private: int frameRate;

@@ -7,7 +7,7 @@ the application window and control the main loop timing
 when creating an instance of [Application](Application.md).
 
 ```c++
-class WindowConfiguration;
+struct WindowConfiguration;
 ```
 
 It also supports loading configuration from an external 
@@ -22,11 +22,9 @@ provided by the [WindowConfiguration](WindowConfiguration.md) class.
 
 - `std::string title`: The title of the application window.
 
-- `int width`: The width of the window in pixels. Defaults to `1280`.
+- `Vector2 size`: The width and height of the window in pixels, represented by a [Vector2](Vector2.md).
 
-- `int height`: The height of the window in pixels. Defaults to `720`.
-
-- `int frameRate`: The desired target frame rate in frames per second. Defaults to `60`.
+- `int frameRate`: The desired target frame rate in frames per second.
 
 ---
 
@@ -95,4 +93,5 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### See Also
-[Application](Application.md)
+[Application](Application.md) <br>
+[Vector2](Vector2.md)

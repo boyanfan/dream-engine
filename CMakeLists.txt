@@ -13,6 +13,7 @@ add_library(${PROJECT_NAME} STATIC
     core/src/timer.cpp
     core/src/video.cpp
     core/src/geometry.cpp
+    core/src/camera.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

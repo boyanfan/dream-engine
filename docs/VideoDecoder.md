@@ -43,18 +43,17 @@ Cleans up all associated FFmpeg and SDL resources, including textures, frames, a
 ### onRender()
 
 ```c++
-void onRender(SDL_Renderer* renderer) override;
+void onRender(const Camera& camera) const override;
 ```
 
-Renders the next frame of the video to the provided SDL 
-renderer. 
+Renders the next frame of the video using the provided camera.
 
 **Parameters:**
-- renderer: SDL renderer used to display the frame.
+`camera`: The [Camera](Camera.md) used to display the video, handling coordinate transforms and rendering context.
 
 This function should be called once per frame.
-It automatically manages timing to sync frame
-playback to the video's frame rate.
+It automatically decodes and synchronizes one video frame based on presentation timestamps (PTS), ensuring accurate playback timing.
+All rendering is performed through the camera to support effects like scaling, parallax, and screen fitting.
 
 ---
 
@@ -84,4 +83,5 @@ from it and which base classes it derives from.
 [Renderable](Renderable.md)
 
 ### See Also
-[VideoWrapper](VideoWrapper.md)
+[VideoWrapper](VideoWrapper.md) <br>
+[Camera](Camera.md)

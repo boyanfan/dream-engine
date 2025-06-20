@@ -6,10 +6,11 @@
 #define RENDERABLE_H
 
 #include "symbols.h"
+#include "camera.h"
 #include <SDL3/SDL.h>
 
 namespace DreamEngine {
-    /// The standard interface for objects that can be rendered with an SDL renderer.
+    /// The standard interface for objects that can be rendered with a Dream Engine Camera.
     /// Classes that confirm to it must implement the `onRender()` method to define how they should be drawn on screen.
     ///
     class Renderable {
@@ -17,9 +18,9 @@ namespace DreamEngine {
         public: virtual ~Renderable() = default;
 
         /// Defines how the object should be rendered using the given SDL renderer.
-        /// @param renderer The SDL renderer used for drawing.
+        /// @param camera Which of the Dream Engine Camera to render on.
         ///
-        protected: virtual void onRender(SDL_Renderer* renderer) = NONE;
+        protected: virtual void onRender(const Camera& camera) const = NONE;
     };
 }
 

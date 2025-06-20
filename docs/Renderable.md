@@ -1,14 +1,14 @@
 # Renderable
-The standard interface for objects that can be rendered 
-with an SDL renderer.
+The standard interface for objects that can be rendered
+through a [Camera](Camera.md).
 
 ```c++
 class Renderable;
 ```
 
-Classes that confirm to it must implement the 
-`onRender()` method to define how they should be drawn 
-on screen.
+Classes that conform to this interface must implement the
+`onRender()` method to define how they should be drawn
+on screen through a given camera view.
 
 ## Methods
 Below is a list of methods that must be implemented to
@@ -17,14 +17,14 @@ conform to the [Renderable](Renderable.md) interface.
 ### onRender()
 
 ```c++
-virtual void onRender(SDL_Renderer* renderer);
+virtual void onRender(const Camera& camera) const;
 ```
 
-Defines how the object should be rendered using the 
-given SDL renderer.
+Defines how the object should be rendered through the
+given camera instance.
 
 **Parameters:**
-- `renderer`: The SDL renderer used to draw the object.
+- `camera`: The [Camera](Camera.md) that handles coordinate translation, parallax, and other visual effects.
 
 **Notes:**
 - This is a pure virtual function and must be implemented by all derived classes.
@@ -39,3 +39,6 @@ from it and which base classes it derives from.
 
 ### Conforming Types
 [VideoDecoder](VideoDecoder.md)
+
+### See Also 
+[Camera](Camera.md)

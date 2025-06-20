@@ -17,6 +17,9 @@
 #define SDL_MIXER_TYPE "SDL::Mixer"
 #define SDL_TTF_TYPE "SDL::TTF"
 
+// DreamEngine::Camera Utility
+#define CAMERA_DEFAULT_FACTOR 1.0f
+
 // Window Utility
 #define NANOSECONDS_PER_SECOND 1000000000
 #define DEFAULT_WINDOW_WIDTH 1280

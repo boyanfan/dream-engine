@@ -1,9 +1,9 @@
 # Vector2
-A simple 2D vector class for representing and manipulating
+A simple 2D vector type for representing and manipulating
 2D vectors.
 
 ```c++
-class Vector2;
+struct Vector2;
 ```
 [Vector2](Vector2.md) supports mathematical operations for 2D vectors, such as 
 addition, subtraction, scalar division, dot product, 

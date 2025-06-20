@@ -96,8 +96,9 @@ namespace DreamEngine {
         return true;
     }
 
-    void VideoDecoder::onRender(SDL_Renderer* renderer) {
+    void VideoDecoder::onRender(const Camera& camera) const {
         if (hasFinished) return;
+        SDL_Renderer* renderer = camera.getRenderer();
 
         // Create texture on the first call
         if (!texture) {
@@ -140,6 +141,7 @@ namespace DreamEngine {
         }
         hasFinished = true;
     }
+
 
     VideoWrapper::VideoWrapper(std::string filepath) : filepath(std::move(filepath)) {  }
 

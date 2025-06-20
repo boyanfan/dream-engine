@@ -4,7 +4,7 @@ it provides a convenient and efficient way to load and reuse
 font resources with multiple sizes.
 
 ```c++
-class FontWrapper;
+struct FontWrapper;
 ```
 
 This class supports lazy loading of fonts — fonts of a 

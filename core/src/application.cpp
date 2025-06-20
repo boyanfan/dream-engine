@@ -11,7 +11,7 @@ namespace DreamEngine {
         else LOG_INFO(Logger::onInitialize(Application::self, SDL_TYPE, LOG_SUCCESS));
 
         // Initialize SDL window
-        window = SDL_CreateWindow(configuration.title.c_str(), configuration.width, configuration.height, NONE);
+        window = SDL_CreateWindow(configuration.title.c_str(), static_cast<int>(configuration.size.x), static_cast<int>(configuration.size.y), NONE);
         if (!window) LOG_ERROR(Logger::onInitialize(Application::self, SDL_WINDOW_TYPE, LOG_FAILURE));
         else LOG_INFO(Logger::onInitialize(Application::self, SDL_WINDOW_TYPE, LOG_SUCCESS));
 
@@ -51,6 +51,8 @@ namespace DreamEngine {
         SDL_QuitSubSystem(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS);
         SDL_Quit();
         LOG_INFO(Logger::onDeinitialize(Application::self, SDL_TYPE));
+
+        Logger::destroyInstance();
     }
 
     void Application::execute() {
@@ -67,6 +69,7 @@ namespace DreamEngine {
 
         // DreamEngine opening presentation
         VideoDecoder* openingLogo = getOpeningPresentation(renderer, GeometryProxy(window));
+        Camera camera = Camera(renderer);
 
         while (isRunning) {
             // Poll all SDL events to handel user input
@@ -80,7 +83,7 @@ namespace DreamEngine {
             const float interval = duration_cast<duration<float>>(tickDidUpdate - tickBeforeUpdate).count();
 
             // Display the DreamEngine opening presentation if the game is launching
-            if (!openingLogo->hasFinished) openingLogo->onRender(renderer);
+            if (!openingLogo->hasFinished) openingLogo->onRender(camera);
 
             // Update game logic, render the current frame and present it to the screen
             onUpdate(interval);
@@ -115,8 +118,8 @@ namespace DreamEngine {
             // Get the key and the value
             if (std::getline(stream, key, WINDOW_CONFIGURATION_SEPARATOR) && std::getline(stream, value)) {
                 if (key == WINDOW_CONFIGURATION_TITLE_KEY) title = value;
-                else if (key == WINDOW_CONFIGURATION_WIDTH_KEY) width = std::stoi(value);
-                else if (key == WINDOW_CONFIGURATION_HEIGHT_KEY) height = std::stoi(value);
+                else if (key == WINDOW_CONFIGURATION_WIDTH_KEY) size.x = std::stof(value);
+                else if (key == WINDOW_CONFIGURATION_HEIGHT_KEY) size.y = std::stof(value);
                 else if (key == WINDOW_CONFIGURATION_FRAME_RATE_KEY) frameRate = std::stoi(value);
             }
         }
