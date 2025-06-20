@@ -1,10 +1,10 @@
-# Font
-[Font](Font.md) is a wrapper class for SDL `TTF_Font` struct, 
+# FontWrapper
+[FontWrapper](FontWrapper.md) is a wrapper class for SDL `TTF_Font` struct, 
 it provides a convenient and efficient way to load and reuse 
 font resources with multiple sizes.
 
 ```c++
-class Font;
+class FontWrapper;
 ```
 
 This class supports lazy loading of fonts — fonts of a 
@@ -16,12 +16,12 @@ redundant file access and improve runtime performance.
 
 ## Methods
 Below is a list and explanation of all public methods
-provided by the [Font](Font.md) class.
+provided by the [FontWrapper](FontWrapper.md) class.
 
 ### Constructor
 
 ```c++
-explicit Font(std::string path);
+explicit FontWrapper(std::string filepath);
 ```
 
 Constructs a Font object from the given font file path. The 
@@ -33,7 +33,7 @@ enabling lazy loading.
 
 ### Destructor
 ```c++
-~Font();
+~FontWrapper();
 ```
 Releases all loaded font resources. It iterates through 
 the font size catching and calls `TTF_CloseFont()` for 
@@ -67,7 +67,7 @@ disk using `TTF_OpenFont()`, cached, and then returned.
 ```c++
 // Get font from resource manager
 ResourceManager* manager = ResourceManager::getInstance();
-Font font = manager->getFont("font");
+FontWrapper font = manager->getFont("font");
 
 TTF_Font* title = font.getSizedFont(52);
 TTF_Font* body = font.getSizedFont(16);
@@ -76,7 +76,7 @@ TTF_Font* body = font.getSizedFont(16);
 ---
 
 ## Relationships
-Below is the position of [Font](Font.md)
+Below is the position of [FontWrapper](FontWrapper.md)
 within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 

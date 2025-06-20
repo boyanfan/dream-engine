@@ -10,6 +10,17 @@ namespace DreamEngine {
         std::cout << getMessageHeader(logScope) << message << std::endl;
     }
 
+    std::string Logger::onDataAccess(const std::string& module, const std::string& data, const bool state) {
+        std::ostringstream buffer;
+        std::string action;
+
+        if (state) action = " successfully accessed ";
+        else action = " failed to access ";
+
+        buffer << getMessageModule(module) << action << getFilepath(data) << ".";
+        return buffer.str();
+    }
+
     std::string Logger::onInitialize(const std::string& module, const std::string& target, const bool state) {
         std::ostringstream buffer;
         std::string action;

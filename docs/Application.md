@@ -91,8 +91,7 @@ the provided SDL renderer.
 
 The [Application](Application.md) class provides basic 
 reflection by storing its own class name, which can be 
-accessed via `Application::self`. This feature is commonly 
-used by other classes such as [Logger](Logger.md).
+accessed via `Application::self`. 
 
 ```c++
 static inline std::string self;
@@ -119,5 +118,4 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### See Also
-[WindowConfiguration](WindowConfiguration.md) <br>
-[Logger](Logger.md)
+[WindowConfiguration](WindowConfiguration.md)

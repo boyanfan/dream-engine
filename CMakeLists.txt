@@ -12,6 +12,7 @@ add_library(${PROJECT_NAME} STATIC
     core/src/logger.cpp
     core/src/timer.cpp
     core/src/video.cpp
+    core/src/geometry.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

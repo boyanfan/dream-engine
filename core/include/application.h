@@ -8,6 +8,8 @@
 #include "symbols.h"
 #include "logger.h"
 #include "video.h"
+#include "geometry.h"
+#include "resource.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -98,6 +100,8 @@ namespace DreamEngine {
         /// @param renderer The SDL_Renderer instance to draw with.
         ///
         protected: virtual void onRender(SDL_Renderer* renderer) = NONE;
+
+        private: static VideoDecoder* getOpeningPresentation(SDL_Renderer* renderer, const GeometryProxy& geometry);
     };
 }
 

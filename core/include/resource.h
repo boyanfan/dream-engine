@@ -8,6 +8,8 @@
 #include "singleton.h"
 #include "font.h"
 #include "symbols.h"
+#include "video.h"
+#include "logger.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -25,6 +27,9 @@ namespace DreamEngine {
         /// Type alias for specific resource loading methods
         using ResourceLoader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
 
+        /// Class Name for reflection implementation.
+        public: static inline std::string self = RESOURCE_MANAGER_TYPE;
+
         /// Pool of loaded textures, keyed by the base filename.
         private: std::unordered_map<std::string, SDL_Texture*> texturePool;
 
@@ -32,7 +37,10 @@ namespace DreamEngine {
         private: std::unordered_map<std::string, Mix_Chunk*> audioPool;
 
         /// Pool of loaded fonts, keyed by the base font name.
-        private: std::unordered_map<std::string, Font*> fontPool;
+        private: std::unordered_map<std::string, FontWrapper*> fontPool;
+
+        /// Pool of loaded videos, keyed by the base filename.
+        private: std::unordered_map<std::string, VideoWrapper*> videoPool;
 
         /// The collection of loaders specified for different types of resources.
         private: std::unordered_map<std::string, ResourceLoader> resourceLoaders;
@@ -79,7 +87,14 @@ namespace DreamEngine {
         /// @param fontName Base font name (without extension) of the font.
         /// @return Font* pointer if found, nullptr otherwise.
         ///
-        public: Font* getFont(const std::string& fontName) const;
+        public: FontWrapper* getFont(const std::string& fontName) const;
+
+        /// Retrieves a loaded video by name.
+        ///
+        /// @param videoName Base video name (without extension) of the video.
+        /// @return VideoWrapper* pointer if found, nullptr otherwise.
+        ///
+        public: VideoWrapper* getVideo(const std::string& videoName) const;
     };
 }
 

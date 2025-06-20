@@ -30,6 +30,8 @@ namespace DreamEngine {
         ///
         public: static T* getInstance();
 
+        public: static void destroyInstance();
+
         /// Deleted copy assignment operator to prevent reassignment.
         public: Singleton& operator =(const Singleton&) = delete;
 
@@ -39,9 +41,14 @@ namespace DreamEngine {
 
     template<typename T> inline T* Singleton<T>::instance = nullptr;
 
-    template<typename T> inline T* Singleton<T>::getInstance() {
+    template<typename T> T* Singleton<T>::getInstance() {
         if (!instance) instance = new T();
         return instance;
+    }
+
+    template<typename T> void Singleton<T>::destroyInstance() {
+        delete instance;
+        instance = nullptr;
     }
 }
 

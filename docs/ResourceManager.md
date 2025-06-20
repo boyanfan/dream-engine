@@ -1,7 +1,7 @@
 # ResourceManager
 
 [ResourceManager](ResourceManager.md) is a singleton 
-utility class in C++ that inherits from the generic
+utility class that inherits from the generic
 [Singleton\<T\>](Singleton.md) base class and provides 
 centralized loading and access to texture and audio 
 assets.
@@ -77,7 +77,7 @@ Pointer to `Mix_Chunk` if found, or nullptr.
 ### getFont()
 
 ```c++
-Font* getFont(const std::string& fontName) const;
+FontWrapper* getFont(const std::string& fontName) const;
 ```
 
 Retrieve a loaded font from the font pool.
@@ -86,7 +86,23 @@ Retrieve a loaded font from the font pool.
 - fontName: The base filename of the font, without the extension.
 
 **Returns:**
-Pointer to [Font](Font.md) if found, or nullptr.
+Pointer to [FontWrapper](FontWrapper.md) if found, or nullptr.
+
+
+### getVideo()
+
+```c++
+VideoWrapper* getVideo(const std::string& videoName) const;
+```
+
+Retrieve a loaded video from the video pool.
+
+**Parameters:**
+
+- `videoName`: The base filename of the video, without the extension.
+
+**Returns:**
+Pointer to [VideoWrapper](VideoWrapper.md) if found, or nullptr.
 
 ---
 
@@ -106,6 +122,14 @@ Mix_Chunk* jumpSound = manager->getAudio("jump");
 
 ---
 
+## Reflection
+
+The [ResourceManager](ResourceManager.md) class provides basic
+reflection by storing its own class name, which can be
+accessed via `ResourceManager::self`.
+
+---
+
 ## Relationships
 Below is the position of [ResourceManager](ResourceManager.md)
 within the type hierarchy, including which classes inherit
@@ -115,4 +139,5 @@ from it and which base classes it derives from.
 [Singleton\<T\>](Singleton.md)
 
 ### See Also
-[Font](Font.md)
+[FontWrapper](FontWrapper.md) <br>
+[VideoWrapper](VideoWrapper.md)

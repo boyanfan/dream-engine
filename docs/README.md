@@ -48,7 +48,8 @@ offering essential functionality for game development.
 - [VideoDecoder](VideoDecoder.md)
 
 ### Data Structures
-
-- [Font](Font.md)
-- [Vector2](Vector2.md)
 - [WindowConfiguration](WindowConfiguration.md)
+- [GeometryProxy](GeometryProxy.md)
+- [FontWrapper](FontWrapper.md)
+- [VideoWrapper](VideoWrapper.md)
+- [Vector2](Vector2.md)

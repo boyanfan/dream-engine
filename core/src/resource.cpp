@@ -20,23 +20,45 @@ namespace DreamEngine {
 
         // Register the loader for font files (with '.mp3' extension)
         registerLoader(DREAM_ENGINE_TTF_EXTENSION, [&](SDL_Renderer*, const std::filesystem::path& path) -> void {
-            Font* font = new Font(path.u8string());
+            FontWrapper* font = new FontWrapper(path.u8string());
             fontPool[path.stem().u8string()] = font;
+        });
+
+        // Register the loader for video files (with '.mp4' extension)
+        registerLoader(DREAM_ENGINE_MP4_EXTENSION, [&](SDL_Renderer*, const std::filesystem::path& path) -> void {
+            VideoWrapper* video = new VideoWrapper(path.u8string());
+            videoPool[path.stem().u8string()] = video;
         });
     }
 
     ResourceManager::~ResourceManager() {
         // Destroy textures
-        for (const std::pair<const std::string, SDL_Texture*>& pair : texturePool) { SDL_DestroyTexture(pair.second); }
+        for (const std::pair<const std::string, SDL_Texture*>& pair : texturePool) {
+            LOG_INFO(Logger::onFileUnload(self, pair.first));
+            SDL_DestroyTexture(pair.second);
+        }
         texturePool.clear();
 
         // Free audio chunks
-        for (const std::pair<const std::string, Mix_Chunk*>& pair : audioPool) { Mix_FreeChunk(pair.second); }
+        for (const std::pair<const std::string, Mix_Chunk*>& pair : audioPool) {
+            LOG_INFO(Logger::onFileUnload(self, pair.first));
+            Mix_FreeChunk(pair.second);
+        }
         audioPool.clear();
 
         // Close fonts
-        for (const std::pair<const std::string, Font*>& pair : fontPool) { delete pair.second; }
+        for (const std::pair<const std::string, FontWrapper*>& pair : fontPool) {
+            LOG_INFO(Logger::onFileUnload(self, pair.first));
+            delete pair.second;
+        }
         fontPool.clear();
+
+        // Close videos
+        for (const std::pair<const std::string, VideoWrapper*>& pair : videoPool) {
+            LOG_INFO(Logger::onFileUnload(self, pair.first));
+            delete pair.second;
+        }
+        videoPool.clear();
 
         // Clear registered loader mappings and generic resources
         resourceLoaders.clear();
@@ -60,6 +82,8 @@ namespace DreamEngine {
                 // Load the resource if its `ResourceLoader` is found
                 if (iterator != resourceLoaders.end()) iterator->second(renderer, path);
             }
+
+            else LOG_ERROR(Logger::onFileLoad(self, entry.path().u8string(), LOG_FAILURE));
         }
     }
 
@@ -70,7 +94,12 @@ namespace DreamEngine {
         const ConstIterator iterator = texturePool.find(textureName);
 
         // Return texture or a nullptr if nothing is found
-        if (iterator != texturePool.end()) return iterator->second;
+        if (iterator != texturePool.end()) {
+            LOG_INFO(Logger::onFileLoad(self, textureName, LOG_SUCCESS));
+            return iterator->second;
+        }
+
+        LOG_ERROR(Logger::onFileLoad(self, textureName, LOG_FAILURE));
         return nullptr;
     }
 
@@ -81,18 +110,44 @@ namespace DreamEngine {
         const ConstIterator iterator = audioPool.find(audioName);
 
         // Return audio or a nullptr if nothing is found
-        if (iterator != audioPool.end()) return iterator->second;
+        if (iterator != audioPool.end()) {
+            LOG_INFO(Logger::onFileLoad(self, audioName, LOG_SUCCESS));
+            return iterator->second;
+        }
+
+        LOG_ERROR(Logger::onFileLoad(self, audioName, LOG_FAILURE));
         return nullptr;
     }
 
-    Font* ResourceManager::getFont(const std::string &fontName) const {
-        using ConstIterator = std::unordered_map<std::string, Font*>::const_iterator;
+    FontWrapper* ResourceManager::getFont(const std::string &fontName) const {
+        using ConstIterator = std::unordered_map<std::string, FontWrapper*>::const_iterator;
 
         // Try to use const methods to find the font
         const ConstIterator iterator = fontPool.find(fontName);
 
         // Return font or a nullptr if nothing is found
-        if (iterator != fontPool.end()) return iterator->second;
+        if (iterator != fontPool.end()) {
+            LOG_INFO(Logger::onFileLoad(self, fontName, LOG_SUCCESS));
+            return iterator->second;
+        }
+
+        LOG_ERROR(Logger::onFileLoad(self, fontName, LOG_FAILURE));
+        return nullptr;
+    }
+
+    VideoWrapper* ResourceManager::getVideo(const std::string &videoName) const {
+        using ConstIterator = std::unordered_map<std::string, VideoWrapper*>::const_iterator;
+
+        // Try to use const methods to find the video
+        const ConstIterator iterator = videoPool.find(videoName);
+
+        // Return video or a nullptr if nothing is found
+        if (iterator != videoPool.end()) {
+            LOG_INFO(Logger::onFileLoad(self, videoName, LOG_SUCCESS));
+            return iterator->second;
+        }
+
+        LOG_ERROR(Logger::onFileLoad(self, videoName, LOG_FAILURE));
         return nullptr;
     }
 }

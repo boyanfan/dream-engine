@@ -8,12 +8,14 @@
 // DreamEngine Type system for Reflection
 #define APPLICATION_TYPE "DreamEngine::Application"
 #define WINDOW_CONFIGURATION_TYPE "DreamEngine::WindowConfiguration"
+#define RESOURCE_MANAGER_TYPE "DreamEngine::ResourceManager"
+#define VIDEO_DECODER_TYPE "DreamEngine::VideoDecoder"
+#define GEOMETRY_PROXY_TYPE "DreamEngine::GeometryProxy"
 #define SDL_TYPE "SDL"
 #define SDL_WINDOW_TYPE "SDL::Window"
 #define SDL_RENDERER_TYPE "SDL::Renderer"
 #define SDL_MIXER_TYPE "SDL::Mixer"
 #define SDL_TTF_TYPE "SDL::TTF"
-#define VIDEO_DECODER_TYPE "DreamEngine::VideoDecoder"
 
 // Window Utility
 #define NANOSECONDS_PER_SECOND 1000000000
@@ -52,13 +54,15 @@
 
 // DreamEngine Utility
 #define NONE 0
-#define DREAM_ENGINE_OPENING_LOGO "resources/engine-logo-video.mp4"
-#define DREAM_ENGINE_OPENING_SOUND "resources/engine-logo-audio.mp3"
+#define DREAM_ENGINE_OPENING_RESOURCES "resources"
+#define DREAM_ENGINE_OPENING_LOGO "engine-logo-video"
+#define DREAM_ENGINE_OPENING_SOUND "engine-logo-audio"
 #define FIRST_FREE_CHANNEL (-1)
 
 // DreamEngine::ResourceManager Utility
 #define DREAM_ENGINE_PNG_EXTENSION ".png"
 #define DREAM_ENGINE_MP3_EXTENSION ".mp3"
+#define DREAM_ENGINE_MP4_EXTENSION ".mp4"
 #define DREAM_ENGINE_TTF_EXTENSION ".ttf"
 
 #endif //DREAM_ENGINE_SYMBOLS_H

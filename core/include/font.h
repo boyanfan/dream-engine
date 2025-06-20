@@ -14,20 +14,20 @@ namespace DreamEngine {
     /// Represents a font resource loaded from a file, supporting multiple font sizes.
     /// It ensures each font size is only loaded once and handles proper cleanup on destruction.
     ///
-    struct Font {
+    struct FontWrapper {
         /// Path to the font file, with an extension of ".ttf".
-        private: std::string path;
+        private: std::string filepath;
 
         /// A pool that caches TTF_Font* objects for different font sizes, keyed by an integer font size.
         private: std::unordered_map<int, TTF_Font*> fontSizePool;
 
         // Constructs a Font object with the given font file path.
-        /// @param path Path to the font file, with an extension of ".ttf".
+        /// @param filepath Path to the font file, with an extension of ".ttf".
         ///
-        public: explicit Font(std::string path);
+        public: explicit FontWrapper(std::string filepath);
 
         /// Destructor. Frees all loaded TTF_Font resources.
-        public: ~Font();
+        public: ~FontWrapper();
 
         /// Retrieves a font of the specified size. If the font size has already been loaded, return the cached font.
         /// Otherwise, loads the font and caches it for future use.

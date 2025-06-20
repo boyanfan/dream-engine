@@ -140,4 +140,14 @@ namespace DreamEngine {
         }
         hasFinished = true;
     }
+
+    VideoWrapper::VideoWrapper(std::string filepath) : filepath(std::move(filepath)) {  }
+
+    VideoWrapper::~VideoWrapper() { delete videoDecoder; }
+
+    VideoDecoder *VideoWrapper::getVideoDecoder(const GeometryProxy geometry) {
+        const Vector2 windowSize = geometry.getWindowSize();
+        if (!videoDecoder) videoDecoder = new VideoDecoder(filepath, static_cast<int>(windowSize.x), static_cast<int>(windowSize.y));
+        return videoDecoder;
+    }
 }

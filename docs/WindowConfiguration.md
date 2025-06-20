@@ -81,8 +81,7 @@ true if the file was successfully loaded and all values were parsed.
 
 The [WindowConfiguration](WindowConfiguration.md) class provides basic
 reflection by storing its own class name, which can be
-accessed via `WindowConfiguration::self`. This feature is commonly
-used by other classes such as [Logger](Logger.md).
+accessed via `WindowConfiguration::self`.
 
 ```c++
 static inline std::string self;

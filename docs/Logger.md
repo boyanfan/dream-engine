@@ -55,6 +55,22 @@ Log a message to the console if it meets the current logging level threshold.
 - `logScope`: Severity level of the message.
 - `message`: The text to be logged.
 
+### onDataAccess()
+
+```c++
+static std::string onDataAccess(const std::string& module, const std::string& data, bool state);
+```
+
+Constructs a message describing the access status of a specific data resource by a given module.
+
+**Parameters:**
+- `module`: The name of the module attempting to access the data.
+- `data`: The name or path of the data resource being accessed.
+- `state`: `LOG_SUCCESS` if the access was successful; `LOG_FAILURE` otherwise.
+
+**Returns:**
+A formatted string containing the resulting message about the data access operation.
+
 ### onInitialize()
 
 ```c++
@@ -120,6 +136,35 @@ Creates a message indicating that a file has been closed or unloaded.
 **Returns:**
 A formatted string describing the file unload event.
 
+
+### getFilepath()
+
+```c++
+static std::string getFilepath(const std::string& filepath);
+```
+
+Formats and stylizes the given file path for logging purposes.
+
+**Parameters:**
+- `filepath`: The file path to be stylized and included in log messages.
+
+**Returns:**
+A formatted string containing the stylized file path.
+
+### getMessageModule()
+
+```c++
+static std::string getMessageModule(const std::string& module);
+```
+
+Returns a stylized string representation of the given module name.
+
+**Parameters:**
+- `module`: The name of the module.
+
+**Returns:**
+A formatted string containing the stylized module.
+
 ---
 
 ## Macros
@@ -142,6 +187,14 @@ macros are preferred over direct use of the `log()` method:
 const std::string message = Logger::onInitialize(SomeClass::self, AnotherClass::self, LOG_FAILURE);
 LOG_ERROR(message)
 ```
+
+---
+
+## Reflection
+
+The [Logger](Logger.md) class provides basic
+reflection by storing its own class name, which can be
+accessed via `Logger::self`.
 
 ---
 

@@ -43,6 +43,15 @@ namespace DreamEngine {
         ///
         public: void log(LogScope logScope, const std::string& message) const;
 
+        /// Constructs a message describing the access status of a specific data resource by a given module.
+        ///
+        /// @param module A string representing the module accessing the data.
+        /// @param data A string representing the name or path of the data resource being accessed.
+        /// @param state A boolean indicating the success or failure of the access operation:
+        /// @return A formatted string containing the resulting message about the data access operation.
+        ///
+        public: static std::string onDataAccess(const std::string& module, const std::string& data, bool state);
+
         /// Constructs a stylized log message for a module initialization event.
         ///
         /// @param module The name of the module performing the initialization.

@@ -5,10 +5,10 @@
 #define DREAM_ENGINE_VIDEO_H
 
 #include "logger.h"
+#include "renderable.h"
+#include "geometry.h"
 #include <string>
 #include <SDL3/SDL.h>
-
-#include "renderable.h"
 
 extern "C" {
 #include <libavformat/avformat.h>
@@ -51,7 +51,7 @@ namespace DreamEngine {
         /// FFmpeg software scaling context for converting pixel formats and sizes.
         private: SwsContext* scalingContext = nullptr;
 
-        /// Frame for holding raw video data directly from decoder.
+        /// Frame for holding raw video data directly from the decoder.
         private: AVFrame* rawFrame = nullptr;
 
         /// Frame for holding converted video data in a pixel format SDL can render.
@@ -100,6 +100,34 @@ namespace DreamEngine {
         /// @return `true` if initialization was successful; `false` otherwise.
         ///
         private: bool initialize(const std::string& filepath);
+    };
+
+    /// A lightweight wrapper that defers the construction of a VideoDecoder until rendering.
+    /// It stores the path to a video file but does not immediately decode it. Instead, it creates the `VideoDecoder`
+    /// only when rendering is about to begin, allowing the rendering window size to be provided dynamically at runtime.
+    ///
+    struct VideoWrapper {
+        /// Path to the video file, with an extension of ".mp4".
+        private: std::string filepath;
+
+        /// Pointer to the lazily initialized `VideoDecoder`.
+        private: VideoDecoder* videoDecoder = nullptr;
+
+        /// Constructs a `VideoWrapper` with the given video file path.
+        /// @param filepath The path to the video file.
+        ///
+        public: explicit VideoWrapper(std::string filepath);
+
+        /// Destructor. Frees the internally managed `VideoDecoder` if created.
+        public: ~VideoWrapper();
+
+        /// Returns the internal `VideoDecoder`, initializing it if not already done.
+        /// The method takes the current window geometry to create a properly scaled decoder.
+        ///
+        /// @param geometry The dimensions of the rendering window.
+        /// @return A pointer to the lazily constructed `VideoDecoder`.
+        ///
+        public: VideoDecoder* getVideoDecoder(GeometryProxy geometry);
     };
 }
 

@@ -5,36 +5,6 @@
 #include "application.h"
 
 namespace DreamEngine {
-    bool WindowConfiguration::configurateFromFile(const std::string &filepath) {
-        // Try to open the configuration file
-        std::ifstream file(filepath);
-
-        if (!file.is_open()) {
-            LOG_ERROR(Logger::onFileLoad(WindowConfiguration::self, filepath, LOG_FAILURE));
-            return false;
-        }
-        LOG_INFO(Logger::onFileLoad(WindowConfiguration::self, filepath, LOG_SUCCESS));
-
-        // Parse the key-value pairs from the configuration file line by line
-        std::string line;
-        while (std::getline(file, line)) {
-            std::istringstream stream(line);
-            std::string key, value;
-
-            // Get the key and the value
-            if (std::getline(stream, key, WINDOW_CONFIGURATION_SEPARATOR) && std::getline(stream, value)) {
-                if (key == WINDOW_CONFIGURATION_TITLE_KEY) title = value;
-                else if (key == WINDOW_CONFIGURATION_WIDTH_KEY) width = std::stoi(value);
-                else if (key == WINDOW_CONFIGURATION_HEIGHT_KEY) height = std::stoi(value);
-                else if (key == WINDOW_CONFIGURATION_FRAME_RATE_KEY) frameRate = std::stoi(value);
-            }
-        }
-
-        file.close();
-        LOG_INFO(Logger::onFileUnload(WindowConfiguration::self, filepath));
-        return true;
-    }
-
     Application::Application(const WindowConfiguration& configuration) {
         // Initialize SDL image and audio
         if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS)) LOG_ERROR(Logger::onInitialize(Application::self, SDL_TYPE, LOG_FAILURE));
@@ -66,6 +36,8 @@ namespace DreamEngine {
     }
 
     Application::~Application() {
+        ResourceManager::destroyInstance();
+
         Mix_Quit();
         LOG_INFO(Logger::onDeinitialize(Application::self, SDL_MIXER_TYPE));
         TTF_Quit();
@@ -94,9 +66,7 @@ namespace DreamEngine {
         SDL_Event event;
 
         // DreamEngine opening presentation
-        VideoDecoder openingLogo = VideoDecoder(DREAM_ENGINE_OPENING_LOGO, 1280, 720);
-        Mix_Chunk* openingSound = Mix_LoadWAV(DREAM_ENGINE_OPENING_SOUND);
-        Mix_PlayChannel(FIRST_FREE_CHANNEL, openingSound, NONE);
+        VideoDecoder* openingLogo = getOpeningPresentation(renderer, GeometryProxy(window));
 
         while (isRunning) {
             // Poll all SDL events to handel user input
@@ -110,7 +80,7 @@ namespace DreamEngine {
             const float interval = duration_cast<duration<float>>(tickDidUpdate - tickBeforeUpdate).count();
 
             // Display the DreamEngine opening presentation if the game is launching
-            if (!openingLogo.hasFinished) openingLogo.onRender(renderer);
+            if (!openingLogo->hasFinished) openingLogo->onRender(renderer);
 
             // Update game logic, render the current frame and present it to the screen
             onUpdate(interval);
@@ -124,7 +94,50 @@ namespace DreamEngine {
             if (tickWillUpdate > nanoseconds(0)) std::this_thread::sleep_for(tickWillUpdate);
             tickBeforeUpdate = steady_clock::now();
         }
-
-        Mix_FreeChunk(openingSound);
     }
+
+    bool WindowConfiguration::configurateFromFile(const std::string &filepath) {
+        // Try to open the configuration file
+        std::ifstream file(filepath);
+
+        if (!file.is_open()) {
+            LOG_ERROR(Logger::onFileLoad(WindowConfiguration::self, filepath, LOG_FAILURE));
+            return false;
+        }
+        LOG_INFO(Logger::onFileLoad(WindowConfiguration::self, filepath, LOG_SUCCESS));
+
+        // Parse the key-value pairs from the configuration file line by line
+        std::string line;
+        while (std::getline(file, line)) {
+            std::istringstream stream(line);
+            std::string key, value;
+
+            // Get the key and the value
+            if (std::getline(stream, key, WINDOW_CONFIGURATION_SEPARATOR) && std::getline(stream, value)) {
+                if (key == WINDOW_CONFIGURATION_TITLE_KEY) title = value;
+                else if (key == WINDOW_CONFIGURATION_WIDTH_KEY) width = std::stoi(value);
+                else if (key == WINDOW_CONFIGURATION_HEIGHT_KEY) height = std::stoi(value);
+                else if (key == WINDOW_CONFIGURATION_FRAME_RATE_KEY) frameRate = std::stoi(value);
+            }
+        }
+
+        file.close();
+        LOG_INFO(Logger::onFileUnload(WindowConfiguration::self, filepath));
+        return true;
+    }
+
+    VideoDecoder *Application::getOpeningPresentation(SDL_Renderer *renderer, const GeometryProxy &geometry) {
+        // Load opening presentation
+        ResourceManager* resourceManager = ResourceManager::getInstance();
+        resourceManager->loadFromDirectory(renderer, DREAM_ENGINE_OPENING_RESOURCES);
+
+        // Get opening presentation sound
+        Mix_Chunk* openingSound = resourceManager->getAudio(DREAM_ENGINE_OPENING_SOUND);
+        Mix_PlayChannel(FIRST_FREE_CHANNEL, openingSound, NONE);
+
+        // Get opening presentation logo
+        VideoWrapper* videoWrapper = resourceManager->getVideo(DREAM_ENGINE_OPENING_LOGO);
+        return videoWrapper->getVideoDecoder(geometry);
+    }
+
 }

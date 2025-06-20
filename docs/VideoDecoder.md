@@ -58,6 +58,23 @@ playback to the video's frame rate.
 
 ---
 
+## Reflection
+
+The [VideoDecoder](VideoDecoder.md) class provides basic
+reflection by storing its own class name, which can be
+accessed via `Application::self`.
+
+---
+
+## Associated Type
+
+[VideoWrapper](VideoWrapper.md) is a lightweight
+container that defers the creation of a [VideoDecoder](VideoDecoder.md)
+until rendering begins, allowing dynamic resolution
+setup based on the current window geometry.
+
+---
+
 ## Relationships
 Below is the position of [VideoDecoder](VideoDecoder.md)
 within the type hierarchy, including which classes inherit
@@ -65,3 +82,6 @@ from it and which base classes it derives from.
 
 ### Conforms To
 [Renderable](Renderable.md)
+
+### See Also
+[VideoWrapper](VideoWrapper.md)
