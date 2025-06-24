@@ -5,8 +5,7 @@
 #ifndef DREAM_ENGINE_CAMERA_H
 #define DREAM_ENGINE_CAMERA_H
 
-#include "geometry.h"
-#include "symbols.h"
+#include "vector2.h"
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 
@@ -16,10 +15,11 @@ namespace DreamEngine {
         private: SDL_Renderer* renderer;
 
         public: explicit Camera(SDL_Renderer* renderer);
+        public: ~Camera() = default;
 
         public: SDL_Renderer* getRenderer() const;
-
-        public: void renderTexture(SDL_Texture *texture, const SDL_FRect *source, const SDL_FRect *destination) const;
+        public: void renderTexture(SDL_Texture *texture, const SDL_FRect *source, const SDL_FRect *destination, float distance) const;
+        public: void moveBy(const Vector2& movement);
     };
 }
 

@@ -37,10 +37,10 @@ namespace DreamEngine {
         private: std::unordered_map<std::string, Mix_Chunk*> audioPool;
 
         /// Pool of loaded fonts, keyed by the base font name.
-        private: std::unordered_map<std::string, FontWrapper*> fontPool;
+        private: std::unordered_map<std::string, FontRepresentable*> fontPool;
 
         /// Pool of loaded videos, keyed by the base filename.
-        private: std::unordered_map<std::string, VideoWrapper*> videoPool;
+        private: std::unordered_map<std::string, VideoRepresentable*> videoPool;
 
         /// The collection of loaders specified for different types of resources.
         private: std::unordered_map<std::string, ResourceLoader> resourceLoaders;
@@ -87,14 +87,14 @@ namespace DreamEngine {
         /// @param fontName Base font name (without extension) of the font.
         /// @return Font* pointer if found, nullptr otherwise.
         ///
-        public: FontWrapper* getFont(const std::string& fontName) const;
+        public: FontRepresentable* getFont(const std::string& fontName) const;
 
         /// Retrieves a loaded video by name.
         ///
         /// @param videoName Base video name (without extension) of the video.
-        /// @return VideoWrapper* pointer if found, nullptr otherwise.
+        /// @return VideoRepresentable* pointer if found, nullptr otherwise.
         ///
-        public: VideoWrapper* getVideo(const std::string& videoName) const;
+        public: VideoRepresentable* getVideo(const std::string& videoName) const;
     };
 }
 

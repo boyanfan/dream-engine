@@ -11,14 +11,12 @@
 #define RESOURCE_MANAGER_TYPE "DreamEngine::ResourceManager"
 #define VIDEO_DECODER_TYPE "DreamEngine::VideoDecoder"
 #define GEOMETRY_PROXY_TYPE "DreamEngine::GeometryProxy"
+#define TEXTURE_SEQUENCE_TYPE "DreamEngine::TextureSequence"
 #define SDL_TYPE "SDL"
 #define SDL_WINDOW_TYPE "SDL::Window"
 #define SDL_RENDERER_TYPE "SDL::Renderer"
 #define SDL_MIXER_TYPE "SDL::Mixer"
 #define SDL_TTF_TYPE "SDL::TTF"
-
-// DreamEngine::Camera Utility
-#define CAMERA_DEFAULT_FACTOR 1.0f
 
 // Window Utility
 #define NANOSECONDS_PER_SECOND 1000000000
@@ -57,10 +55,10 @@
 
 // DreamEngine Utility
 #define NONE 0
+#define FIRST_FREE_CHANNEL (-1)
 #define DREAM_ENGINE_OPENING_RESOURCES "resources"
 #define DREAM_ENGINE_OPENING_LOGO "engine-logo-video"
 #define DREAM_ENGINE_OPENING_SOUND "engine-logo-audio"
-#define FIRST_FREE_CHANNEL (-1)
 
 // DreamEngine::ResourceManager Utility
 #define DREAM_ENGINE_PNG_EXTENSION ".png"

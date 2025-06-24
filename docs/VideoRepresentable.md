@@ -1,12 +1,12 @@
-# VideoWrapper
+# VideoRepresentable
 
-The [VideoWrapper](VideoWrapper.md) class provides a 
+The [VideoRepresentable](VideoRepresentable.md) class provides a 
 lightweight mechanism to defer video decoding until 
 rendering time. It is managed by the 
 [ResourceManager](ResourceManager.md).
 
 ```c++
-struct VideoWrapper;
+struct VideoRepresentable;
 ```
 
 It stores the path to a video file and only constructs 
@@ -19,14 +19,14 @@ window size at that moment.
 ## Methods
 
 Below is a list and explanation of all public methods
-provided by the [VideoWrapper](VideoWrapper.md) class.
+provided by the [VideoRepresentable](VideoRepresentable.md) structure.
 
 ### Constructor
 
 ```c++
-explicit VideoWrapper(std::string filepath);
+explicit VideoRepresentable(std::string filepath);
 ```
-Constructs a [VideoWrapper](VideoWrapper.md) with the given video file path.
+Constructs a [VideoRepresentable](VideoRepresentable.md) with the given video file path.
 
 **Parameters:**
 - `filepath`: Path to the video file (e.g., `.mp4` format).
@@ -35,7 +35,7 @@ Constructs a [VideoWrapper](VideoWrapper.md) with the given video file path.
 ### Destructor
 
 ```c++
-~VideoWrapper();
+~VideoRepresentable();
 ```
 Cleans up the internally allocated [VideoDecoder](VideoDecoder.md) if it was created.
 
@@ -58,12 +58,12 @@ Returns the internal [VideoDecoder](VideoDecoder.md) instance, creating it on th
 
 [VideoDecoder](VideoDecoder.md) is the raw representation of video 
 playback resources, providing direct rendering API like 
-`onRender()`. Using its wrapper class [VideoWrapper](VideoWrapper.md)
+`onRender()`. Using its wrapper class [VideoRepresentable](VideoRepresentable.md)
 and managed by the [ResourceManager](ResourceManager.md)
 is preferred.
 
 ## Relationships
-Below is the position of [VideoWrapper](VideoWrapper.md)
+Below is the position of [VideoRepresentable](VideoRepresentable.md)
 within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 

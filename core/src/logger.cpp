@@ -28,13 +28,13 @@ namespace DreamEngine {
         if (state) action = " successfully initialized ";
         else action = " failed to initialize ";
 
-        buffer << getMessageModule(module) << action << LOG_STYLE_CYAN << target << LOG_STYLE_PLAIN << ".";
+        buffer << getMessageModule(module) << action << getTargetModule(target) << ".";
         return buffer.str();
     }
 
     std::string Logger::onDeinitialize(const std::string& module, const std::string& target) {
         std::ostringstream buffer;
-        buffer << LOG_STYLE_CYAN << target << LOG_STYLE_PLAIN << " has been deinitialized by " << getMessageModule(module) << ".";
+        buffer << getTargetModule(target) << " has been deinitialized by " << getMessageModule(module) << ".";
         return buffer.str();
     }
 
@@ -52,6 +52,18 @@ namespace DreamEngine {
     std::string Logger::onFileUnload(const std::string& module, const std::string& filepath) {
         std::ostringstream buffer;
         buffer << "File " << getFilepath(filepath) << " has been closed by " << getMessageModule(module) << ".";
+        return buffer.str();
+    }
+
+    std::string Logger::onOutOfBounds(const std::string &module, const int index) {
+        std::ostringstream buffer;
+        buffer << getMessageModule(module) << " attempted to access out-of-bound position " << index << ".";
+        return buffer.str();
+    }
+
+    std::string Logger::getTargetModule(const std::string& target) {
+        std::ostringstream buffer;
+        buffer << LOG_STYLE_CYAN << target << LOG_STYLE_PLAIN;
         return buffer.str();
     }
 

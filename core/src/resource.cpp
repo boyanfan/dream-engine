@@ -20,13 +20,13 @@ namespace DreamEngine {
 
         // Register the loader for font files (with '.mp3' extension)
         registerLoader(DREAM_ENGINE_TTF_EXTENSION, [&](SDL_Renderer*, const std::filesystem::path& path) -> void {
-            FontWrapper* font = new FontWrapper(path.u8string());
+            FontRepresentable* font = new FontRepresentable(path.u8string());
             fontPool[path.stem().u8string()] = font;
         });
 
         // Register the loader for video files (with '.mp4' extension)
         registerLoader(DREAM_ENGINE_MP4_EXTENSION, [&](SDL_Renderer*, const std::filesystem::path& path) -> void {
-            VideoWrapper* video = new VideoWrapper(path.u8string());
+            VideoRepresentable* video = new VideoRepresentable(path.u8string());
             videoPool[path.stem().u8string()] = video;
         });
     }
@@ -47,14 +47,14 @@ namespace DreamEngine {
         audioPool.clear();
 
         // Close fonts
-        for (const std::pair<const std::string, FontWrapper*>& pair : fontPool) {
+        for (const std::pair<const std::string, FontRepresentable*>& pair : fontPool) {
             LOG_INFO(Logger::onFileUnload(self, pair.first));
             delete pair.second;
         }
         fontPool.clear();
 
         // Close videos
-        for (const std::pair<const std::string, VideoWrapper*>& pair : videoPool) {
+        for (const std::pair<const std::string, VideoRepresentable*>& pair : videoPool) {
             LOG_INFO(Logger::onFileUnload(self, pair.first));
             delete pair.second;
         }
@@ -94,10 +94,7 @@ namespace DreamEngine {
         const ConstIterator iterator = texturePool.find(textureName);
 
         // Return texture or a nullptr if nothing is found
-        if (iterator != texturePool.end()) {
-            LOG_INFO(Logger::onFileLoad(self, textureName, LOG_SUCCESS));
-            return iterator->second;
-        }
+        if (iterator != texturePool.end())  return iterator->second;
 
         LOG_ERROR(Logger::onFileLoad(self, textureName, LOG_FAILURE));
         return nullptr;
@@ -110,42 +107,33 @@ namespace DreamEngine {
         const ConstIterator iterator = audioPool.find(audioName);
 
         // Return audio or a nullptr if nothing is found
-        if (iterator != audioPool.end()) {
-            LOG_INFO(Logger::onFileLoad(self, audioName, LOG_SUCCESS));
-            return iterator->second;
-        }
+        if (iterator != audioPool.end()) return iterator->second;
 
         LOG_ERROR(Logger::onFileLoad(self, audioName, LOG_FAILURE));
         return nullptr;
     }
 
-    FontWrapper* ResourceManager::getFont(const std::string &fontName) const {
-        using ConstIterator = std::unordered_map<std::string, FontWrapper*>::const_iterator;
+    FontRepresentable* ResourceManager::getFont(const std::string &fontName) const {
+        using ConstIterator = std::unordered_map<std::string, FontRepresentable*>::const_iterator;
 
         // Try to use const methods to find the font
         const ConstIterator iterator = fontPool.find(fontName);
 
         // Return font or a nullptr if nothing is found
-        if (iterator != fontPool.end()) {
-            LOG_INFO(Logger::onFileLoad(self, fontName, LOG_SUCCESS));
-            return iterator->second;
-        }
+        if (iterator != fontPool.end()) return iterator->second;
 
         LOG_ERROR(Logger::onFileLoad(self, fontName, LOG_FAILURE));
         return nullptr;
     }
 
-    VideoWrapper* ResourceManager::getVideo(const std::string &videoName) const {
-        using ConstIterator = std::unordered_map<std::string, VideoWrapper*>::const_iterator;
+    VideoRepresentable* ResourceManager::getVideo(const std::string &videoName) const {
+        using ConstIterator = std::unordered_map<std::string, VideoRepresentable*>::const_iterator;
 
         // Try to use const methods to find the video
         const ConstIterator iterator = videoPool.find(videoName);
 
         // Return video or a nullptr if nothing is found
-        if (iterator != videoPool.end()) {
-            LOG_INFO(Logger::onFileLoad(self, videoName, LOG_SUCCESS));
-            return iterator->second;
-        }
+        if (iterator != videoPool.end()) return iterator->second;
 
         LOG_ERROR(Logger::onFileLoad(self, videoName, LOG_FAILURE));
         return nullptr;

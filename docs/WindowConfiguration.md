@@ -15,10 +15,10 @@ file, allowing easy customization of window settings.
 
 ---
 
-## Members
+## Fields
 
 Below is a list and explanation of all public members
-provided by the [WindowConfiguration](WindowConfiguration.md) class.
+provided by the [WindowConfiguration](WindowConfiguration.md) structure.
 
 - `std::string title`: The title of the application window.
 
@@ -31,7 +31,7 @@ provided by the [WindowConfiguration](WindowConfiguration.md) class.
 ## Methods
 
 Below is a list and explanation of all public methods
-provided by the [WindowConfiguration](WindowConfiguration.md) class.
+provided by the [WindowConfiguration](WindowConfiguration.md) structure.
 
 ### Constructor
 

@@ -86,7 +86,7 @@ Retrieve a loaded font from the font pool.
 - fontName: The base filename of the font, without the extension.
 
 **Returns:**
-Pointer to [FontWrapper](FontWrapper.md) if found, or nullptr.
+Pointer to [FontWrapper](FontRepresentable.md) if found, or nullptr.
 
 
 ### getVideo()
@@ -102,7 +102,7 @@ Retrieve a loaded video from the video pool.
 - `videoName`: The base filename of the video, without the extension.
 
 **Returns:**
-Pointer to [VideoWrapper](VideoWrapper.md) if found, or nullptr.
+Pointer to [VideoWrapper](VideoRepresentable.md) if found, or nullptr.
 
 ---
 
@@ -139,5 +139,5 @@ from it and which base classes it derives from.
 [Singleton\<T\>](Singleton.md)
 
 ### See Also
-[FontWrapper](FontWrapper.md) <br>
-[VideoWrapper](VideoWrapper.md)
+[FontWrapper](FontRepresentable.md) <br>
+[VideoWrapper](VideoRepresentable.md)

@@ -42,14 +42,17 @@ offering essential functionality for game development.
 
 ### Classes
 
-- [Logger](Logger.md)
 - [ResourceManager](ResourceManager.md)
+- [Camera](Camera.md)
+- [Logger](Logger.md)
 - [Timer](Timer.md)
 - [VideoDecoder](VideoDecoder.md)
 
 ### Data Structures
 - [WindowConfiguration](WindowConfiguration.md)
 - [GeometryProxy](GeometryProxy.md)
-- [FontWrapper](FontWrapper.md)
-- [VideoWrapper](VideoWrapper.md)
+- [FontRepresentable](FontRepresentable.md)
+- [VideoRepresentable](VideoRepresentable.md)
+- [TextureRepresentable](TextureRepresentable.md)
+- [TextureSequence](TextureSequence.md)
 - [Vector2](Vector2.md)

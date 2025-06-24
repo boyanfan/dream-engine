@@ -67,7 +67,7 @@ accessed via `Application::self`.
 
 ## Associated Type
 
-[VideoWrapper](VideoWrapper.md) is a lightweight
+[VideoRepresentable](VideoRepresentable.md) is a lightweight
 container that defers the creation of a [VideoDecoder](VideoDecoder.md)
 until rendering begins, allowing dynamic resolution
 setup based on the current window geometry.
@@ -83,5 +83,5 @@ from it and which base classes it derives from.
 [Renderable](Renderable.md)
 
 ### See Also
-[VideoWrapper](VideoWrapper.md) <br>
+[VideoRepresentable](VideoRepresentable.md) <br>
 [Camera](Camera.md)

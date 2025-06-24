@@ -86,6 +86,21 @@ namespace DreamEngine {
         ///
         public: static std::string onFileUnload(const std::string& module, const std::string& filepath);
 
+        /// Constructs a formatted error message indicating that out-of-bounds access in a specified module.
+        ///
+        /// @param module A string representing the name of the module where the violation occurred.
+        /// @param index The invalid index that caused the out-of-bounds access.
+        /// @return A formatted string describing the out-of-bounds error context.
+        ///
+        public: static std::string onOutOfBounds(const std::string& module, int index);
+
+        /// Formats and returns the standardized name of a target module.
+        ///
+        /// @param target The raw identifier or name of the target module.
+        /// @return A formatted string representing the resolved module name.
+        ///
+        public: static std::string getTargetModule(const std::string& target);
+
         /// Returns a stylized string representation of the given module name.
         ///
         /// @param module The name of the module.

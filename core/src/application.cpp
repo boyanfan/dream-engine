@@ -68,8 +68,8 @@ namespace DreamEngine {
         SDL_Event event;
 
         // DreamEngine opening presentation
-        VideoDecoder* openingLogo = getOpeningPresentation(renderer, GeometryProxy(window));
-        Camera camera = Camera(renderer);
+        const VideoDecoder* openingLogo = getOpeningPresentation(renderer, GeometryProxy(window));
+        const Camera camera = Camera(renderer);
 
         while (isRunning) {
             // Poll all SDL events to handel user input
@@ -139,7 +139,7 @@ namespace DreamEngine {
         Mix_PlayChannel(FIRST_FREE_CHANNEL, openingSound, NONE);
 
         // Get opening presentation logo
-        VideoWrapper* videoWrapper = resourceManager->getVideo(DREAM_ENGINE_OPENING_LOGO);
+        VideoRepresentable* videoWrapper = resourceManager->getVideo(DREAM_ENGINE_OPENING_LOGO);
         return videoWrapper->getVideoDecoder(geometry);
     }
 
