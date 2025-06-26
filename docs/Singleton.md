@@ -94,4 +94,5 @@ from it and which base classes it derives from.
 
 ### Conforming Types
 [ResourceManager](ResourceManager.md) <br>
+[SceneManager](SceneManager.md) <br>
 [Logger](Logger.md)

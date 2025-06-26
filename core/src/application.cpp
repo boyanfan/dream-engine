@@ -28,6 +28,12 @@ namespace DreamEngine {
         if (!TTF_Init()) LOG_ERROR(Logger::onInitialize(Application::self, SDL_TTF_TYPE, LOG_FAILURE));
         else LOG_INFO(Logger::onInitialize(Application::self, SDL_TTF_TYPE, LOG_SUCCESS));
 
+        // Create camera
+        mainCamera = new Camera(renderer);
+
+        // Create the entry scene
+        SceneManager::getInstance()->switchCurrentScene(new OpeningPresentation(mainCamera, GeometryProxy(window)));
+
         // Set the fixed frame rate
         frameRate = configuration.frameRate;
 
@@ -37,6 +43,8 @@ namespace DreamEngine {
 
     Application::~Application() {
         ResourceManager::destroyInstance();
+        SceneManager::destroyInstance();
+        delete mainCamera;
 
         Mix_Quit();
         LOG_INFO(Logger::onDeinitialize(Application::self, SDL_MIXER_TYPE));
@@ -56,46 +64,42 @@ namespace DreamEngine {
     }
 
     void Application::execute() {
-        using namespace std::chrono;
-        
         // Get the duration of one frame in nanosecond for the given frame rate
-        const nanoseconds frameDuration = nanoseconds(NANOSECONDS_PER_SECOND / frameRate);
+        const std::chrono::nanoseconds frameDuration = std::chrono::nanoseconds(NANOSECONDS_PER_SECOND / frameRate);
 
         // Record the time point before the first update to compute delta time
-        time_point<steady_clock> tickBeforeUpdate = steady_clock::now();
+        std::chrono::time_point<std::chrono::steady_clock> tickBeforeUpdate = std::chrono::steady_clock::now();
 
         // Polling input events to handle any user input
         SDL_Event event;
 
-        // DreamEngine opening presentation
-        const VideoDecoder* openingLogo = getOpeningPresentation(renderer, GeometryProxy(window));
-        const Camera camera = Camera(renderer);
-
         while (isRunning) {
+            // Get the current scene
+            Scene* currentScene = SceneManager::getInstance()->getCurrentScene();
+
             // Poll all SDL events to handel user input
             while (SDL_PollEvent(&event)) {
                 if (event.type == SDL_EVENT_QUIT) isRunning = false;
-                onEvent(event);
+                if (currentScene) currentScene->onEvent(event);
             }
 
             // Record the time point right before this frame's update logic and compute delta time for updating
-            time_point<steady_clock> tickDidUpdate = steady_clock::now();
-            const float interval = duration_cast<duration<float>>(tickDidUpdate - tickBeforeUpdate).count();
-
-            // Display the DreamEngine opening presentation if the game is launching
-            if (!openingLogo->hasFinished) openingLogo->onRender(camera);
+            std::chrono::time_point<std::chrono::steady_clock> tickDidUpdate = std::chrono::steady_clock::now();
+            const float interval = duration_cast<std::chrono::duration<float>>(tickDidUpdate - tickBeforeUpdate).count();
 
             // Update game logic, render the current frame and present it to the screen
-            onUpdate(interval);
-            onRender(renderer);
+            if (currentScene) {
+                currentScene->onUpdate(interval);
+                currentScene->onRender(*mainCamera);
+            }
             SDL_RenderPresent(renderer);
 
             // Calculate how much time remains before the next frame
-            nanoseconds tickWillUpdate = frameDuration - (steady_clock::now() - tickDidUpdate);
+            std::chrono::nanoseconds tickWillUpdate = frameDuration - (std::chrono::steady_clock::now() - tickDidUpdate);
 
             // Sleep the thread for the remaining time to cap the frame rate
-            if (tickWillUpdate > nanoseconds(0)) std::this_thread::sleep_for(tickWillUpdate);
-            tickBeforeUpdate = steady_clock::now();
+            if (tickWillUpdate > std::chrono::nanoseconds(0)) std::this_thread::sleep_for(tickWillUpdate);
+            tickBeforeUpdate = std::chrono::steady_clock::now();
         }
     }
 
@@ -128,19 +132,4 @@ namespace DreamEngine {
         LOG_INFO(Logger::onFileUnload(WindowConfiguration::self, filepath));
         return true;
     }
-
-    VideoDecoder *Application::getOpeningPresentation(SDL_Renderer *renderer, const GeometryProxy &geometry) {
-        // Load opening presentation
-        ResourceManager* resourceManager = ResourceManager::getInstance();
-        resourceManager->loadFromDirectory(renderer, DREAM_ENGINE_OPENING_RESOURCES);
-
-        // Get opening presentation sound
-        Mix_Chunk* openingSound = resourceManager->getAudio(DREAM_ENGINE_OPENING_SOUND);
-        Mix_PlayChannel(FIRST_FREE_CHANNEL, openingSound, NONE);
-
-        // Get opening presentation logo
-        VideoRepresentable* videoWrapper = resourceManager->getVideo(DREAM_ENGINE_OPENING_LOGO);
-        return videoWrapper->getVideoDecoder(geometry);
-    }
-
 }

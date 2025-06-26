@@ -46,4 +46,6 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### Conforming Types
+[GameObject](GameObject.md) <br>
+[Scene](Scene.md) <br>
 [Timer](Timer.md)

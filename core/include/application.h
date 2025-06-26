@@ -7,10 +7,10 @@
 
 #include "symbols.h"
 #include "logger.h"
-#include "video.h"
 #include "geometry.h"
 #include "resource.h"
 #include "vector2.h"
+#include "logo.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -52,18 +52,22 @@ namespace DreamEngine {
         public: bool configurateFromFile(const std::string& filepath);
     };
 
-    /// A basic application class which initializes SDL, creates a window and renderer, and handles the main loop.
-    /// Games should inherit from it and implement run(), onUpdate() and onRender() methods to specify game logic.
+    /// The Application class serves as the core entry point for any game or interactive program built with
+    /// DreamEngine. It handles game initialization, creates the main window and renderer, and manages the main loop,
+    /// including event polling, update logic, rendering, and frame rate control.
     ///
     class Application {
         /// Class Name for reflection implementation.
         public: static inline std::string self = APPLICATION_TYPE;
 
         /// Pointer to the SDL window created by the application.
-        private: SDL_Window* window = nullptr;
+        private: SDL_Window *window = nullptr;
 
         /// Pointer to the SDL renderer used for rendering.
         protected: SDL_Renderer* renderer = nullptr;
+
+        /// Pointer to the main camera used for rendering the current view.
+        protected: Camera* mainCamera = nullptr;
 
         /// Target frame rate per second for the main loop.
         private: int frameRate;
@@ -83,23 +87,6 @@ namespace DreamEngine {
         /// This function runs until the application receives a quit event or is explicitly stopped.
         ///
         public: void execute();
-
-        /// Called whenever an SDL event is polled from the event queue. Override this to handle input events.
-        /// @param event The SDL_Event to handle, including input, window, and system events.
-        ///
-        protected: virtual void onEvent(const SDL_Event& event) = NONE;
-
-        /// Called once per frame to update the game state. Override this to handle game-specific update logic.
-        /// @param interval The time has elapsed since the last frame in seconds.
-        ///
-        protected: virtual void onUpdate(float interval) = NONE;
-
-        /// Called once per frame to render the game visuals. Override this to handle game-specific rendering logic.
-        /// @param renderer The SDL_Renderer instance to draw with.
-        ///
-        protected: virtual void onRender(SDL_Renderer* renderer) = NONE;
-
-        private: static VideoDecoder* getOpeningPresentation(SDL_Renderer* renderer, const GeometryProxy& geometry);
     };
 }
 

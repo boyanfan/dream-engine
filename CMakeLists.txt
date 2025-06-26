@@ -15,6 +15,8 @@ add_library(${PROJECT_NAME} STATIC
     core/src/geometry.cpp
     core/src/camera.cpp
     core/src/texture.cpp
+    core/src/scene.cpp
+    core/src/logo.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

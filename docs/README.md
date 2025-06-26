@@ -10,19 +10,7 @@ and how to use it effectively.
 
 ## A Dream Engine Tour
 
-At the heart of every DreamEngine game is the 
-[Application](Application.md) class — a virtual base 
-class that serves as the program’s entry point. 
-It encapsulates all the core runtime behaviors,
-so developers can focus purely on implementing game logic. 
-By inheriting from Application and overriding key methods, 
-you can build your entire game without worrying about 
-the underlying system setup.
-
-The [ResourceManager](ResourceManager.md) class is a 
-global singleton designed to simplify asset management
-across your game. It handles automatic loading, caching, 
-and unloading of various kinds of resources.
+Updating, available sooner...
 
 ---
 
@@ -39,10 +27,13 @@ offering essential functionality for game development.
 - [Updatable](Updatable.md)
 - [Singleton\<T\>](Singleton.md)
 - [Application](Application.md)
+- [Scene](Scene.md)
+- [GameObject](GameObject.md)
 
 ### Classes
 
 - [ResourceManager](ResourceManager.md)
+- [SceneManager](SceneManager.md)
 - [Camera](Camera.md)
 - [Logger](Logger.md)
 - [Timer](Timer.md)

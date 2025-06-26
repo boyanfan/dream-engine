@@ -24,7 +24,17 @@ following commands.
 ```bash
 cmake --version
 pkg-config --version
+
 pkg-config --modversion sdl3
+pkg-config --modversion sdl3-image
+pkg-config --modversion sdl3-mixer
+pkg-config --modversion sdl3-ttf
+
+pkg-config --modversion libavformat
+pkg-config --modversion libavcodec
+pkg-config --modversion libavutil
+pkg-config --modversion libswscale
+pkg-config --modversion libswresample
 ```
 
 Then you can build it using the following commands.

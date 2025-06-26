@@ -12,6 +12,7 @@
 #define VIDEO_DECODER_TYPE "DreamEngine::VideoDecoder"
 #define GEOMETRY_PROXY_TYPE "DreamEngine::GeometryProxy"
 #define TEXTURE_SEQUENCE_TYPE "DreamEngine::TextureSequence"
+#define SCENE_MANAGER_TYPE "DreamEngine::SceneManager"
 #define SDL_TYPE "SDL"
 #define SDL_WINDOW_TYPE "SDL::Window"
 #define SDL_RENDERER_TYPE "SDL::Renderer"
@@ -56,6 +57,7 @@
 // DreamEngine Utility
 #define NONE 0
 #define FIRST_FREE_CHANNEL (-1)
+#define SKIPPED
 #define DREAM_ENGINE_OPENING_RESOURCES "resources"
 #define DREAM_ENGINE_OPENING_LOGO "engine-logo-video"
 #define DREAM_ENGINE_OPENING_SOUND "engine-logo-audio"

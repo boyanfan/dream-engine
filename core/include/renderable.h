@@ -20,7 +20,7 @@ namespace DreamEngine {
         /// Defines how the object should be rendered using the given SDL renderer.
         /// @param camera Which of the Dream Engine Camera to render on.
         ///
-        protected: virtual void onRender(const Camera& camera) const = NONE;
+        public: virtual void onRender(const Camera& camera) const = NONE;
     };
 }
 
