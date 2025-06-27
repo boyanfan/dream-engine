@@ -1,6 +1,6 @@
 # TextureSequence
 
-A data structure that manages a sequence of rectangular regions 
+A class that manages a sequence of rectangular regions 
 from a single texture sheet. 
 
 ```c++
@@ -14,7 +14,7 @@ such as an element in a sequence or a layer.
 
 ## Methods
 Below is a list and explanation of all public methods
-provided by the [TextureSequence](TextureSequence.md) structure.
+provided by the [TextureSequence](TextureSequence.md) class.
 
 ### Constructor
 
@@ -56,8 +56,6 @@ containing the shared texture and its region.
 ```c++
 size_t getSize() const;
 ```
-
-Returns the number of available regions in the sequence.
 
 **Returns**: The size of the source collection.
 

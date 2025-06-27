@@ -1,16 +1,15 @@
 # Singleton\<T\>
 
-[Singleton\<T\>](Singleton.md) is a generic interface for enforcing 
-the singleton pattern in C++ applications. It provides 
-a centralized, reusable, and type-safe implementation 
+A generic class that provides 
+a centralized, reusable, and type-safe implementation of the singleton pattern
 that ensures only one instance of a derived class can exist at runtime.
 
 ```c++
 template<typename T> class Singleton;
 ```
 
-It enforces the singleton pattern, prevents copying 
-and moving of the singleton instance, and supports 
+It prevents copying 
+and moving of the singleton instance and supports 
 inheritance and virtual destruction for cleanup.
 
 ---
@@ -30,23 +29,7 @@ using the default constructor.
 
 ---
 
-## Example Usage
-
-To make a class a singleton, inherit from 
-`Singleton<T>` and declare `friend class Singleton<T>`.
-
-```c++
-class SomeManager : public Singleton<SomeManager> { friend class Singleton<SomeManager>;
-    ...
-}
-
-// Then access the instance with
-SomeManager* manager = SomeManager::getInstance();
-```
-
----
-
-## Deleted Operations
+## Discussion
 To ensure that [Singleton\<T\>](Singleton.md) remains a singleton,
 all copy and move operations are explicitly deleted.
 This prevents accidental duplication or reassignment
@@ -72,18 +55,6 @@ lifetime. By deleting:
 This guarantees that the singleton instance created
 via `getInstance()` remains unique and immutable in
 identity.
-
-### Misuses Prevented
-
-```c++
-class SomeManager : public Singleton<SomeManager>;
-
-// These would be compile-time errors:
-SomeManager a = *SomeManager::getInstance();
-SomeManager b = std::move(*SomeManager::getInstance());
-a = *SomeManager::getInstance();
-b = std::move(*SomeManager::getInstance());
-```
 
 ---
 

@@ -8,6 +8,7 @@
 #include "vector2.h"
 #include "symbols.h"
 #include "logger.h"
+
 #include <SDL3/SDL.h>
 #include <string>
 
@@ -20,7 +21,7 @@ namespace DreamEngine {
         public: static inline std::string self = GEOMETRY_PROXY_TYPE;
 
         /// Pointer to the SDL window this proxy tracks
-        public: SDL_Window* window = nullptr;
+        private: SDL_Window* window = nullptr;
 
         /// Construct an empty proxy with no associated window.
         public: GeometryProxy() = default;

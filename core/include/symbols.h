@@ -5,7 +5,7 @@
 #ifndef DREAM_ENGINE_SYMBOLS_H
 #define DREAM_ENGINE_SYMBOLS_H
 
-// DreamEngine Type system for Reflection
+// Dream Engine Type system for Reflection
 #define APPLICATION_TYPE "DreamEngine::Application"
 #define WINDOW_CONFIGURATION_TYPE "DreamEngine::WindowConfiguration"
 #define RESOURCE_MANAGER_TYPE "DreamEngine::ResourceManager"
@@ -21,6 +21,7 @@
 
 // Window Utility
 #define NANOSECONDS_PER_SECOND 1000000000
+#define MILLISECONDS_PER_SECOND 1000
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720
 #define DEFAULT_WINDOW_TITLE "Hello DreamEngine!"
@@ -33,7 +34,7 @@
 
 // DreamEngine::Logger Utility
 #define LOG_STYLE_PLAIN "\033[0m"
-#define LOG_STYLE_BOLD_RED   "\033[31m\033[1m"
+#define LOG_STYLE_BOLD_RED "\033[31m\033[1m"
 #define LOG_STYLE_BOLD_GREEN "\033[32m\033[1m"
 #define LOG_STYLE_BOLD_YELLOW "\033[33m\033[1m"
 #define LOG_STYLE_BOLD_GREY "\033[37m\033[1m"
@@ -49,15 +50,19 @@
 #define LOG_WARNING(message) Logger::getInstance()->log(LogScope::Warning, message)
 #define LOG_ERROR(message) Logger::getInstance()->log(LogScope::Error, message)
 #else
-#define LOG_INFO(message)    ((void)0)
+#define LOG_INFO(message) ((void)0)
 #define LOG_WARNING(message) ((void)0)
-#define LOG_ERROR(message)   ((void)0)
+#define LOG_ERROR(message) ((void)0)
 #endif
 
-// DreamEngine Utility
+// Dream Engine Keywords
+#define interface class
+#define delegated 0
+#define omitted
+
+// Dream Engine Utilities
 #define NONE 0
 #define FIRST_FREE_CHANNEL (-1)
-#define SKIPPED
 #define DREAM_ENGINE_OPENING_RESOURCES "resources"
 #define DREAM_ENGINE_OPENING_LOGO "engine-logo-video"
 #define DREAM_ENGINE_OPENING_SOUND "engine-logo-audio"

@@ -29,10 +29,10 @@ namespace DreamEngine {
         else LOG_INFO(Logger::onInitialize(Application::self, SDL_TTF_TYPE, LOG_SUCCESS));
 
         // Create camera
-        mainCamera = new Camera(renderer);
+        camera = new Camera(renderer);
 
         // Create the entry scene
-        SceneManager::getInstance()->switchCurrentScene(new OpeningPresentation(mainCamera, GeometryProxy(window)));
+        SceneManager::getInstance()->switchCurrentScene(new OpeningPresentation(camera, GeometryProxy(window)));
 
         // Set the fixed frame rate
         frameRate = configuration.frameRate;
@@ -44,7 +44,7 @@ namespace DreamEngine {
     Application::~Application() {
         ResourceManager::destroyInstance();
         SceneManager::destroyInstance();
-        delete mainCamera;
+        delete camera;
 
         Mix_Quit();
         LOG_INFO(Logger::onDeinitialize(Application::self, SDL_MIXER_TYPE));
@@ -90,7 +90,7 @@ namespace DreamEngine {
             // Update game logic, render the current frame and present it to the screen
             if (currentScene) {
                 currentScene->onUpdate(interval);
-                currentScene->onRender(*mainCamera);
+                currentScene->onRender(*camera);
             }
             SDL_RenderPresent(renderer);
 
@@ -103,7 +103,7 @@ namespace DreamEngine {
         }
     }
 
-    bool WindowConfiguration::configurateFromFile(const std::string &filepath) {
+    bool WindowConfiguration::configurateFromFile(const std::string& filepath) {
         // Try to open the configuration file
         std::ifstream file(filepath);
 

@@ -103,7 +103,7 @@ namespace DreamEngine {
         private: bool initialize(const std::string& filepath);
     };
 
-    /// A lightweight wrapper that defers the construction of a VideoDecoder until rendering.
+    /// A wrapper type that defers the construction of a VideoDecoder until rendering.
     /// It stores the path to a video file but does not immediately decode it. Instead, it creates the `VideoDecoder`
     /// only when rendering is about to begin, allowing the rendering window size to be provided dynamically at runtime.
     ///

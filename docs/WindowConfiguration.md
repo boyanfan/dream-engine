@@ -1,10 +1,9 @@
 # WindowConfiguration
 
-The [WindowConfiguration](WindowConfiguration.md) class 
-holds the basic window properties and the target frame rate 
-for a DreamEngine application. It is used to configure 
-the application window and control the main loop timing 
-when creating an instance of [Application](Application.md).
+The [WindowConfiguration](WindowConfiguration.md) type 
+holds the basic window properties
+for a Dream Engine [Application](Application.md) 
+when initializing it.
 
 ```c++
 struct WindowConfiguration;
@@ -13,12 +12,7 @@ struct WindowConfiguration;
 It also supports loading configuration from an external 
 file, allowing easy customization of window settings.
 
----
-
-## Fields
-
-Below is a list and explanation of all public members
-provided by the [WindowConfiguration](WindowConfiguration.md) structure.
+**Fields:**
 
 - `std::string title`: The title of the application window.
 
@@ -31,7 +25,7 @@ provided by the [WindowConfiguration](WindowConfiguration.md) structure.
 ## Methods
 
 Below is a list and explanation of all public methods
-provided by the [WindowConfiguration](WindowConfiguration.md) structure.
+provided by the [WindowConfiguration](WindowConfiguration.md) type.
 
 ### Constructor
 
@@ -68,7 +62,7 @@ frameRate=60
 ```
 
 **Parameters:**
-- filepath: The file path to the configuration file.
+- `filepath`: The file path to the configuration file.
 
 **Returns:**
 true if the file was successfully loaded and all values were parsed.

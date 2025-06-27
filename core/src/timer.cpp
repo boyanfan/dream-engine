@@ -7,10 +7,6 @@
 namespace DreamEngine {
     void Timer::restart() { elapsedTime = 0; isRepeating = false; }
 
-    void Timer::setDuration(const float duration) { this->duration = duration; }
-
-    void Timer::setRepeating(const bool flag) { isRepeating = flag; }
-
     void Timer::setOnTimeout(const std::function<void()>& callback) { onTimeout = callback; }
 
     void Timer::pause() { hasPaused = true; }
@@ -33,7 +29,7 @@ namespace DreamEngine {
             // If triggering is allowed and a timeout callback is set, invoke it
             if (canTrigger && onTimeout) onTimeout();
 
-            // If the timer is not repeating, set hasTriggered and break out of the loop, since
+            // If the timer is not repeating, sets hasTriggered and break out of the loop, since
             // we only want to trigger once for non-repeating timers
             if (!isRepeating) {
                 hasTriggered = true;

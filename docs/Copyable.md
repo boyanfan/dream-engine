@@ -1,7 +1,7 @@
 # Copyable
-The [Copyable](Copyable.md) interface defines a standard 
-interface for creating deep or customized copies of engine
-objects.
+The standard interface for creating deep or customized copies of 
+engine objects. It allows runtime-polymorphic cloning without knowing the 
+exact type.
 
 ```c++
 class Copyable;
@@ -15,7 +15,7 @@ input buffers, or network handles.
 
 ---
 
-## Methods
+## Requirements
 Below is a list of methods that must be implemented to 
 confirm the [Copyable](Copyable.md) interface.
 
@@ -29,9 +29,9 @@ defined by the implementing class.
 **Returns:**
 A new dynamically allocated instance with copied data.
 
-**Notes:**
-All classes that inherit from Copyable must implement 
-`copy()`. This interface is especially useful when:
-- You want polymorphic cloning without knowing the exact type.
-- You need to exclude volatile or runtime-only state from copies.
-- You want to avoid relying on default or shallow copy constructors.
+---
+
+## Relationships
+Below is the position of [Copyable](Copyable.md)
+within the type hierarchy, including which classes inherit
+from it and which base classes it derives from.

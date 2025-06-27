@@ -7,13 +7,14 @@
 
 #include "symbols.h"
 #include "logger.h"
+
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <vector>
 
 namespace DreamEngine {
-    /// A lightweight struct representing a texture region that can be rendered. It contains a pointer to the SDL texture
-    /// sheet and a source rectangle specifying the portion of the texture to be used.
+    /// A lightweight struct representing a texture region that can be rendered. It contains a pointer to the SDL
+    /// texture sheet and a source rectangle specifying the portion of the texture to be used.
     ///
     struct TextureRepresentable {
         /// Pointer to the shared original SDL texture resource.
@@ -32,10 +33,8 @@ namespace DreamEngine {
         public: ~TextureRepresentable() = default;
     };
 
-    /**
-     *
-     */
-    struct TextureSequence {
+    /// A data structure that manages a sequence of rectangular regions from a single texture sheet.
+    class TextureSequence {
         /// Class Name for reflection implementation.
         public: static inline std::string self = TEXTURE_SEQUENCE_TYPE;
 
@@ -44,9 +43,6 @@ namespace DreamEngine {
 
         /// A collection of source rectangles defining individual regions within the texture.
         private: std::vector<SDL_FRect> sourceCollection;
-
-        /// Width and height of a single region within the texture sheet.
-        private: float textureWidth = NONE, textureHeight = NONE;
 
         /// Constructs a `TextureSequence` from a texture sheet and dimensions of each region.
         /// @param textureSheet The shared SDL texture containing multiple regions.

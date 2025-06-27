@@ -5,7 +5,9 @@
 #ifndef DREAM_ENGINE_TIMER_H
 #define DREAM_ENGINE_TIMER_H
 
+#include "symbols.h"
 #include "updatable.h"
+
 #include <functional>
 
 namespace DreamEngine {
@@ -13,23 +15,23 @@ namespace DreamEngine {
     /// time out, and provides functionality to pause, resume, and restart the timer.
     ///
     class Timer final : public Updatable {
-        /// The elapsed time, in seconds, since the timer started or was last reset.
-        private: float elapsedTime = 0;
-
         /// The duration of the timer waits, in seconds, before firing the timeout event.
-        private: float duration = 0;
+        public: float duration = NONE;
 
-        /// Whether the timer is currently paused.
-        private: bool hasPaused = false;
+        /// Whether the timer is in repeating mode (`true`) or one-shot mode (`false`).
+        public: bool isRepeating = false;
+
+        /// The elapsed time, in seconds, since the timer started or was last reset.
+        private: float elapsedTime = NONE;
 
         /// Whether the timer has already fired its timeout event in one-shot mode.
         private: bool hasTriggered = false;
 
-        /// Whether the timer is in repeating mode (`true`) or one-shot mode (`false`).
-        private: bool isRepeating = false;
-
         /// The callback function to execute when the timer times out.
         private: std::function<void()> onTimeout;
+
+        /// Whether the timer is currently paused.
+        private: bool hasPaused = false;
 
         /// The default constructor for the Timer class.
         public: Timer() = default;

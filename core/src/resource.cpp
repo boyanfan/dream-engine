@@ -18,7 +18,7 @@ namespace DreamEngine {
             if (audio) audioPool[path.stem().u8string()] = audio;
         });
 
-        // Register the loader for font files (with '.mp3' extension)
+        // Register the loader for font files (with '.ttf' extension)
         registerLoader(DREAM_ENGINE_TTF_EXTENSION, [&](SDL_Renderer*, const std::filesystem::path& path) -> void {
             FontRepresentable* font = new FontRepresentable(path.u8string());
             fontPool[path.stem().u8string()] = font;
@@ -73,7 +73,7 @@ namespace DreamEngine {
         // Iterate over each regular file in the given directory
         for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(directory)) {
             if (entry.is_regular_file()) {
-                using ConstIterator = std::unordered_map<std::string, ResourceLoader>::const_iterator;
+                using ConstIterator = const std::unordered_map<std::string, ResourceLoader>::const_iterator;
 
                 // Try to find the `ResourceLoader` registered for the current iterating file
                 const std::filesystem::path& path = entry.path();
@@ -88,10 +88,10 @@ namespace DreamEngine {
     }
 
     SDL_Texture* ResourceManager::getTexture(const std::string &textureName) const {
-        using ConstIterator = std::unordered_map<std::string, SDL_Texture*>::const_iterator;
+        using ConstIterator = const std::unordered_map<std::string, SDL_Texture*>::const_iterator;
 
         // Try to use const methods to find the texture
-        const ConstIterator iterator = texturePool.find(textureName);
+        ConstIterator iterator = texturePool.find(textureName);
 
         // Return texture or a nullptr if nothing is found
         if (iterator != texturePool.end())  return iterator->second;
@@ -114,10 +114,10 @@ namespace DreamEngine {
     }
 
     FontRepresentable* ResourceManager::getFont(const std::string &fontName) const {
-        using ConstIterator = std::unordered_map<std::string, FontRepresentable*>::const_iterator;
+        using ConstIterator = const std::unordered_map<std::string, FontRepresentable*>::const_iterator;
 
         // Try to use const methods to find the font
-        const ConstIterator iterator = fontPool.find(fontName);
+        ConstIterator iterator = fontPool.find(fontName);
 
         // Return font or a nullptr if nothing is found
         if (iterator != fontPool.end()) return iterator->second;
@@ -127,10 +127,10 @@ namespace DreamEngine {
     }
 
     VideoRepresentable* ResourceManager::getVideo(const std::string &videoName) const {
-        using ConstIterator = std::unordered_map<std::string, VideoRepresentable*>::const_iterator;
+        using ConstIterator = const std::unordered_map<std::string, VideoRepresentable*>::const_iterator;
 
         // Try to use const methods to find the video
-        const ConstIterator iterator = videoPool.find(videoName);
+        ConstIterator iterator = videoPool.find(videoName);
 
         // Return video or a nullptr if nothing is found
         if (iterator != videoPool.end()) return iterator->second;

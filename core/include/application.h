@@ -61,19 +61,19 @@ namespace DreamEngine {
         public: static inline std::string self = APPLICATION_TYPE;
 
         /// Pointer to the SDL window created by the application.
-        private: SDL_Window *window = nullptr;
+        private: SDL_Window* window = nullptr;
 
         /// Pointer to the SDL renderer used for rendering.
-        protected: SDL_Renderer* renderer = nullptr;
+        public: SDL_Renderer* renderer = nullptr;
 
         /// Pointer to the main camera used for rendering the current view.
-        protected: Camera* mainCamera = nullptr;
+        public: Camera* camera = nullptr;
 
         /// Target frame rate per second for the main loop.
         private: int frameRate;
 
         /// Controls whether the main loop is currently running.
-        protected: bool isRunning = true;
+        private: bool isRunning = true;
 
         /// Constructs the application using the specified window configuration.
         /// @param configuration The window settings and frame rate for the application.

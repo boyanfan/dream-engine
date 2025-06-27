@@ -1,9 +1,9 @@
 # ResourceManager
 
-[ResourceManager](ResourceManager.md) is a singleton 
+A singleton
 utility class that inherits from the generic
-[Singleton\<T\>](Singleton.md) base class and provides 
-centralized loading and access to texture and audio 
+[Singleton\<T\>](Singleton.md) and provides 
+centralized loading and access to texture, audio, video and font 
 assets.
 
 ```c++
@@ -26,10 +26,6 @@ provided by the [ResourceManager](ResourceManager.md) class.
 static ResourceManager* getInstance();
 ```
 
-Returns the singleton instance of [ResourceManager](ResourceManager.md). 
-This method is defined and inherited from the
-[Singleton\<T\>](Singleton.md) base class.
-
 **Returns:**
 A pointer to the single, global [ResourceManager](ResourceManager.md) instance.
 
@@ -44,8 +40,8 @@ file using a registered loader based on its file
 extension. Keys used in resource maps are the base filenames, without extensions.
 
 **Parameters**
-- renderer: Pointer to SDL_Renderer, required for texture creation.
-- directory: Path to the folder containing asset files.
+- `renderer`: Pointer to SDL_Renderer, required for texture creation.
+- `directory`: Path to the folder containing asset files.
 
 ### getTexture()
 
@@ -55,7 +51,7 @@ SDL_Texture* getTexture(const std::string& textureName) const;
 Retrieve a loaded texture from the texture pool.
 
 **Parameters**
-- textureName: The base filename of the texture, without the extension.
+- `textureName`: The base filename of the texture, without the extension.
 
 **Returns:**
 Pointer to `SDL_Texture` if found, or nullptr.
@@ -69,7 +65,7 @@ Mix_Chunk* getAudio(const std::string& audioName) const;
 Retrieve a loaded audio chunk from the audio pool.
 
 **Parameters**
-- audioName: The base filename of the audio, without the extension.
+- `audioName`: The base filename of the audio, without the extension.
 
 **Returns:**
 Pointer to `Mix_Chunk` if found, or nullptr.
@@ -77,22 +73,22 @@ Pointer to `Mix_Chunk` if found, or nullptr.
 ### getFont()
 
 ```c++
-FontWrapper* getFont(const std::string& fontName) const;
+FontRepresentable* getFont(const std::string& fontName) const;
 ```
 
 Retrieve a loaded font from the font pool.
 
 **Parameters**
-- fontName: The base filename of the font, without the extension.
+- `fontName`: The base filename of the font, without the extension.
 
 **Returns:**
-Pointer to [FontWrapper](FontRepresentable.md) if found, or nullptr.
+Pointer to [FontRepresentable](FontRepresentable.md) if found, or nullptr.
 
 
 ### getVideo()
 
 ```c++
-VideoWrapper* getVideo(const std::string& videoName) const;
+VideoRepresentable* getVideo(const std::string& videoName) const;
 ```
 
 Retrieve a loaded video from the video pool.
@@ -102,23 +98,7 @@ Retrieve a loaded video from the video pool.
 - `videoName`: The base filename of the video, without the extension.
 
 **Returns:**
-Pointer to [VideoWrapper](VideoRepresentable.md) if found, or nullptr.
-
----
-
-## Example Usage
-
-```c++
-// Get singleton instance
-ResourceManager* manager = ResourceManager::getInstance();
-
-// Load assets
-manager->loadFromDirectory(renderer, "resources/");
-
-// Get and use resources
-SDL_Texture* playerTexture = manager->getTexture("player");
-Mix_Chunk* jumpSound = manager->getAudio("jump");
-```
+Pointer to [VideoRepresentable](VideoRepresentable.md) if found, or nullptr.
 
 ---
 
@@ -127,6 +107,10 @@ Mix_Chunk* jumpSound = manager->getAudio("jump");
 The [ResourceManager](ResourceManager.md) class provides basic
 reflection by storing its own class name, which can be
 accessed via `ResourceManager::self`.
+
+```c++
+static inline std::string self;
+```
 
 ---
 
@@ -139,5 +123,5 @@ from it and which base classes it derives from.
 [Singleton\<T\>](Singleton.md)
 
 ### See Also
-[FontWrapper](FontRepresentable.md) <br>
-[VideoWrapper](VideoRepresentable.md)
+[FontRepresentable](FontRepresentable.md) <br>
+[VideoRepresentable](VideoRepresentable.md)

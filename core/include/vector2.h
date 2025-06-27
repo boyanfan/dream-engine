@@ -5,6 +5,7 @@
 #ifndef DREAM_ENGINE_VECTOR2_H
 #define DREAM_ENGINE_VECTOR2_H
 
+#include "symbols.h"
 #include <cmath>
 
 namespace DreamEngine {
@@ -14,10 +15,10 @@ namespace DreamEngine {
     ///
     struct Vector2 {
         /// Horizontal components of the 2D vector.
-        public: float x = 0;
+        public: float x = NONE;
 
         /// Vertical components of the 2D vector.
-        public: float y = 0;
+        public: float y = NONE;
 
         /// Default constructor. Initializes the vector to (0, 0).
         public: Vector2() = default;

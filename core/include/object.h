@@ -12,14 +12,14 @@ namespace DreamEngine {
     /// The standard interface for any interactive entity within the game world that can be updated, rendered, and
     /// respond to events. It inherits from both Updatable and Renderable.
     ///
-    class GameObject : public Updatable, public Renderable {
+    interface GameObject : public Updatable, public Renderable {
         /// Virtual destructor to ensure proper cleanup of derived GameObject instances.
         public: ~GameObject() override = default;
 
         /// Handles SDL events such as keyboard, mouse, or controller input.
         /// @param event The SDL_Event instance representing the input to the process.
         ///
-        public: virtual void onEvent(const SDL_Event& event) = NONE;
+        public: virtual void onEvent(const SDL_Event& event) = delegated;
     };
 }
 

@@ -1,5 +1,6 @@
 # Logger
-A singleton class used to output styled and scoped log 
+A singleton utility class that inherits from the generic
+[Singleton\<T\>](Singleton.md). It is used to output styled and scoped log 
 messages to the console. Supports info, warning, and 
 error levels.
 
@@ -7,16 +8,12 @@ error levels.
 class Logger final : public Singleton<Logger>
 ```
 
-[Logger](Logger.md) class also offers utility methods to 
+It also offers utility methods to 
 format common status messages related to initialization and 
 file operations.
 
----
+**Fields:**
 
-## Members
-
-Below is a list and explanation of all public members
-provided by the [Logger](Logger.md) class.
 - `logScope`: A public field that defines the minimum severity level of log messages to be shown. Messages with lower severity will be ignored.
 
 ```c++
@@ -36,12 +33,8 @@ provided by the [Logger](Logger.md) class.
 static Logger* getInstance();
 ```
 
-Returns the singleton instance of [Logger](Logger.md).
-This method is defined and inherited from the
-[Singleton\<T\>](Singleton.md) base class.
-
 **Returns:**
-A pointer to the single, global [Logger](Logger.md) instance.
+A pointer to the single global [Logger](Logger.md) instance.
 
 ### log()
 
@@ -181,20 +174,15 @@ macros are preferred over direct use of the `log()` method:
 
 ---
 
-## Example Usage
-
-```c++
-const std::string message = Logger::onInitialize(SomeClass::self, AnotherClass::self, LOG_FAILURE);
-LOG_ERROR(message)
-```
-
----
-
 ## Reflection
 
 The [Logger](Logger.md) class provides basic
 reflection by storing its own class name, which can be
 accessed via `Logger::self`.
+
+```c++
+static inline std::string self;
+```
 
 ---
 
@@ -203,9 +191,5 @@ Below is the position of [Logger](Logger.md)
 within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
-### Conforms To
+### Inherits From
 [Singleton\<T\>](Singleton.md)
-
-### See Also
-[Application](Application.md) <br>
-[WindowConfiguration](WindowConfiguration.md)

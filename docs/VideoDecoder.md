@@ -1,5 +1,5 @@
 # VideoDecoder
-The [VideoDecoder](VideoDecoder.md) class is responsible for 
+A class that is responsible for 
 decoding and rendering a video file frame-by-frame using 
 `Fmpeg` and `SDL`. 
 
@@ -7,8 +7,7 @@ decoding and rendering a video file frame-by-frame using
 class VideoDecoder : public Renderable;
 ```
 
-This class implements from [Renderable](Renderable.md) interface 
-and provides the `onRender()` method to handle video frame presentation.
+This class implements from [Renderable](Renderable.md) interface to handle video frame presentation.
 The video is scaled to match the rendering window size.
 
 ---
@@ -53,7 +52,7 @@ Renders the next frame of the video using the provided camera.
 
 This function should be called once per frame.
 It automatically decodes and synchronizes one video frame based on presentation timestamps (PTS), ensuring accurate playback timing.
-All rendering is performed through the camera to support effects like scaling, parallax, and screen fitting.
+All renderings are performed through the camera to support effects like scaling, parallax, and screen fitting.
 
 ---
 
@@ -61,16 +60,11 @@ All rendering is performed through the camera to support effects like scaling, p
 
 The [VideoDecoder](VideoDecoder.md) class provides basic
 reflection by storing its own class name, which can be
-accessed via `Application::self`.
+accessed via `VideoDecoder::self`.
 
----
-
-## Associated Type
-
-[VideoRepresentable](VideoRepresentable.md) is a lightweight
-container that defers the creation of a [VideoDecoder](VideoDecoder.md)
-until rendering begins, allowing dynamic resolution
-setup based on the current window geometry.
+```c++
+static inline std::string self;
+```
 
 ---
 

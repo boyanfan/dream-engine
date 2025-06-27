@@ -1,6 +1,6 @@
 # SceneManager
 
-[SceneManager](SceneManager.md) is a singleton
+A singleton
 utility class that inherits from the generic
 [Singleton\<T\>](Singleton.md) base class, responsible for
 managing scene transitions in a game. 
@@ -9,7 +9,7 @@ managing scene transitions in a game.
 class SceneManager final : public Singleton<SceneManager>;
 ```
 
-It keeps track of the currently active scene and provides an interface to switch to a different one. The class is designed to be globally accessible through the Singleton pattern.
+It keeps track of the currently active scene and provides an interface to switch to a different one.
 
 ---
 
@@ -23,12 +23,8 @@ provided by the [SceneManager](SceneManager.md) class.
 static SceneManager* getInstance();
 ```
 
-Returns the singleton instance of [SceneManager](SceneManager.md).
-This method is defined and inherited from the
-[Singleton\<T\>](Singleton.md) base class.
-
 **Returns:**
-A pointer to the single, global [SceneManager](SceneManager.md) instance.
+A pointer to the single, global instance.
 
 ### getCurrentScene()
 
@@ -56,6 +52,10 @@ Schedules a scene to become the next active scene.
 The [SceneManager](SceneManager.md) class provides basic
 reflection by storing its own class name, which can be
 accessed via `SceneManager::self`.
+
+```c++
+static inline std::string self;
+```
 
 ---
 

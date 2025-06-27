@@ -1,6 +1,8 @@
 # Timer
-The [Timer](Timer.md) class is a utility designed to handle 
-timed events in a game. 
+A utility designed to handle 
+timed events in a game. It implements the
+[Updatable](Updatable.md) interface and is meant to be
+updated every frame.
 
 ```c++
 class Timer : public Updatable;
@@ -8,9 +10,11 @@ class Timer : public Updatable;
 
 It supports executing a callback function after a specified
  duration and includes control over pausing, resuming, 
-repeating, and restarting the timer. It implements the 
-[Updatable](Updatable.md) interface and is meant to be 
-updated every frame.
+repeating, and restarting the timer.
+
+**Fields:**
+- `float duration`: The duration of the timer waits, in seconds.
+- `bool isRepeating`: Whether the timer is in repeating mode or one-shot mode.
 
 ---
 
@@ -42,16 +46,7 @@ void restart();
 ```
 
 Resets the timer with the same duration, repeat mode, 
-and callback.
-
-
-### setDuration()
-
-```c++
-void setDuration(float duration);
-```
-
-Sets the duration the timer will wait before firing the timeout event.
+and callback. Sets the duration the timer will wait before firing the timeout event.
 
 **Parameters:**
 - `duration`: Time in seconds to wait before triggering.
@@ -68,18 +63,6 @@ Sets the function to be called when the timer times out.
 **Parameters:**
 - `callback`: A function with no arguments and no return value.
 
-
-### setRepeating()
-
-```c++
-void setRepeating(bool flag);
-```
-
-Controls whether the timer repeats after firing.
-
-**Parameters:**
-- `flag`: `true` for repeating mode; `false` for one-shot behavior.
-
 ### pause()
 
 ```c++
@@ -95,8 +78,6 @@ void resume();
 ```
 
 Resumes the timer from its paused state.
-
----
 
 ### onUpdate()
 

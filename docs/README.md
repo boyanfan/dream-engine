@@ -25,25 +25,25 @@ offering essential functionality for game development.
 - [Copyable](Copyable.md)
 - [Renderable](Renderable.md)
 - [Updatable](Updatable.md)
-- [Singleton\<T\>](Singleton.md)
-- [Application](Application.md)
 - [Scene](Scene.md)
 - [GameObject](GameObject.md)
 
 ### Classes
 
+- [Application](Application.md)
 - [ResourceManager](ResourceManager.md)
 - [SceneManager](SceneManager.md)
+- [Singleton\<T\>](Singleton.md)
 - [Camera](Camera.md)
 - [Logger](Logger.md)
+- [TextureSequence](TextureSequence.md)
 - [Timer](Timer.md)
 - [VideoDecoder](VideoDecoder.md)
 
-### Data Structures
+### Data Types
 - [WindowConfiguration](WindowConfiguration.md)
 - [GeometryProxy](GeometryProxy.md)
 - [FontRepresentable](FontRepresentable.md)
 - [VideoRepresentable](VideoRepresentable.md)
 - [TextureRepresentable](TextureRepresentable.md)
-- [TextureSequence](TextureSequence.md)
 - [Vector2](Vector2.md)

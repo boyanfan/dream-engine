@@ -13,18 +13,32 @@ namespace DreamEngine {
     /// The standard interface that represents an entire game scene. It provides lifecycle hooks for entering and
     /// exiting the scene.
     ///
-    class Scene : public GameObject {
+    interface Scene : public GameObject {
         /// Destructor override to ensure proper cleanup of Scene-derived objects.
         public: ~Scene() override = default;
 
-        /// Indicates whether the scene is ready to transition away.
-        public: bool sceneWillTransition = true;
+        /// Indicates whether the scene is ready to transition away. Controlled internally and modified through
+        /// public methods.
+        private: bool sceneWillTransition = true;
 
         /// Called when the scene is entered.
-        public: virtual void onEntry() = NONE;
+        public: virtual void onEntry() = delegated;
 
         /// Called when the scene is exited.
-        public: virtual void onExit() = NONE;
+        public: virtual void onExit() = delegated;
+
+        /// Prevents the scene from transitioning. Useful when a scene is not yet ready to exit.
+        public: void lockSceneTransition();
+
+        /// Allows the scene to transition away when requested. This should be called once the scene is ready to
+        /// exit cleanly.
+        ///
+        public: void unlockSceneTransition();
+
+        /// Checks whether the scene is currently allowing transitions.
+        /// @return `true` if transitions are allowed, `false` otherwise.
+        ///
+        public: bool isAllowingSceneTransition() const;
     };
 
     /// A singleton class responsible for managing scene transitions in the game. SceneManager holds the currently
@@ -42,6 +56,7 @@ namespace DreamEngine {
 
         /// Returns the currently active scene.
         /// @return Pointer to the current Scene.
+        ///
         public: Scene* getCurrentScene() const;
 
         /// Schedules a scene to become the next active scene.

@@ -54,10 +54,10 @@ namespace DreamEngine {
         /// Registers a resource loading function for a specific file extension. This allows developers to extend
         /// the ResourceManager with support for additional resource types.
         ///
-        /// @param extension File extension to register the loader for (including the dot, e.g., ".png").
+        /// @param extension File extension to register the loader for.
         /// @param resourceLoader A function that takes an SDL_Renderer pointer and a file path and performs custom
-        ///               loading logic for that file type. It should insert loaded resources
-        ///               into the appropriate internal pool.
+        ///                       loading logic for that file type. It should insert loaded resources
+        ///                       into the appropriate internal pool.
         ///
         private: void registerLoader(const std::string& extension, const ResourceLoader& resourceLoader);
 

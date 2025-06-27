@@ -1,5 +1,5 @@
 # FontRepresentable
-[FontRepresentable](FontRepresentable.md) is a wrapper class for SDL `TTF_Font` struct, 
+A wrapper type for SDL `TTF_Font` type, 
 it provides a convenient and efficient way to load and reuse 
 font resources with multiple sizes.
 
@@ -7,7 +7,7 @@ font resources with multiple sizes.
 struct FontRepresentable;
 ```
 
-This class supports lazy loading of fonts — fonts of a 
+It supports lazy loading of fonts — fonts of a 
 given size are only loaded when first requested. 
 Once loaded, they are stored in an internal cache to avoid 
 redundant file access and improve runtime performance.
@@ -16,7 +16,7 @@ redundant file access and improve runtime performance.
 
 ## Methods
 Below is a list and explanation of all public methods
-provided by the [FontRepresentable](FontRepresentable.md) class.
+provided by the [FontRepresentable](FontRepresentable.md) type.
 
 ### Constructor
 
@@ -29,7 +29,7 @@ actual font data is not loaded until `getSizedFont()` is called,
 enabling lazy loading.
 
 **Parameters:**
-- path: Path to the font file, with an extension of `.ttf`.
+- `path`: Path to the font file, with an extension of `.ttf`.
 
 ### Destructor
 ```c++
@@ -48,30 +48,11 @@ TTF_Font* getSizedFont(int fontSize);
 Returns a pointer to a font of the specified size.
 
 **Parameters:**
-- fontSize: The desired integer font size in points.
+- `fontSize`: The desired integer font size in points.
 
 **Returns:** 
 A `TTF_Font*` for rendering text at the specified size. 
 Returns nullptr if loading fails.
-
-**Notes:**
-Fonts are not loaded until they are needed. If a font of 
-the requested size already exists in the internal cache, 
-it is returned immediately. Otherwise, it is loaded from 
-disk using `TTF_OpenFont()`, cached, and then returned.
-
----
-
-## Example Usage
-
-```c++
-// Get font from resource manager
-ResourceManager* manager = ResourceManager::getInstance();
-FontRepresentable font = manager->getFont("font");
-
-TTF_Font* title = font.getSizedFont(52);
-TTF_Font* body = font.getSizedFont(16);
-```
 
 ---
 

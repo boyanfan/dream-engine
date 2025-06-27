@@ -10,7 +10,7 @@ Classes that conform to this interface must implement the
 `onRender()` method to define how they should be drawn
 on screen through a given camera view.
 
-## Methods
+## Requirements
 Below is a list of methods that must be implemented to
 conform to the [Renderable](Renderable.md) interface.
 
@@ -25,10 +25,6 @@ given camera instance.
 
 **Parameters:**
 - `camera`: The [Camera](Camera.md) that handles coordinate translation, parallax, and other visual effects.
-
-**Notes:**
-- This is a pure virtual function and must be implemented by all derived classes.
-- Typically called once per frame during the rendering phase.
 
 ---
 

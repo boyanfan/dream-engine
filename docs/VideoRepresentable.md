@@ -1,9 +1,6 @@
 # VideoRepresentable
 
-The [VideoRepresentable](VideoRepresentable.md) class provides a 
-lightweight mechanism to defer video decoding until 
-rendering time. It is managed by the 
-[ResourceManager](ResourceManager.md).
+A type that represents a video playback. It defers video decoding until rendering time.
 
 ```c++
 struct VideoRepresentable;
@@ -19,7 +16,7 @@ window size at that moment.
 ## Methods
 
 Below is a list and explanation of all public methods
-provided by the [VideoRepresentable](VideoRepresentable.md) structure.
+provided by the [VideoRepresentable](VideoRepresentable.md) type.
 
 ### Constructor
 
@@ -29,7 +26,7 @@ explicit VideoRepresentable(std::string filepath);
 Constructs a [VideoRepresentable](VideoRepresentable.md) with the given video file path.
 
 **Parameters:**
-- `filepath`: Path to the video file (e.g., `.mp4` format).
+- `filepath`: Path to the video file with `.mp4` extension.
 
 
 ### Destructor
@@ -44,7 +41,8 @@ Cleans up the internally allocated [VideoDecoder](VideoDecoder.md) if it was cre
 ```c++
 VideoDecoder* getVideoDecoder(GeometryProxy geometry);
 ```
-Returns the internal [VideoDecoder](VideoDecoder.md) instance, creating it on the first call using the provided geometry (window size).
+Returns the internal [VideoDecoder](VideoDecoder.md) instance, 
+creating it on the first call using the provided window geometry.
 
 **Parameters:**
 - `geometry`: A [GeometryProxy](GeometryProxy.md) object representing the window size to scale the video appropriately.
@@ -53,14 +51,6 @@ Returns the internal [VideoDecoder](VideoDecoder.md) instance, creating it on th
 - A pointer to the lazily initialized [VideoDecoder](VideoDecoder.md).
 
 ---
-
-### Associated Type
-
-[VideoDecoder](VideoDecoder.md) is the raw representation of video 
-playback resources, providing direct rendering API like 
-`onRender()`. Using its wrapper class [VideoRepresentable](VideoRepresentable.md)
-and managed by the [ResourceManager](ResourceManager.md)
-is preferred.
 
 ## Relationships
 Below is the position of [VideoRepresentable](VideoRepresentable.md)

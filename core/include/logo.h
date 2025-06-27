@@ -6,7 +6,6 @@
 #define DREAM_ENGINE_LOGO_H
 
 #include "scene.h"
-#include "video.h"
 #include "geometry.h"
 #include "resource.h"
 
@@ -22,10 +21,7 @@ namespace DreamEngine {
         private: const VideoDecoder* openingLogo = nullptr;
 
         /// Pointer to the audio chunk for the opening sound.
-        private: Mix_Chunk *openingSound = nullptr;
-
-        /// Pointer to the camera used for rendering the video.
-        private: const Camera* camera = nullptr;
+        private: Mix_Chunk* openingSound = nullptr;
 
         /// The audio channel used to play the opening sound.
         private: int openingSoundChannel = FIRST_FREE_CHANNEL;
@@ -45,7 +41,7 @@ namespace DreamEngine {
         /// Handles input events during the opening presentation.
         /// @param event SDL input event.
         ///
-        public: void onEvent(const SDL_Event &event) override;
+        public: void onEvent(const SDL_Event& event) override;
 
         /// Updates the state of the presentation.
         /// @param interval Time has elapsed since the last frame.

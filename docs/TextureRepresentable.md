@@ -1,7 +1,6 @@
 # TextureRepresentable
 
-A lightweight struct representing a texture region 
-that can be rendered. 
+A type representing a texture region that can be rendered. 
 
 ```c++
 struct TextureRepresentable;
@@ -12,13 +11,7 @@ corresponding source rectangle, primarily used by
 [TextureSequence](TextureSequence.md) to represent
 individual texture regions.
 
----
-
-## Fields
-
-Below is a list and explanation of all public members
-provided by the [TextureRepresentable](TextureRepresentable.md) structure.
-
+**Fields:**
 - `SDL_Texture* texture`: Pointer to the shared original SDL texture resource.
 - `SDL_FRect source`: The source rectangle within the texture sheet to render.
 
@@ -26,7 +19,7 @@ provided by the [TextureRepresentable](TextureRepresentable.md) structure.
 
 ## Methods
 Below is a list and explanation of all public methods
-provided by the [TextureRepresentable](TextureRepresentable.md) structure.
+provided by the [TextureRepresentable](TextureRepresentable.md) type.
 
 ### Constructor
 

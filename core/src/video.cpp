@@ -126,11 +126,11 @@ namespace DreamEngine {
                     // Sync to PTS
                     const int64_t timestamp = rawFrame->best_effort_timestamp != AV_NOPTS_VALUE ? rawFrame->best_effort_timestamp : rawFrame->pts;
                     const double presentationTime = static_cast<double>(timestamp) * av_q2d(videoTimeBase);
-                    const double currentTime = (static_cast<double>(SDL_GetTicks()) - static_cast<double>(startTicks)) / 1000.0;
+                    const double currentTime = (static_cast<double>(SDL_GetTicks()) - static_cast<double>(startTicks)) / MILLISECONDS_PER_SECOND;
                     const double offsetTime = presentationTime - currentTime;
 
                     // Render
-                    if (offsetTime > 0) SDL_Delay(static_cast<Uint32>(offsetTime * 1000.0));
+                    if (offsetTime > 0) SDL_Delay(static_cast<Uint32>(offsetTime * MILLISECONDS_PER_SECOND));
                     SDL_RenderTexture(renderer, texture, nullptr, nullptr);
 
                     av_packet_unref(packet);
@@ -143,7 +143,7 @@ namespace DreamEngine {
     }
 
 
-    VideoRepresentable::VideoRepresentable(std::string filepath) : filepath(std::move(filepath)) {  }
+    VideoRepresentable::VideoRepresentable(std::string filepath) : filepath(std::move(filepath)) { omitted }
 
     VideoRepresentable::~VideoRepresentable() { delete videoDecoder; }
 

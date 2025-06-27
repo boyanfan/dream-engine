@@ -1,6 +1,6 @@
 # Application
-The [Application](Application.md) class serves as the core entry point 
-for any game or interactive program built with DreamEngine. 
+The core entry point 
+for any game or interactive program built with Dream Engine. 
 It handles game initialization, creates the main window 
 and renderer, and manages the main loop, including event 
 polling, update logic, rendering, and frame rate control.
@@ -9,12 +9,16 @@ polling, update logic, rendering, and frame rate control.
 class Application;
 ```
 
-Dream Engine uses a Scene-based architecture. 
-Developers implement game behavior by confirming 
+Dream Engine uses a scene-based architecture. 
+Developers define game behavior by implementing classes that confirm 
 [Scene](Scene.md) interface, then schedule those scenes 
-with the [SceneManager](SceneManager.md). The [Application](Application.md) 
-class automatically delegates per-frame updates and 
-rendering to the active scene.
+with the [SceneManager](SceneManager.md). The user-input handling, 
+per-frame updates, and rendering logic are automatically
+delegated to the current active scene.
+
+**Fields:**
+- `SDL_Renderer* renderer`: Pointer to the SDL renderer used for rendering.
+- `Camera* camera`: Pointer to the [Camera](Camera.md) used for rendering the current view.
 
 ---
 
@@ -51,7 +55,7 @@ void execute();
 Starts the main loop. It polls SDL events and passes 
 them to the active `onEvent()` method, 
 calls the `onUpdate()` to update game logic, 
-and the `onRender()` with the main camera to draw the frame.
+and the `onRender()` with the [Camera](Camera.md) to display the frame.
 Methods above are delegated to the [Scene](Scene.md) interface implementation.
 
 ---
@@ -76,4 +80,5 @@ from it and which base classes it derives from.
 ### See Also
 [WindowConfiguration](WindowConfiguration.md) <br>
 [Scene](Scene.md) <br>
-[SceneManager](SceneManager.md)
+[SceneManager](SceneManager.md) <br>
+[Camera](Camera.md)

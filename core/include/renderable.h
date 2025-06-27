@@ -13,14 +13,14 @@ namespace DreamEngine {
     /// The standard interface for objects that can be rendered with a Dream Engine Camera.
     /// Classes that confirm to it must implement the `onRender()` method to define how they should be drawn on screen.
     ///
-    class Renderable {
+    interface Renderable {
         /// Virtual destructor to ensure proper cleanup of derived classes.
         public: virtual ~Renderable() = default;
 
         /// Defines how the object should be rendered using the given SDL renderer.
         /// @param camera Which of the Dream Engine Camera to render on.
         ///
-        public: virtual void onRender(const Camera& camera) const = NONE;
+        public: virtual void onRender(const Camera& camera) const = delegated;
     };
 }
 

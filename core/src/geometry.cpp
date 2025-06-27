@@ -5,12 +5,12 @@
 #include "geometry.h"
 
 namespace DreamEngine {
-    GeometryProxy::GeometryProxy(SDL_Window *window) {
+    GeometryProxy::GeometryProxy(SDL_Window* window) {
         if (window) bind(window);
         else LOG_ERROR("Cannot bind a null window to GeometryProxy.");
     }
 
-    void GeometryProxy::bind(SDL_Window *window) { this->window = window; }
+    void GeometryProxy::bind(SDL_Window* window) { this->window = window; }
 
     Vector2 GeometryProxy::getWindowPosition() const {
         int x, y;

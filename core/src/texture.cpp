@@ -5,10 +5,9 @@
 #include "texture.h"
 
 namespace DreamEngine {
-    TextureRepresentable::TextureRepresentable(SDL_Texture* texture, const SDL_FRect source) : texture(texture), source(source) {}
+    TextureRepresentable::TextureRepresentable(SDL_Texture* texture, const SDL_FRect source) : texture(texture), source(source) { omitted }
 
-    TextureSequence::TextureSequence(SDL_Texture* textureSheet, const float textureWidth, const float textureHeight)
-        : textureSheet(textureSheet), textureWidth(textureWidth), textureHeight(textureHeight){
+    TextureSequence::TextureSequence(SDL_Texture* textureSheet, const float textureWidth, const float textureHeight) : textureSheet(textureSheet) {
 
         float sheetWidth = NONE, sheetHeight = NONE;
         if (!SDL_GetTextureSize(textureSheet, &sheetWidth, &sheetHeight)) {
@@ -22,10 +21,9 @@ namespace DreamEngine {
 
         for (int row = 0; row < numberOfRows; row++) {
             for (int column = 0; column < numberOfColumns; column++) {
-                SDL_FRect texture = {
+                sourceCollection.emplace_back<SDL_FRect>({
                     static_cast<float>(column) * textureWidth, static_cast<float>(row) * textureHeight, textureWidth, textureHeight
-                };
-                sourceCollection.push_back(texture);
+                });
             }
         }
     }

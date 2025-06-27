@@ -14,7 +14,7 @@ rendering and game logic update behavior.
 
 ---
 
-## Methods
+## Requirements
 Below is a list of methods that must be implemented to
 conform to the [GameObject](GameObject.md) interface.
 

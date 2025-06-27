@@ -5,8 +5,8 @@
 #ifndef DREAM_ENGINE_LOGGER_H
 #define DREAM_ENGINE_LOGGER_H
 
-#include "singleton.h"
 #include "symbols.h"
+#include "singleton.h"
 
 #include <string>
 #include <sstream>
