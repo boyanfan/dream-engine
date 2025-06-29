@@ -102,18 +102,6 @@ Pointer to [VideoRepresentable](VideoRepresentable.md) if found, or nullptr.
 
 ---
 
-## Reflection
-
-The [ResourceManager](ResourceManager.md) class provides basic
-reflection by storing its own class name, which can be
-accessed via `ResourceManager::self`.
-
-```c++
-static inline std::string self;
-```
-
----
-
 ## Relationships
 Below is the position of [ResourceManager](ResourceManager.md)
 within the type hierarchy, including which classes inherit

@@ -40,12 +40,9 @@ namespace DreamEngine {
 
     void OpeningPresentation::onRender(const Camera& camera) const { openingLogo->onRender(camera); }
 
-    void OpeningPresentation::onUpdate(float interval) {
-        if (openingLogo->hasFinished) {
-            unlockSceneTransition();
-            SceneManager::getInstance()->switchCurrentScene(nullptr);
-        }
-    }
+    void OpeningPresentation::onUpdate(float interval) { if (openingLogo->hasFinished) unlockSceneTransition(); }
 
     void OpeningPresentation::onExit() { omitted }
+
+    std::string OpeningPresentation::getIdentifier() const { return DREAM_ENGINE_OPENING_IDENTIFIER; }
 }

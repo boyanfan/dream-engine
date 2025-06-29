@@ -4,12 +4,12 @@ The standard interface for any interactive entity within the game world
 that can be updated, rendered, and respond to events.
 
 ```c++
-class GameObject : public Updatable, public Renderable;
+class GameObject : public Updatable, public Renderable, public Identifiable<std::string>;
 ```
 
 Conforming to the [GameObject](GameObject.md) interface 
-also requires implementing the [Renderable](Renderable.md)
-and [Updatable](Updatable.md) interfaces, which define 
+also requires implementing the [Renderable](Renderable.md), 
+[Updatable](Updatable.md), and [Identifiable\<ID\>](Identifiable.md) interfaces, which define 
 rendering and game logic update behavior.
 
 ---
@@ -38,7 +38,8 @@ from it and which base classes it derives from.
 
 ### Conforms To
 [Updatable](Updatable.md) <br>
-[Renderable](Renderable.md)
+[Renderable](Renderable.md) <br>
+[Identifiable\<ID\>](Identifiable.md)
 
 ### Conforming Types
 [Scene](Scene.md)

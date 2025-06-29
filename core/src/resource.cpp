@@ -9,6 +9,7 @@ namespace DreamEngine {
         // Register the loader for image files (with '.png' extension)
         registerLoader(DREAM_ENGINE_PNG_EXTENSION, [&](SDL_Renderer* renderer, const std::filesystem::path& path) -> void {
             SDL_Texture* texture = IMG_LoadTexture(renderer, path.u8string().c_str());
+            SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
             if (texture) texturePool[path.stem().u8string()] = texture;
         });
 

@@ -5,7 +5,7 @@
 #ifndef DREAM_ENGINE_SYMBOLS_H
 #define DREAM_ENGINE_SYMBOLS_H
 
-// Dream Engine Type system for Reflection
+// Dream Engine Type System for Reflection
 #define APPLICATION_TYPE "DreamEngine::Application"
 #define WINDOW_CONFIGURATION_TYPE "DreamEngine::WindowConfiguration"
 #define RESOURCE_MANAGER_TYPE "DreamEngine::ResourceManager"
@@ -57,6 +57,7 @@
 
 // Dream Engine Keywords
 #define interface class
+#define identifier std::string
 #define delegated 0
 #define omitted
 
@@ -66,6 +67,7 @@
 #define DREAM_ENGINE_OPENING_RESOURCES "resources"
 #define DREAM_ENGINE_OPENING_LOGO "engine-logo-video"
 #define DREAM_ENGINE_OPENING_SOUND "engine-logo-audio"
+#define DREAM_ENGINE_OPENING_IDENTIFIER "id-scene-opening-presentation"
 
 // DreamEngine::ResourceManager Utility
 #define DREAM_ENGINE_PNG_EXTENSION ".png"

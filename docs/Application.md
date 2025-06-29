@@ -60,18 +60,6 @@ Methods above are delegated to the [Scene](Scene.md) interface implementation.
 
 ---
 
-## Reflection
-
-The [Application](Application.md) class provides basic 
-reflection by storing its own class name, which can be 
-accessed via `Application::self`. 
-
-```c++
-static inline std::string self;
-```
-
----
-
 ## Relationships
 Below is the position of [Application](Application.md)
 within the type hierarchy, including which classes inherit

@@ -56,18 +56,6 @@ All renderings are performed through the camera to support effects like scaling,
 
 ---
 
-## Reflection
-
-The [VideoDecoder](VideoDecoder.md) class provides basic
-reflection by storing its own class name, which can be
-accessed via `VideoDecoder::self`.
-
-```c++
-static inline std::string self;
-```
-
----
-
 ## Relationships
 Below is the position of [VideoDecoder](VideoDecoder.md)
 within the type hierarchy, including which classes inherit

@@ -24,11 +24,11 @@ namespace DreamEngine {
     /// and storing them for efficient reuse during runtime.
     ///
     class ResourceManager final : public Singleton<ResourceManager> { friend class Singleton<ResourceManager>;
-        /// Type alias for specific resource loading methods
-        using ResourceLoader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
-
         /// Class Name for reflection implementation.
         public: static inline std::string self = RESOURCE_MANAGER_TYPE;
+
+        /// Type alias for specific resource loading methods
+        using ResourceLoader = std::function<void(SDL_Renderer* renderer, const std::filesystem::path& path)>;
 
         /// Pool of loaded textures, keyed by the base filename.
         private: std::unordered_map<std::string, SDL_Texture*> texturePool;

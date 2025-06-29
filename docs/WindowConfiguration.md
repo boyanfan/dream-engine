@@ -69,18 +69,6 @@ true if the file was successfully loaded and all values were parsed.
 
 ---
 
-## Reflection
-
-The [WindowConfiguration](WindowConfiguration.md) class provides basic
-reflection by storing its own class name, which can be
-accessed via `WindowConfiguration::self`.
-
-```c++
-static inline std::string self;
-```
-
----
-
 ## Relationships
 Below is the position of [WindowConfiguration](WindowConfiguration.md)
 within the type hierarchy, including which classes inherit

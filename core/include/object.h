@@ -7,12 +7,14 @@
 
 #include "renderable.h"
 #include "updatable.h"
+#include "identifiable.h"
+#include <string>
 
 namespace DreamEngine {
     /// The standard interface for any interactive entity within the game world that can be updated, rendered, and
-    /// respond to events. It inherits from both Updatable and Renderable.
+    /// respond to events. It confirms Updatable, Renderable, and Identifiable<ID> interfaces.
     ///
-    interface GameObject : public Updatable, public Renderable {
+    interface GameObject : public Updatable, public Renderable, public Identifiable<identifier> {
         /// Virtual destructor to ensure proper cleanup of derived GameObject instances.
         public: ~GameObject() override = default;
 

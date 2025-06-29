@@ -79,4 +79,5 @@ from it and which base classes it derives from.
 ### Conforms To
 [GameObject](GameObject.md) <br>
 [Updatable](Updatable.md) <br>
-[Renderable](Renderable.md) 
+[Renderable](Renderable.md)  <br>
+[Identifiable\<ID\>](Identifiable.md)

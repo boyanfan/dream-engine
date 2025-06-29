@@ -20,7 +20,7 @@ namespace DreamEngine {
         public: ~Camera() = default;
 
         public: SDL_Renderer* getRenderer() const;
-        public: void renderTexture(SDL_Texture *texture, const SDL_FRect *source, const SDL_FRect *destination, float distance) const;
+        public: void renderTexture(SDL_Texture *texture, const SDL_FRect *source, const SDL_FRect *destination, float parallex) const;
         public: void moveBy(const Vector2& movement);
     };
 }

@@ -83,18 +83,6 @@ The center point of the window as a [Vector2](Vector2.md).
 
 ---
 
-## Reflection
-
-The [GeometryProxy](GeometryProxy.md) type provides basic
-reflection by storing its own type name, which can be
-accessed via `GeometryProxy::self`.
-
-```c++
-static inline std::string self;
-```
-
---- 
-
 ## Relationships
 Below is the position of [GeometryProxy](GeometryProxy.md)
 within the type hierarchy, including which classes inherit

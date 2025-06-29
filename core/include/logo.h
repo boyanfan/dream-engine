@@ -55,6 +55,9 @@ namespace DreamEngine {
 
         /// Called when the scene is exited.
         public: void onExit() override;
+
+        /// Returns the unique identifier of it.
+        public: std::string getIdentifier() const override;
     };
 }
 
