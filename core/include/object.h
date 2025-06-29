@@ -1,27 +1,25 @@
 //
-// Created by fanboyan on 2025/6/25.
+// Created by fanboyan on 2025/6/29.
 //
 
 #ifndef DREAM_ENGINE_OBJECT_H
 #define DREAM_ENGINE_OBJECT_H
 
-#include "renderable.h"
+#include "symbols.h"
+#include "interactable.h"
 #include "updatable.h"
-#include "identifiable.h"
-#include <string>
+#include "renderable.h"
 
 namespace DreamEngine {
-    /// The standard interface for any interactive entity within the game world that can be updated, rendered, and
-    /// respond to events. It confirms Updatable, Renderable, and Identifiable<ID> interfaces.
+    /// The standard interface for all entities that exist in the game world with a position can respond to input,
+    /// be updated every frame, and be rendered on screen.
     ///
-    interface GameObject : public Updatable, public Renderable, public Identifiable<identifier> {
-        /// Virtual destructor to ensure proper cleanup of derived GameObject instances.
-        public: ~GameObject() override = default;
+    interface GameObject : public Interactable, public Updatable, public Renderable {
+        /// Destructor override to ensure proper cleanup of the derived objects.
+        public: Vector2 position = Vector2();
 
-        /// Handles SDL events such as keyboard, mouse, or controller input.
-        /// @param event The SDL_Event instance representing the input to the process.
-        ///
-        public: virtual void onEvent(const SDL_Event& event) = delegated;
+        /// The position of the game object in world space coordinate.
+        public: ~GameObject() override = default;
     };
 }
 

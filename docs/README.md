@@ -26,8 +26,9 @@ offering essential functionality for game development.
 - [Identifiable\<ID\>](Identifiable.md)
 - [Renderable](Renderable.md)
 - [Updatable](Updatable.md)
+- [Interactable](Interactable.md)
 - [Scene](Scene.md)
-- [GameObject](GameObject.md)
+- [GameObject](Interactable.md)
 
 ### Classes
 

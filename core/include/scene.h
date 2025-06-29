@@ -6,6 +6,7 @@
 #define DREAM_ENGINE_SCENE_H
 
 #include "object.h"
+#include "identifiable.h"
 #include "singleton.h"
 #include "logger.h"
 
@@ -13,7 +14,7 @@ namespace DreamEngine {
     /// The standard interface that represents an entire game scene. It provides lifecycle hooks for entering and
     /// exiting the scene.
     ///
-    interface Scene : public GameObject {
+    interface Scene : public GameObject, public Identifiable<identifier> {
         /// Destructor override to ensure proper cleanup of Scene-derived objects.
         public: ~Scene() override = default;
 

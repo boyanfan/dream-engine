@@ -1,33 +1,21 @@
 # GameObject
 
-The standard interface for any interactive entity within the game world 
-that can be updated, rendered, and respond to events.
+It defines the base abstraction for all entities that exist 
+in the game world with a position, can respond to input, 
+be updated every frame, and be rendered on screen.
 
 ```c++
-class GameObject : public Updatable, public Renderable, public Identifiable<std::string>;
+class GameObject : public Interactable, public Updatable, public Renderable;
 ```
 
-Conforming to the [GameObject](GameObject.md) interface 
-also requires implementing the [Renderable](Renderable.md), 
-[Updatable](Updatable.md), and [Identifiable\<ID\>](Identifiable.md) interfaces, which define 
-rendering and game logic update behavior.
+Conforming to the [GameObject](GameObject.md) interface
+also requires implementing the [Interactable](Interactable.md),
+[Updatable](Updatable.md), and [Renderable](Renderable.md) interfaces to
+respond to SDL events, support per-frame logic updates, and
+provide a way to be drawn onto the screen.
 
----
-
-## Requirements
-Below is a list of methods that must be implemented to
-conform to the [GameObject](GameObject.md) interface.
-
-### onEvent()
-
-```c++
-virtual void onEvent(const SDL_Event& event);
-```
-
-Handles SDL events, such as keyboard input, mouse actions, or window interactions.
-
-**Parameters:**
-- `event`: The SDL event object to be handled by the scene.
+**Fields:**
+- `Vector2 position`: The position of the game object in world space coordinate.
 
 ---
 
@@ -35,11 +23,6 @@ Handles SDL events, such as keyboard input, mouse actions, or window interaction
 Below is the position of [GameObject](GameObject.md)
 within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
-
-### Conforms To
-[Updatable](Updatable.md) <br>
-[Renderable](Renderable.md) <br>
-[Identifiable\<ID\>](Identifiable.md)
 
 ### Conforming Types
 [Scene](Scene.md)

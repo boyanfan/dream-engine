@@ -5,12 +5,13 @@ with rendering, updating, and event handling capabilities.
 Scene transition control is delegated to the [SceneManager](SceneManager.md).
 
 ```c++
-class Scene : public GameObject;
+class Scene : public GameObject, public Identifiable<identifier>
 ```
 
 Conforming to the [Scene](Scene.md) interface
-also requires implementing the [GameObject](GameObject.md) interfaces, which define
-rendering and game logic update behavior.
+also requires implementing the [GameObject](Interactable.md) and [Identifiable\<ID\>](Identifiable.md) interfaces
+to respond to SDL events, support per-frame logic updates,
+provide a way to be drawn onto the screen, and provide a unique global identification.
 
 ---
 
@@ -77,7 +78,8 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### Conforms To
-[GameObject](GameObject.md) <br>
+[GameObject](Interactable.md) <br>
+[Interactable](Interactable.md) <br>
 [Updatable](Updatable.md) <br>
 [Renderable](Renderable.md)  <br>
 [Identifiable\<ID\>](Identifiable.md)
