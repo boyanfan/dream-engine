@@ -39,7 +39,7 @@ Destruct the data structure by clearing all internal collections.
 ### getTexture()
 
 ```c++
-TextureRepresentable getTexture(int index) const;
+TextureRepresentable getTexture(size_t index) const;
 ```
 
 Retrieves a [TextureRepresentable](TextureRepresentable.md) 

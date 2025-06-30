@@ -24,5 +24,10 @@ Below is the position of [GameObject](GameObject.md)
 within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
+### Confirms To
+[Interactable](Interactable.md) <br>
+[Updatable](Updatable.md) <br>
+[Renderable](Renderable.md)
+
 ### Conforming Types
 [Scene](Scene.md)

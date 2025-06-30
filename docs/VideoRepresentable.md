@@ -60,4 +60,3 @@ from it and which base classes it derives from.
 ### See Also
 [VideoDecoder](VideoDecoder.md) <br>
 [GeometryProxy](GeometryProxy.md) <br>
-[ResourceManager](ResourceManager.md)

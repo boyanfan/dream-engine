@@ -5,7 +5,7 @@
 #ifndef DREAM_ENGINE_SYMBOLS_H
 #define DREAM_ENGINE_SYMBOLS_H
 
-// Dream Engine Type System for Reflection
+// Dream Engine Type System
 #define APPLICATION_TYPE "DreamEngine::Application"
 #define WINDOW_CONFIGURATION_TYPE "DreamEngine::WindowConfiguration"
 #define RESOURCE_MANAGER_TYPE "DreamEngine::ResourceManager"
@@ -18,10 +18,9 @@
 #define SDL_RENDERER_TYPE "SDL::Renderer"
 #define SDL_MIXER_TYPE "SDL::Mixer"
 #define SDL_TTF_TYPE "SDL::TTF"
+#define Identifier std::string
 
 // Window Utility
-#define NANOSECONDS_PER_SECOND 1000000000
-#define MILLISECONDS_PER_SECOND 1000
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720
 #define DEFAULT_WINDOW_TITLE "Hello DreamEngine!"
@@ -57,13 +56,14 @@
 
 // Dream Engine Keywords
 #define interface class
-#define identifier std::string
 #define delegated 0
 #define omitted
 
 // Dream Engine Utilities
 #define NONE 0
 #define FIRST_FREE_CHANNEL (-1)
+#define ONE_SECOND 1.0f
+#define MILLISECONDS_PER_SECOND 1000
 #define DREAM_ENGINE_OPENING_RESOURCES "resources"
 #define DREAM_ENGINE_OPENING_LOGO "engine-logo-video"
 #define DREAM_ENGINE_OPENING_SOUND "engine-logo-audio"
@@ -74,5 +74,9 @@
 #define DREAM_ENGINE_MP3_EXTENSION ".mp3"
 #define DREAM_ENGINE_MP4_EXTENSION ".mp4"
 #define DREAM_ENGINE_TTF_EXTENSION ".ttf"
+
+// DreamEngine::Camera Utility
+#define NO_SCREEN_SCALE 1.0f
+#define NO_PARALLEX 1.0f
 
 #endif //DREAM_ENGINE_SYMBOLS_H

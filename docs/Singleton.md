@@ -1,6 +1,6 @@
 # Singleton\<T\>
 
-A generic class that provides 
+The standard interface that provides 
 a centralized, reusable, and type-safe implementation of the singleton pattern
 that ensures only one instance of a derived class can exist at runtime.
 

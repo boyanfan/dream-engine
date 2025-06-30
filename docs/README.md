@@ -27,6 +27,7 @@ offering essential functionality for game development.
 - [Renderable](Renderable.md)
 - [Updatable](Updatable.md)
 - [Interactable](Interactable.md)
+- [Singleton\<T\>](Singleton.md)
 - [Scene](Scene.md)
 - [GameObject](Interactable.md)
 
@@ -36,9 +37,9 @@ offering essential functionality for game development.
 - [ResourceManager](ResourceManager.md)
 - [SceneManager](SceneManager.md)
 - [Camera](Camera.md)
+- [Animation](Animation.md)
 - [Logger](Logger.md)
 - [Timer](Timer.md)
-- [Singleton\<T\>](Singleton.md)
 - [TextureSequence](TextureSequence.md)
 - [VideoDecoder](VideoDecoder.md)
 

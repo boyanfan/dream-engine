@@ -36,6 +36,7 @@ from it and which base classes it derives from.
 ### Conforming Types
 [GameObject](Interactable.md) <br>
 [Scene](Scene.md) <br>
+[Animation](Animation.md) <br>
 [VideoDecoder](VideoDecoder.md)
 
 ### See Also 

@@ -5,11 +5,13 @@
 #ifndef DREAM_ENGINE_SINGLETON_H
 #define DREAM_ENGINE_SINGLETON_H
 
+#include "symbols.h"
+
 namespace DreamEngine {
-    /// A generic base class for implementing the Singleton pattern. To use this class, inherit from it and
+    /// The standard interface for implementing the Singleton pattern. To use this class, inherit from it and
     /// declare the derived class as a friend class.
     ///
-    template<typename T> class Singleton {
+    template<typename T> interface Singleton {
         /// The pointer to the only global instance of a singleton class.
         private: static T* instance;
 

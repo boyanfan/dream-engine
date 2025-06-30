@@ -75,5 +75,4 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### See Also
-[Application](Application.md) <br>
 [Vector2](Vector2.md)

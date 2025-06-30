@@ -7,7 +7,6 @@
 
 #include "symbols.h"
 #include "updatable.h"
-
 #include <functional>
 
 namespace DreamEngine {
@@ -42,20 +41,10 @@ namespace DreamEngine {
         /// Restarts the timer by resetting the elapsed time and the has triggered flag.
         public: void restart();
 
-        /// Sets the duration the timer should wait before firing the timeout event.
-        /// @param duration The time, in seconds, to wait for triggering the on timeout event.
-        ///
-        public: void setDuration(float duration);
-
         /// Sets the callback function to be executed when the timer times out.
         /// @param callback A function with no parameters and no return value to be called upon timeout.
         ///
         public: void setOnTimeout(const std::function<void()>& callback);
-
-        /// Sets whether the timer should repeat after triggering.
-        /// @param flag `true` to make the timer repeat; `false` for one-shot behavior.
-        ///
-        public: void setRepeating(bool flag);
 
         /// Pauses the timer, halting countdown without resetting the elapsed time.
         public: void pause();

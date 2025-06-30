@@ -191,5 +191,5 @@ Below is the position of [Logger](Logger.md)
 within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
-### Inherits From
+### Conforms To
 [Singleton\<T\>](Singleton.md)

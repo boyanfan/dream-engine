@@ -30,8 +30,8 @@ namespace DreamEngine {
 
     TextureSequence::~TextureSequence() { sourceCollection.clear(); }
 
-    TextureRepresentable TextureSequence::getTexture(const int index) const {
-        if (index >= 0 && index < sourceCollection.size()) return TextureRepresentable(textureSheet, sourceCollection[index]);
+    TextureRepresentable TextureSequence::getTexture(const size_t index) const {
+        if (index < sourceCollection.size()) return TextureRepresentable(textureSheet, sourceCollection[index]);
         LOG_ERROR(Logger::onOutOfBounds(self, index));
         return TextureRepresentable(nullptr, SDL_FRect{});
     }

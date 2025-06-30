@@ -15,12 +15,13 @@ namespace DreamEngine {
     class Camera {
         private: Vector2 position;
         private: SDL_Renderer* renderer;
+        public: float globalScreenScale = NO_SCREEN_SCALE;
 
         public: explicit Camera(SDL_Renderer* renderer);
         public: ~Camera() = default;
 
         public: SDL_Renderer* getRenderer() const;
-        public: void renderTexture(SDL_Texture *texture, const SDL_FRect *source, const SDL_FRect *destination, float parallex) const;
+        public: void renderTexture(SDL_Texture *texture, const SDL_FRect *source, const SDL_FRect *destination, float parallex, bool isFlippedRendering = false) const;
         public: void moveBy(const Vector2& movement);
     };
 }

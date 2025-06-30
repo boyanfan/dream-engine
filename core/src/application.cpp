@@ -64,42 +64,32 @@ namespace DreamEngine {
     }
 
     void Application::execute() {
-        // Get the duration of one frame in nanosecond for the given frame rate
-        const std::chrono::nanoseconds frameDuration = std::chrono::nanoseconds(NANOSECONDS_PER_SECOND / frameRate);
-
-        // Record the time point before the first update to compute delta time
-        std::chrono::time_point<std::chrono::steady_clock> tickBeforeUpdate = std::chrono::steady_clock::now();
+        // Get the duration of one frame in seconds for the given frame rate
+        const std::chrono::duration<float> frameDuration = std::chrono::duration<float>(ONE_SECOND / static_cast<float>(frameRate));
 
         // Polling input events to handle any user input
         SDL_Event event;
 
-        while (isRunning) {
-            // Get the current scene
-            Scene* currentScene = SceneManager::getInstance()->getCurrentScene();
+        std::chrono::time_point<std::chrono::steady_clock> tickBeforeUpdate = std::chrono::steady_clock::now();
 
-            // Poll all SDL events to handel user input
+        while (isRunning) {
+            std::chrono::time_point<std::chrono::steady_clock> tickWillUpdate = std::chrono::steady_clock::now();
+            std::chrono::duration<float> interval = tickWillUpdate - tickBeforeUpdate;
+            tickBeforeUpdate = tickWillUpdate;
+
             while (SDL_PollEvent(&event)) {
                 if (event.type == SDL_EVENT_QUIT) isRunning = false;
-                if (currentScene) currentScene->onEvent(event);
+                if (Scene* scene = SceneManager::getInstance()->getCurrentScene()) scene->onEvent(event);
             }
 
-            // Record the time point right before this frame's update logic and compute delta time for updating
-            std::chrono::time_point<std::chrono::steady_clock> tickDidUpdate = std::chrono::steady_clock::now();
-            const float interval = duration_cast<std::chrono::duration<float>>(tickDidUpdate - tickBeforeUpdate).count();
-
-            // Update game logic, render the current frame and present it to the screen
-            if (currentScene) {
-                currentScene->onUpdate(interval);
-                currentScene->onRender(*camera);
+            if (Scene* scene = SceneManager::getInstance()->getCurrentScene()) {
+                scene->onUpdate(interval.count());
+                scene->onRender(*camera);
             }
             SDL_RenderPresent(renderer);
 
-            // Calculate how much time remains before the next frame
-            std::chrono::nanoseconds tickWillUpdate = frameDuration - (std::chrono::steady_clock::now() - tickDidUpdate);
-
-            // Sleep the thread for the remaining time to cap the frame rate
-            if (tickWillUpdate > std::chrono::nanoseconds(0)) std::this_thread::sleep_for(tickWillUpdate);
-            tickBeforeUpdate = std::chrono::steady_clock::now();
+            const std::chrono::duration<float> tickDidUpdate = std::chrono::steady_clock::now() - tickWillUpdate;
+            if (tickDidUpdate < frameDuration) std::this_thread::sleep_for(frameDuration - tickDidUpdate);
         }
     }
 

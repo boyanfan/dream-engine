@@ -58,7 +58,7 @@ namespace DreamEngine {
         /// @param index The index of the region to retrieve.
         /// @return A `TextureRepresentable` containing the shared texture and its region.
         ///
-        public: TextureRepresentable getTexture(int index) const;
+        public: TextureRepresentable getTexture(size_t index) const;
 
         /// Returns the number of available regions in the sequence.
         /// @return The size of the source collection.

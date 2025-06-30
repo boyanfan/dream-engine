@@ -14,7 +14,7 @@ namespace DreamEngine {
     /// The standard interface that represents an entire game scene. It provides lifecycle hooks for entering and
     /// exiting the scene.
     ///
-    interface Scene : public GameObject, public Identifiable<identifier> {
+    interface Scene : public GameObject, public Identifiable<Identifier> {
         /// Destructor override to ensure proper cleanup of Scene-derived objects.
         public: ~Scene() override = default;
 

@@ -67,6 +67,8 @@ from it and which base classes it derives from.
 
 ### See Also
 [WindowConfiguration](WindowConfiguration.md) <br>
+[GeometryProxy](GeometryProxy.md) <br>
 [Scene](Scene.md) <br>
 [SceneManager](SceneManager.md) <br>
+[Logger](Logger.md) <br>
 [Camera](Camera.md)
