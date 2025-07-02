@@ -83,6 +83,7 @@ namespace DreamEngine {
             }
 
             if (Scene* scene = SceneManager::getInstance()->getCurrentScene()) {
+                SDL_RenderClear(renderer);
                 scene->onUpdate(interval.count());
                 scene->onRender(*camera);
             }

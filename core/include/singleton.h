@@ -32,6 +32,7 @@ namespace DreamEngine {
         ///
         public: static T* getInstance();
 
+        /// Destroy the singleton instance.
         public: static void destroyInstance();
 
         /// Deleted copy assignment operator to prevent reassignment.

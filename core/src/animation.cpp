@@ -5,8 +5,8 @@
 #include "animation.h"
 
 namespace DreamEngine {
-    Animation::Animation(SDL_Texture *textureSheet, const float textureWidth, const float textureHeight, const int frameRate)
-        : frameRate(frameRate), textureSequence(TextureSequence(textureSheet, textureWidth, textureHeight)) {
+    Animation::Animation(SDL_Texture *textureSheet, const float textureWidth, const float textureHeight, const int frameRate, const float flipOffset)
+        : frameRate(frameRate), flipOffset(flipOffset), textureSequence(TextureSequence(textureSheet, textureWidth, textureHeight)) {
 
         timer.isRepeating = true;
         timer.duration = ONE_SECOND / static_cast<float>(frameRate);
@@ -28,11 +28,16 @@ namespace DreamEngine {
         const TextureRepresentable currentFrame = textureSequence.getTexture(frameIndex);
 
         // Set the anchor point to the bottom center
-        SDL_FRect const destination = {
+        SDL_FRect destination = {
             position.x - currentFrame.source.w / 2, position.y - currentFrame.source.h,
             currentFrame.source.w, currentFrame.source.h
         };
 
-        camera.renderTexture(currentFrame.texture, &currentFrame.source, &destination, parallexEffect, isFlippedRendering);
+        if (isFlippedRendering) {
+            destination.x += destination.w / 2 - flipOffset;
+            destination.w *= -1;
+        }
+
+        camera.renderTexture(currentFrame.texture, &currentFrame.source, &destination, parallexEffect);
     }
 }

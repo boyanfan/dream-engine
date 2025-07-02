@@ -35,6 +35,9 @@ namespace DreamEngine {
         /// The parallax effect strength applied during rendering.
         public: float parallexEffect = NO_PARALLEX;
 
+        /// The offset for flipping when the texture content is not centered.
+        private: float flipOffset = 0.0f;
+
         /// The internal timer that drives frame updates.
         private: Timer timer = Timer();
 
@@ -53,8 +56,9 @@ namespace DreamEngine {
         /// @param textureWidth The width of a single frame.
         /// @param textureHeight The height of a single frame.
         /// @param frameRate The number of frames to play per second.
+        /// @param flipOffset The offset for flipping when the texture content is not centered.
         ///
-        public: Animation(SDL_Texture* textureSheet, float textureWidth, float textureHeight, int frameRate);
+        public: Animation(SDL_Texture* textureSheet, float textureWidth, float textureHeight, int frameRate, float flipOffset = 0.0f);
 
         /// Default virtual destructor for proper cleanup.
         public: ~Animation() override = default;

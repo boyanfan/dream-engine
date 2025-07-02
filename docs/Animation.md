@@ -27,7 +27,7 @@ provided by the [Animation](Animation.md) class.
 ### Constructor
 
 ```c++
-Animation(SDL_Texture* textureSheet, float textureWidth, float textureHeight, int frameRate);
+Animation(SDL_Texture* textureSheet, float textureWidth, float textureHeight, int frameRate, float flipOffset = 0.0f);
 ```
 
 Constructs an Animation object using a texture sheet and frame layout.
@@ -37,6 +37,7 @@ Constructs an Animation object using a texture sheet and frame layout.
 - `textureWidth`: The width of a single frame.
 - `textureHeight`: The height of a single frame.
 - `frameRate`: The number of frames to play per second.
+- `flipOffset`: The offset for flipping when the texture content is not centered.
 
 ### Destructor
 
