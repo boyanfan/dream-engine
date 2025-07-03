@@ -15,7 +15,7 @@ namespace DreamEngine {
     /// exiting the scene.
     ///
     interface Scene : public GameObject, public Identifiable<Identifier> {
-        /// Destructor override to ensure proper cleanup of Scene-derived objects.
+        /// Destructor override to ensure proper cleanup of scene-derived objects.
         public: ~Scene() override = default;
 
         /// Indicates whether the scene is ready to transition away. Controlled internally and modified through

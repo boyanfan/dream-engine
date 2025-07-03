@@ -41,4 +41,6 @@ from it and which base classes it derives from.
 [GameObject](Interactable.md) <br>
 [Scene](Scene.md) <br>
 [Animation](Animation.md) <br>
+[State](State.md) <br>
+[FiniteStateMachine](FiniteStateMachine.md) <br>
 [Timer](Timer.md)

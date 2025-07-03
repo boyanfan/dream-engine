@@ -29,6 +29,7 @@ offering essential functionality for game development.
 - [Interactable](Interactable.md)
 - [Singleton\<T\>](Singleton.md)
 - [Scene](Scene.md)
+- [State](State.md)
 - [GameObject](Interactable.md)
 
 ### Classes
@@ -36,6 +37,7 @@ offering essential functionality for game development.
 - [Application](Application.md)
 - [ResourceManager](ResourceManager.md)
 - [SceneManager](SceneManager.md)
+- [FiniteStateMachine](FiniteStateMachine.md)
 - [Camera](Camera.md)
 - [Animation](Animation.md)
 - [Logger](Logger.md)

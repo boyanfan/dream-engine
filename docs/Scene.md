@@ -5,7 +5,7 @@ with rendering, updating, and event handling capabilities.
 Scene transition control is delegated to the [SceneManager](SceneManager.md).
 
 ```c++
-class Scene : public GameObject, public Identifiable<identifier>
+class Scene : public GameObject, public Identifiable<std::string>
 ```
 
 Conforming to the [Scene](Scene.md) interface
@@ -83,3 +83,6 @@ from it and which base classes it derives from.
 [Updatable](Updatable.md) <br>
 [Renderable](Renderable.md)  <br>
 [Identifiable\<ID\>](Identifiable.md)
+
+### See Also
+[SceneManager](SceneManager.md)
