@@ -29,6 +29,8 @@ offering essential functionality for game development.
 - [Interactable](Interactable.md)
 - [Singleton\<T\>](Singleton.md)
 - [Scene](Scene.md)
+- [Observable\<T\>](Observable.md)
+- [Observer\<T\>](Observer.md)
 - [State](State.md)
 - [GameObject](Interactable.md)
 
@@ -48,6 +50,7 @@ offering essential functionality for game development.
 ### Data Types
 - [WindowConfiguration](WindowConfiguration.md)
 - [GeometryProxy](GeometryProxy.md)
+- [Transform](Transform.md)
 - [FontRepresentable](FontRepresentable.md)
 - [VideoRepresentable](VideoRepresentable.md)
 - [TextureRepresentable](TextureRepresentable.md)

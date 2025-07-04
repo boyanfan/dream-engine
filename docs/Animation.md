@@ -13,7 +13,7 @@ to support per-frame logic updates and
 provide a way to be drawn onto the screen.
 
 **Fields:**
-- `Vector2 position`: The position of the animation in the world space.
+- `Transform transform`: A 2D [Transform](Transform.md) component used for positioning and orienting entities in the world or local space..
 - `bool isRepeating`: Whether the animation should loop once it reaches the end.
 - `int frameRate`: The number of frames to display per second.
 - `bool isFlippedRendering`: Whether the animation should be rendered with horizontal flipping.
@@ -92,5 +92,6 @@ from it and which base classes it derives from.
 [Camera](Camera.md) <br>
 [TextureSequence](TextureSequence.md) <br>
 [TextureRepresentable](TextureRepresentable.md) <br>
+[Transform](Transform.md) <br>
 [Timer](Timer.md) <br>
 [Vector2](Vector2.md)

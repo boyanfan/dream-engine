@@ -1,7 +1,7 @@
 # GameObject
 
 It defines the base abstraction for all entities that exist 
-in the game world with a position, can respond to input, 
+in the game world with a [Transform](Transform.md) component, can respond to input, 
 be updated every frame, and be rendered on screen.
 
 ```c++
@@ -15,7 +15,7 @@ respond to SDL events, support per-frame logic updates, and
 provide a way to be drawn onto the screen.
 
 **Fields:**
-- `Vector2 position`: The position of the game object in world space coordinate.
+- `Transform transform`: A 2D [Transform](Transform.md) component used for positioning and orienting entities in the world or local space.
 
 ---
 
@@ -31,3 +31,6 @@ from it and which base classes it derives from.
 
 ### Conforming Types
 [Scene](Scene.md)
+
+### See Also
+[Transform](Transform.md)

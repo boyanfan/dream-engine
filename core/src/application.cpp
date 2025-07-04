@@ -82,6 +82,14 @@ namespace DreamEngine {
                 if (Scene* scene = SceneManager::getInstance()->getCurrentScene()) scene->onEvent(event);
             }
 
+            // Set the virtual resolution of the camera
+            if (camera->isVirtualResolution) {
+                SDL_SetRenderLogicalPresentation(renderer, camera->virtualWidth, camera->virtualHeight, SDL_LOGICAL_PRESENTATION_OVERSCAN);
+            }
+
+            // Disable virtual resolution
+            else SDL_SetRenderLogicalPresentation(renderer, NONE, NONE, SDL_LOGICAL_PRESENTATION_DISABLED);
+
             if (Scene* scene = SceneManager::getInstance()->getCurrentScene()) {
                 SDL_RenderClear(renderer);
                 scene->onUpdate(interval.count());

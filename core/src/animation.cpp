@@ -29,7 +29,7 @@ namespace DreamEngine {
 
         // Set the anchor point to the bottom center
         SDL_FRect destination = {
-            position.x - currentFrame.source.w / 2, position.y - currentFrame.source.h,
+            transform.position.x - currentFrame.source.w / 2, transform.position.y - currentFrame.source.h,
             currentFrame.source.w, currentFrame.source.h
         };
 

@@ -12,6 +12,7 @@
 #include "vector2.h"
 #include "texture.h"
 #include "identifiable.h"
+#include "transform.h"
 
 #include <functional>
 
@@ -20,8 +21,8 @@ namespace DreamEngine {
     /// with parallax and flipping, and is suitable for animated game objects.
     ///
     class Animation final : public Renderable, public Updatable {
-        /// The position of the animation in the world space.
-        public: Vector2 position = Vector2();
+        /// A 2D transformation component used for positioning and orienting entities in the world or local space.
+        public: Transform transform = Transform();
 
         /// Whether the animation should loop once it reaches the end.
         public: bool isRepeating = true;

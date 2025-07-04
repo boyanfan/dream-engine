@@ -7,19 +7,21 @@
 
 #include "symbols.h"
 #include "vector2.h"
+#include "observable.h"
+#include "transform.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 
 namespace DreamEngine {
-    class Camera {
-        public: Vector2 position;
+    class Camera final : public Observer<Transform> {
+        public: Transform transform = Transform();
         private: SDL_Renderer* renderer;
-        private: bool isVirtualResolution = false;
+        public: bool isVirtualResolution = false;
         public: int virtualWidth = NONE, virtualHeight = NONE;
 
         public: explicit Camera(SDL_Renderer* renderer);
-        public: ~Camera() = default;
+        public: ~Camera() override = default;
 
         public: SDL_Renderer* getRenderer() const;
         public: void renderTexture(SDL_Texture *texture, const SDL_FRect *source, const SDL_FRect *destination, float parallex) const;
@@ -27,7 +29,7 @@ namespace DreamEngine {
         public: void enableVirtualResolution(int width, int height);
         public: void disableVirtualResolution();
 
-        public: void moveBy(const Vector2& movement);
+        public: void onNotified(const Transform& newValue) override;
     };
 }
 
