@@ -51,6 +51,7 @@ offering essential functionality for game development.
 - [WindowConfiguration](WindowConfiguration.md)
 - [GeometryProxy](GeometryProxy.md)
 - [Transform](Transform.md)
+- [Mathematics\<T\>](Mathematics.md)
 - [FontRepresentable](FontRepresentable.md)
 - [VideoRepresentable](VideoRepresentable.md)
 - [TextureRepresentable](TextureRepresentable.md)

@@ -5,7 +5,7 @@
 #include "timer.h"
 
 namespace DreamEngine {
-    void Timer::restart() { elapsedTime = 0; }
+    void Timer::restart() { elapsedTime = 0; hasTriggered = false; }
 
     void Timer::setOnTimeout(const std::function<void()>& callback) { onTimeout = callback; }
 

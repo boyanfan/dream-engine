@@ -22,6 +22,8 @@ namespace DreamEngine {
 
     void Animation::reset() { timer.restart(); frameIndex = 0; }
 
+    void Animation::setOnFinished(const std::function<void()> &callback) { onTimeout = callback; }
+
     void Animation::onUpdate(const float interval) { timer.onUpdate(interval); }
 
     void Animation::onRender(const Camera &camera) const {

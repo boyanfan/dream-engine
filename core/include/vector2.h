@@ -83,6 +83,11 @@ namespace DreamEngine {
         ///
         public: void operator *=(const Vector2& other);
 
+        /// Performs dot multiplication with a float in-place.
+        /// @param value The scalar to dot multiplies.
+        ///
+        public: void operator *=(float value);
+
         /// Divides this vector by a scalar in-place.
         /// @param value The scalar to divide by.
         ///

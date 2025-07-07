@@ -76,7 +76,8 @@
 #define DREAM_ENGINE_TTF_EXTENSION ".ttf"
 
 // DreamEngine::Camera Utility
-#define NO_SCREEN_SCALE 1.0f
+#define NO_SCALE 1.0f
 #define NO_PARALLEX 1.0f
+#define CAMERA_DEFAULT_INERTIA 1.5f
 
 #endif //DREAM_ENGINE_SYMBOLS_H

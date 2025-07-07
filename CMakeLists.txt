@@ -19,6 +19,7 @@ add_library(${PROJECT_NAME} STATIC
     core/src/logo.cpp
     core/src/animation.cpp
     core/src/state.cpp
+    core/src/transform.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

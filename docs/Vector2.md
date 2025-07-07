@@ -17,7 +17,7 @@ magnitude and normalization.
 
 ## Methods
 Below is a list and explanation of all public methods
-provided by the [Vector2](Vector2.md) class.
+provided by the [Vector2](Vector2.md) type.
 
 ### Constructors
 
@@ -131,6 +131,14 @@ void operator *=(const Vector2& other)
 ```
 
 Performs component-wise multiplication with another vector in-place.
+
+### Dot Multiplication Assignment
+
+```c++
+public: void operator *=(float value);
+```
+
+Performs dot multiplication with a float in-place.
 
 ### Division Assignment
 

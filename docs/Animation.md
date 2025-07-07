@@ -69,6 +69,14 @@ Renders the current frame of the animation using the provided camera.
 **Parameters:**
 - `camera`: The camera to apply for rendering in world space.
 
+### setOnFinished()
+
+```c++
+void setOnFinished(const std::function<void()>& callback);
+```
+
+Sets the function to be called when the animation finishes.
+
 ### reset()
 
 ```c++

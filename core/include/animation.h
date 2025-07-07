@@ -74,6 +74,11 @@ namespace DreamEngine {
         ///
         public: void onRender(const Camera &camera) const override;
 
+        /// Sets the callback function to be executed when the animation finishes.
+        /// @param callback A function with no parameters and no return value to be called upon timeout.
+        ///
+        public: void setOnFinished(const std::function<void()>& callback);
+
         /// Resets the animation back to its initial state.
         public: void reset();
     };

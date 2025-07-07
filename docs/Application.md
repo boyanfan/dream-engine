@@ -70,5 +70,4 @@ from it and which base classes it derives from.
 [GeometryProxy](GeometryProxy.md) <br>
 [Scene](Scene.md) <br>
 [SceneManager](SceneManager.md) <br>
-[Logger](Logger.md) <br>
 [Camera](Camera.md)

@@ -5,7 +5,7 @@
 #include "vector2.h"
 
 namespace DreamEngine {
-    Vector2::Vector2(const float x, const float y) : x(x), y(y) { }
+    Vector2::Vector2(const float x, const float y) : x(x), y(y) { omitted }
 
     Vector2 Vector2::operator +(const Vector2 &other) const { return {x + other.x, y + other.y}; }
 
@@ -22,6 +22,8 @@ namespace DreamEngine {
     void Vector2::operator -=(const Vector2 &other) { x -= other.x; y -= other.y; }
 
     void Vector2::operator *=(const Vector2 &other) { x *= other.x; y *= other.y; }
+
+    void Vector2::operator *=(float value) { x *= value; y *= value; }
 
     void Vector2::operator /=(const float value) { x /= value; y /= value; }
 
