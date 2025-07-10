@@ -16,7 +16,7 @@ namespace DreamEngine {
     /// The standard interface that represents a generic state in the game or application, managed by
     /// a finite state machine.
     ///
-    interface State : public Updatable {
+    interface State : public Updatable, public Identifiable<Identifier> {
         /// Destructor override to ensure proper cleanup of state-derived objects.
         public: ~State() override = default;
 
@@ -43,7 +43,12 @@ namespace DreamEngine {
         /// Switches the current active state to the one associated with the given identifier.
         /// @param state The state to switch to.
         ///
-        public: void switchCurrentState(State* state);
+        public: bool switchCurrentState(State* state);
+
+        /// Get the identifier of the current active state.
+        /// @return The identifier define by the current active state.
+        ///
+        public: Identifier getCurrentStateID() const;
 
         /// Updates the currently active state. This method should be called once per frame.
         /// @param interval The elapsed time since the last update, in seconds.

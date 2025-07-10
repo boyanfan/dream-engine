@@ -36,12 +36,24 @@ Destructor override to ensure proper cleanup.
 ### switchCurrentState()
 
 ```c++
-void switchCurrentState(State* state):
+bool switchCurrentState(State* state):
 ```
 Transitions the FSM to the provided [State](State.md).
 
 **Parameters:**
 - `state`: A pointer to the [State](State.md) to switch to.
+
+**Return:** `true` if the state changes, `false` if the
+provided [State](State.md) is same to the current state,
+and the transition will not happen.
+
+### getCurrentStateID()
+
+```c++
+std::string getCurrentStateID() const;
+```
+
+**Return:** The identifier define by the current active state.
 
 ### onUpdate()
 

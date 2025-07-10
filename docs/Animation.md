@@ -18,6 +18,7 @@ provide a way to be drawn onto the screen.
 - `int frameRate`: The number of frames to display per second.
 - `bool isFlippedRendering`: Whether the animation should be rendered with horizontal flipping.
 - `float parallexEffect`: The parallax effect strength applied during rendering.
+- `bool hasFinished`:  A flag determines whether the animation has finished.
 
 ---
 

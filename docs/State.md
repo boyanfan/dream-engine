@@ -7,7 +7,7 @@ Each state must define its behavior when it
 becomes active or inactive.
 
 ```c++
-class State : public Updatable;
+class State : public Updatable, public Identifiable<Identifier>;
 ```
 
 Conforming to the [State](State.md) interface
@@ -44,7 +44,8 @@ within the type hierarchy, including which classes inherit
 from it and which base classes it derives from.
 
 ### Conforms To
-[Updatable](Updatable.md)
+[Updatable](Updatable.md) <br>
+[Identifiable\<ID\>](Identifiable.md)
 
 ### See Also
 [FiniteStateMachine](FiniteStateMachine.md)

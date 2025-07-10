@@ -36,6 +36,9 @@ namespace DreamEngine {
         /// The parallax effect strength applied during rendering.
         public: float parallexEffect = NO_PARALLEX;
 
+        /// A flag determines whether the animation has finished.
+        public: bool hasFinished = false;
+
         /// The offset for flipping when the texture content is not centered.
         private: float flipOffset = 0.0f;
 

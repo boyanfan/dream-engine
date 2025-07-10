@@ -14,13 +14,14 @@ namespace DreamEngine {
         timer.setOnTimeout([this] {
             frameIndex++;
             if (frameIndex >= textureSequence.getSize()) {
+                hasFinished = !isRepeating;
                 frameIndex = isRepeating ? 0 : textureSequence.getSize() - 1;
-                if (!isRepeating && onTimeout) onTimeout();
+                if (!isRepeating && onTimeout) { onTimeout(); }
             }
         });
     }
 
-    void Animation::reset() { timer.restart(); frameIndex = 0; }
+    void Animation::reset() { timer.restart(); frameIndex = 0; hasFinished = false; }
 
     void Animation::setOnFinished(const std::function<void()> &callback) { onTimeout = callback; }
 

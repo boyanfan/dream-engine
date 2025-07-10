@@ -5,12 +5,17 @@
 #include "state.h"
 
 namespace DreamEngine {
-    void FiniteStateMachine::switchCurrentState(State* state) {
-        if (currentState == state) return;
+    bool FiniteStateMachine::switchCurrentState(State* state) {
+        if (currentState == state) return false;
         if (currentState) currentState->onExit();
         currentState = state;
         if (currentState) currentState->onEntry();
+        return true;
     }
 
     void FiniteStateMachine::onUpdate(const float interval) { if (currentState) currentState->onUpdate(interval); }
+
+    Identifier FiniteStateMachine::getCurrentStateID() const {
+        if (currentState) return currentState->getIdentifier(); return Identifier();
+    }
 }
