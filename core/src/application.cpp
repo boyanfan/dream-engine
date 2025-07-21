@@ -93,11 +93,21 @@ namespace DreamEngine {
             // Update Camera
             camera->onUpdate(interval.count());
 
+            // Update and render the scene
             if (Scene* scene = SceneManager::getInstance()->getCurrentScene()) {
+                // Clear the previous frame content to be ready for rendering the next frame
                 SDL_RenderClear(renderer);
+
+                // Update and render the game objects in the current active scene
                 scene->onUpdate(interval.count());
                 scene->onRender(*camera);
+
+                // Process collisions and display the collision boxes if is in the debug mode
+                CollisionManager::getInstance()->processCollision();
+                COLLISION_MANAGER_ON_RENDER(*camera);
             }
+
+            // Present the game scene on the screen
             SDL_RenderPresent(renderer);
 
             const std::chrono::duration<float> tickDidUpdate = std::chrono::steady_clock::now() - tickWillUpdate;

@@ -10,7 +10,8 @@ class Logger final : public Singleton<Logger>
 
 It also offers utility methods to 
 format common status messages related to initialization and 
-file operations.
+file operations. The info will be displayed only
+if the build type of the program is `Debug`.
 
 **Fields:**
 

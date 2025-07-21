@@ -13,7 +13,8 @@ class State : public Updatable, public Identifiable<Identifier>;
 Conforming to the [State](State.md) interface
 also requires implementing the [Updatable](Updatable.md)
 and [Identifiable\<ID\>](Identifiable.md) interfaces,
- providing per-frame update logic.
+providing per-frame update logic and a unique identifier
+for each state.
 
 ---
 

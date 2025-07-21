@@ -35,4 +35,6 @@ namespace DreamEngine {
         if (magnitude == 0) return {0, 0};
         return {x / magnitude, y / magnitude};
     }
+
+    bool Vector2::isZero() const { return x == 0 && y == 0; }
 }

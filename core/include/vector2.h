@@ -102,6 +102,11 @@ namespace DreamEngine {
         /// @return A new vector with the same direction but a magnitude of 1.
         ///
         public: Vector2 normalize() const;
+
+        /// Check if the vector is zero.
+        /// @return `true` if the vector is zero, `false` otherwise.
+        ///
+        public: bool isZero() const;
     };
 }
 

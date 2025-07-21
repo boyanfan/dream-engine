@@ -10,12 +10,14 @@ namespace DreamEngine {
     SDL_Renderer* Camera::getRenderer() const { return renderer; }
 
     void Camera::renderTexture(SDL_Texture* texture, const SDL_FRect* source, const SDL_FRect* destination, const float parallex) const {
-        // Convert the coordinates from world space to the screen space
+        const SDL_FRect screenSpace = convertCoordinateFromWorldToScreen(destination, parallex);
+        SDL_RenderTexture(renderer, texture, source, &screenSpace);
+    }
+
+    SDL_FRect Camera::convertCoordinateFromWorldToScreen(const SDL_FRect *destination, const float parallex) const {
         SDL_FRect screenSpace = *destination;
         screenSpace.x -= transform.position.x * parallex, screenSpace.y -= transform.position.y * parallex;
-
-        // Render the texture
-        SDL_RenderTexture(renderer, texture, source, &screenSpace);
+        return screenSpace;
     }
 
     void Camera::enableVirtualResolution(const Vector2& resolution) {
@@ -26,17 +28,21 @@ namespace DreamEngine {
 
     void Camera::enableTargetFollowing(const Transform& target, const float inertia) {
         isTargetFollowingEnabled = true;
-        targetOffest = transform - target, targetTransform = target;
+        targetDifference = transform - target, targetTransform = target;
         this->inertia = inertia;
         onNotified(target);
     }
 
     void Camera::disableTargetFollowing() {
         isTargetFollowingEnabled = false;
-        targetTransform = Transform(), targetOffest = Transform();
+        targetTransform = Transform(), targetDifference = Transform();
     }
 
-    void Camera::onNotified(const Transform& newValue) { if (isTargetFollowingEnabled) targetTransform = newValue + targetOffest; }
+    void Camera::bindWindowGeometry(SDL_Window* window) { geometry.bind(window); }
+
+    const GeometryProxy& Camera::getWindowGeometry() const { return geometry; }
+
+    void Camera::onNotified(const Transform& newValue) { if (isTargetFollowingEnabled) targetTransform = newValue + targetDifference; }
 
     void Camera::onUpdate(const float interval) {
         if (!isTargetFollowingEnabled) return;

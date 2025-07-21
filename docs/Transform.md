@@ -10,6 +10,7 @@ struct Transform;
 **Fields:**
 
 - `Vector2 position`: The current position of the object.
+- `Vector2 size`: The size of the object in the world or local space.
 - `Vector2 scale`: The scaling factor on each axis.
 - `float rotation`: The rotation angle of the object.
 - `Vector2 anchor`: The anchor point used for pivoting transformations.
@@ -30,12 +31,13 @@ Transform();
 Constructs a default Transform with identity values.
 
 ```c++
-Transform(const Vector2& position, const Vector2& scale, float rotation, const Vector2& anchor);
+Transform(const Vector2& position, const Vector2& size, const Vector2& scale, float rotation, const Vector2& anchor);
 ```
 Constructs a Transform with the specified position, scale, rotation, and anchor.
 
 **Parameters:**
 - `position`: The initial position of the transform.
+- `size`: The initial size of the transform.
 - `scale`: The initial scale factors for X and Y.
 - `rotation`: The initial rotation angle.
 - `anchor`: The anchor point for transformations.

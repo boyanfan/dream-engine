@@ -17,6 +17,9 @@ namespace DreamEngine {
         /// The position of the object in the world or local space.
         public: Vector2 position = Vector2();
 
+        /// The size of the object in the world or local space.
+        public: Vector2 size = Vector2();
+
         /// The scale factors along the X and Y axes.
         public: Vector2 scale = Vector2(NO_SCALE, NO_SCALE);
 
@@ -35,11 +38,12 @@ namespace DreamEngine {
         /// Constructs a Transform with the specified position, scale, rotation, and anchor.
         ///
         /// @param position The initial position of the transform.
+        /// @param size The initial size of the transform.
         /// @param scale The initial scale factors for X and Y.
         /// @param rotation The initial rotation angle.
         /// @param anchor The anchor point for transformations.
         ///
-        public: Transform(const Vector2& position, const Vector2& scale, float rotation, const Vector2& anchor);
+        public: Transform(const Vector2& position, const Vector2& size, const Vector2& scale, float rotation, const Vector2& anchor);
 
         /// The facing or moving direction of the object.
         public: Direction direction = Direction::None;

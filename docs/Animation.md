@@ -13,7 +13,7 @@ to support per-frame logic updates and
 provide a way to be drawn onto the screen.
 
 **Fields:**
-- `Transform transform`: A 2D [Transform](Transform.md) component used for positioning and orienting entities in the world or local space..
+- `Transform transform`: A 2D [Transform](Transform.md) component used for positioning and orienting entities in the world or local space.
 - `bool isRepeating`: Whether the animation should loop once it reaches the end.
 - `int frameRate`: The number of frames to display per second.
 - `bool isFlippedRendering`: Whether the animation should be rendered with horizontal flipping.

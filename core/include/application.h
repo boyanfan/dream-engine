@@ -11,6 +11,7 @@
 #include "resource.h"
 #include "vector2.h"
 #include "logo.h"
+#include "collision.h"
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>

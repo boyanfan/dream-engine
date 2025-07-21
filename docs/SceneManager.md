@@ -1,8 +1,7 @@
 # SceneManager
 
-A singleton
-utility class that inherits from the generic
-[Singleton\<T\>](Singleton.md) base class, responsible for
+A utility class that confirms to the
+[Singleton\<T\>](Singleton.md) interface and is responsible for
 managing scene transitions in a game. 
 
 ```c++

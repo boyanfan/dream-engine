@@ -1,8 +1,7 @@
 # ResourceManager
 
-A singleton
-utility class that inherits from the generic
-[Singleton\<T\>](Singleton.md) and provides 
+A utility class that confirms to the
+[Singleton\<T\>](Singleton.md) interface and provides 
 centralized loading and access to texture, audio, video and font 
 assets.
 

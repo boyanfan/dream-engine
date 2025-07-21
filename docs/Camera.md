@@ -4,7 +4,7 @@ parallax effects, and optional target following
 with inertia smoothing.
 
 ```c++
-class Camera : public Observer<Transform>, Updatable;
+class Camera : public Observer<Transform>, public Updatable;
 ```
 
 The camera only follows an `Observable<Transform>` object,
@@ -43,14 +43,6 @@ Constructs a Camera using the given SDL renderer.
 
 Default destructor.
 
-### getRenderer()
-
-```c++
-SDL_Renderer* getRenderer() const;
-```
-
-**return:** A pointer to the SDL_Renderer used by the camera.
-
 ### renderTexture()
 
 ```c++
@@ -64,6 +56,37 @@ Renders a texture using camera's position and optional parallax effect.
 - `source`: The source rectangle from the texture.
 - `destination`: The destination rectangle on screen.
 - `parallex`: The parallax scrolling factor. Larger than 1.0f if the object moves faster than the camera, smaller if the object moves slower than the camera.
+
+### getRenderer()
+
+```c++
+SDL_Renderer* getRenderer() const;
+```
+
+Note that if any content is directly drawn on the screen 
+via the renderer instead of the camera, call
+`convertCoordinateFromWorldToScreen()` to convert the 
+coordinate from the world space to the screen space.
+
+**return:** A pointer to the `SDL_Renderer` used by the camera.
+
+### convertCoordinateFromWorldToScreen()
+
+```c++
+SDL_FRect convertCoordinateFromWorldToScreen(const SDL_FRect* destination, float parallex) const;
+```
+
+Converts from the world space coordinate to the screen space 
+coordinate. Call this method if the content is directly
+drawn on the screen via the `SDL_Renderer` instead of the camera,
+which requires the proper coordinate conversion.
+
+**Parameters:**
+
+- `destination`: The destination rectangle on screen.
+- `parallex`: The parallax scrolling factor. Larger than 1.0f if the object moves faster than the camera, smaller if the object moves slower than the camera.
+
+**Returns:** The screen space rectangle to render to.
 
 ### enableVirtualResolution()
 
@@ -98,6 +121,26 @@ Enables following a target with optional inertia smoothing.
 - `target`: The target's [Transform](Transform.md) to follow.
 - `inertia`: The smoothing inertia for movement.
 
+### bindWindowGeometry()
+
+```c++
+void bindWindowGeometry(SDL_Window* window);
+```
+
+Binds the [GeometryProxy](GeometryProxy.md) to an existing SDL window and updates geometry.
+
+**Parameters:**
+- `window`: The window to capture its geometry.
+
+### getWindowGeometry()
+
+```c++
+const GeometryProxy& getWindowGeometry() const;
+```
+
+**Returns:** The proxy that captures the current window geometry.
+
+
 ### onUpdate()
 
 ```c++
@@ -123,4 +166,5 @@ from it and which base classes it derives from.
 ### See Also
 [Observable\<T\>](Observable.md) <br>
 [Transform](Transform.md) <br>
+[GeometryProxy](GeometryProxy.md) <br>
 [Vector2](Vector2.md)

@@ -46,7 +46,7 @@ namespace DreamEngine {
         public: bool switchCurrentState(State* state);
 
         /// Get the identifier of the current active state.
-        /// @return The identifier define by the current active state.
+        /// @return The identifier defined by the current active state.
         ///
         public: Identifier getCurrentStateID() const;
 

@@ -62,6 +62,14 @@ Vector2 normalize() const;
 Compute a normalized version of this vector.  
 **Returns**: A new vector with the same direction but magnitude of 1.
 
+### isZero()
+
+```c++
+bool isZero() const;
+```
+
+**Returns:** `true` if the vector is zero, `false` otherwise.
+
 ---
 
 ## Operators

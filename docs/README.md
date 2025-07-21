@@ -15,9 +15,9 @@ Updating, available sooner...
 ---
 
 ## Core API Reference
-This section provides a complete index of all core 
-classes and interfaces available in Dream Engine. 
-These components form the foundation of the engine, 
+This section provides a complete index of all 
+classes, data types, and interfaces available in the Dream Engine
+Core Library. These components form the foundation of the engine, 
 offering essential functionality for game development.
 
 ### Interfaces
@@ -39,6 +39,7 @@ offering essential functionality for game development.
 - [Application](Application.md)
 - [ResourceManager](ResourceManager.md)
 - [SceneManager](SceneManager.md)
+- [CollisionManager](CollisionManager.md)
 - [FiniteStateMachine](FiniteStateMachine.md)
 - [Camera](Camera.md)
 - [Animation](Animation.md)
@@ -51,6 +52,7 @@ offering essential functionality for game development.
 - [WindowConfiguration](WindowConfiguration.md)
 - [GeometryProxy](GeometryProxy.md)
 - [Transform](Transform.md)
+- [CollisionBox](CollisionBox.md)
 - [Mathematics\<T\>](Mathematics.md)
 - [FontRepresentable](FontRepresentable.md)
 - [VideoRepresentable](VideoRepresentable.md)

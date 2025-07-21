@@ -9,9 +9,7 @@
 #include "renderable.h"
 #include "updatable.h"
 #include "timer.h"
-#include "vector2.h"
 #include "texture.h"
-#include "identifiable.h"
 #include "transform.h"
 
 #include <functional>
@@ -40,7 +38,7 @@ namespace DreamEngine {
         public: bool hasFinished = false;
 
         /// The offset for flipping when the texture content is not centered.
-        private: float flipOffset = 0.0f;
+        private: float flipOffset = NONE;
 
         /// The internal timer that drives frame updates.
         private: Timer timer = Timer();
@@ -62,7 +60,7 @@ namespace DreamEngine {
         /// @param frameRate The number of frames to play per second.
         /// @param flipOffset The offset for flipping when the texture content is not centered.
         ///
-        public: Animation(SDL_Texture* textureSheet, float textureWidth, float textureHeight, int frameRate, float flipOffset = 0.0f);
+        public: Animation(SDL_Texture* textureSheet, float textureWidth, float textureHeight, int frameRate, float flipOffset = NONE);
 
         /// Default virtual destructor for proper cleanup.
         public: ~Animation() override = default;
