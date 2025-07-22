@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/10.
 //
 
-#include "vector2.h"
+#include "../core/include/vector2.h"
 
 namespace DreamEngine {
     Vector2::Vector2(const float x, const float y) : x(x), y(y) { omitted }

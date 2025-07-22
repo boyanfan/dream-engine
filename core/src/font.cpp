@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/7.
 //
 
-#include "font.h"
+#include "../core/include/font.h"
 
 namespace DreamEngine {
     FontRepresentable::FontRepresentable(std::string filepath) : filepath(std::move(filepath)) { omitted }

@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/20.
 //
 
-#include "geometry.h"
+#include "../core/include/geometry.h"
 
 namespace DreamEngine {
     GeometryProxy::GeometryProxy(SDL_Window* window) {

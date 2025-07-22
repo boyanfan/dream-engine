@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/11.
 //
 
-#include "application.h"
+#include "../core/include/application.h"
 
 namespace DreamEngine {
     Application::Application(const WindowConfiguration& configuration) {

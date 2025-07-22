@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/25.
 //
 
-#include "scene.h"
+#include "../core/include/scene.h"
 
 namespace DreamEngine {
     Scene* SceneManager::getCurrentScene() const {

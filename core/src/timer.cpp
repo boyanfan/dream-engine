@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/17.
 //
 
-#include "timer.h"
+#include "../core/include/timer.h"
 
 namespace DreamEngine {
     void Timer::restart() { elapsedTime = 0; hasTriggered = false; }

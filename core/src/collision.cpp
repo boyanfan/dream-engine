@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/7/11.
 //
 
-#include "collision.h"
+#include "../core/include/collision.h"
 
 namespace DreamEngine {
     CollisionBox::CollisionBox(const Vector2& offset) : transform(Transform()), offset(offset) { omitted }

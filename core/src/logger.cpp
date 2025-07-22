@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/14.
 //
 
-#include "logger.h"
+#include "../core/include/logger.h"
 
 namespace DreamEngine {
     void Logger::log(const LogScope logScope, const std::string &message) const {

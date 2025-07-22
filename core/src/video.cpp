@@ -1,7 +1,7 @@
 // video.cpp
 // Created by fanboyan on 2025/6/18.
 
-#include "video.h"
+#include "../core/include/video.h"
 
 namespace DreamEngine {
     VideoDecoder::VideoDecoder(const std::string& filepath, const int windowWidth, const int windowHeight) :

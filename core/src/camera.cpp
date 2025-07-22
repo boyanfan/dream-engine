@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/20.
 //
 
-#include "camera.h"
+#include "../core/include/camera.h"
 
 namespace DreamEngine {
     Camera::Camera(SDL_Renderer* renderer) : renderer(renderer) { omitted }

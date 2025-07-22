@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/30.
 //
 
-#include "animation.h"
+#include "../core/include/animation.h"
 
 namespace DreamEngine {
     Animation::Animation(SDL_Texture *textureSheet, const float textureWidth, const float textureHeight, const int frameRate, const float flipOffset)
