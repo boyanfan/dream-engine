@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/7/11.
 //
 
-#include "../core/include/collision.h"
+#include "collision.h"
 
 namespace DreamEngine {
     CollisionBox::CollisionBox(const Vector2& offset) : transform(Transform()), offset(offset) { omitted }
@@ -57,11 +57,8 @@ namespace DreamEngine {
             };
             const SDL_FRect screenSpace = camera.convertCoordinateFromWorldToScreen(&destination, NO_PARALLEX);
 
-            // No transparent if the box is enabled
-            const Uint8 alpha = collisionBox->isEnabled ? FULL_COLOR_SPACE : QUARTER_COLOR_SPACE;
-
             // Set the color of the rendering box
-            SDL_SetRenderDrawColor(renderer, FULL_COLOR_SPACE, NONE, NONE, alpha);
+            SDL_SetRenderDrawColor(renderer, COLOR_TO_ARGS(Color::Black));
             SDL_RenderRect(renderer, &screenSpace);
         }
     }

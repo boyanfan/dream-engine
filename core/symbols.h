@@ -64,8 +64,8 @@
 #define FIRST_FREE_CHANNEL (-1)
 #define ONE_SECOND 1.0f
 #define MILLISECONDS_PER_SECOND 1000
-#define FULL_COLOR_SPACE 256
-#define QUARTER_COLOR_SPACE 64
+#define SOLID_COLOR 255
+#define HEX_REPRESENTATION_PREFIX '#'
 #define DREAM_ENGINE_OPENING_RESOURCES "resources"
 #define DREAM_ENGINE_OPENING_LOGO "engine-logo-video"
 #define DREAM_ENGINE_OPENING_SOUND "engine-logo-audio"
@@ -90,5 +90,8 @@
 #else
 #define COLLISION_MANAGER_ON_RENDER(camera) ((void)0)
 #endif
+
+// Dream Engine Color Utilities
+#define COLOR_TO_ARGS(color) (color).red, (color).green, (color).blue, (color).alpha
 
 #endif //DREAM_ENGINE_SYMBOLS_H

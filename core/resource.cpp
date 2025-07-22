@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/2.
 //
 
-#include "../core/include/resource.h"
+#include "resource.h"
 
 namespace DreamEngine {
     ResourceManager::ResourceManager() {

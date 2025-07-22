@@ -8,6 +8,7 @@
 #include "transform.h"
 #include "singleton.h"
 #include "renderable.h"
+#include "../ui/color.h"
 
 #include <SDL3/SDL.h>
 #include <vector>

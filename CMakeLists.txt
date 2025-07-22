@@ -5,25 +5,27 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(${PROJECT_NAME} STATIC
-    core/src/application.cpp
-    core/src/resource.cpp
-    core/src/font.cpp
-    core/src/vector2.cpp
-    core/src/logger.cpp
-    core/src/timer.cpp
-    core/src/video.cpp
-    core/src/geometry.cpp
-    core/src/camera.cpp
-    core/src/texture.cpp
-    core/src/scene.cpp
-    core/src/logo.cpp
-    core/src/animation.cpp
-    core/src/state.cpp
-    core/src/transform.cpp
-    core/src/collision.cpp
-)
+    # Core Library
+    core/application.cpp
+    core/resource.cpp
+    core/font.cpp
+    core/vector2.cpp
+    core/logger.cpp
+    core/timer.cpp
+    core/video.cpp
+    core/geometry.cpp
+    core/camera.cpp
+    core/texture.cpp
+    core/scene.cpp
+    core/logo.cpp
+    core/animation.cpp
+    core/state.cpp
+    core/transform.cpp
+    core/collision.cpp
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/core/include>)
+    # UI Library
+    ui/color.cpp
+)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/api>

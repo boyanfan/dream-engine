@@ -2,38 +2,38 @@
 // Created by fanboyan on 2025/7/21.
 //
 
-#ifndef DREAM_ENGINE_CORE_H
-#define DREAM_ENGINE_CORE_H
+#ifndef DREAM_ENGINE_CORE_API_H
+#define DREAM_ENGINE_CORE_API_H
 
 /// Dream Engine Symbols
-#include "../core/include/symbols.h"
+#include "../core/symbols.h"
 
-/// Dream Engine Components
-#include "../core/include/application.h"
-#include "../core/include/animation.h"
-#include "../core/include/camera.h"
-#include "../core/include/collision.h"
-#include "../core/include/font.h"
-#include "../core/include/geometry.h"
-#include "../core/include/logger.h"
-#include "../core/include/logo.h"
-#include "../core/include/mathematics.h"
-#include "../core/include/object.h"
-#include "../core/include/resource.h"
-#include "../core/include/scene.h"
-#include "../core/include/texture.h"
-#include "../core/include/timer.h"
-#include "../core/include/transform.h"
-#include "../core/include/vector2.h"
-#include "../core/include/video.h"
+/// Dream Engine Core Components
+#include "../core/application.h"
+#include "../core/animation.h"
+#include "../core/camera.h"
+#include "../core/collision.h"
+#include "../core/font.h"
+#include "../core/geometry.h"
+#include "../core/logger.h"
+#include "../core/logo.h"
+#include "../core/mathematics.h"
+#include "../core/object.h"
+#include "../core/resource.h"
+#include "../core/scene.h"
+#include "../core/texture.h"
+#include "../core/timer.h"
+#include "../core/transform.h"
+#include "../core/vector2.h"
+#include "../core/video.h"
 
-/// Dream Engine Interfaces
-#include "../core/include/copyable.h"
-#include "../core/include/identifiable.h"
-#include "../core/include/observable.h"
-#include "../core/include/renderable.h"
-#include "../core/include/updatable.h"
-#include "../core/include/singleton.h"
-#include "../core/include/state.h"
+/// Dream Engine Core Interfaces
+#include "../core/copyable.h"
+#include "../core/identifiable.h"
+#include "../core/observable.h"
+#include "../core/renderable.h"
+#include "../core/updatable.h"
+#include "../core/singleton.h"
+#include "../core/state.h"
 
-#endif //DREAM_ENGINE_CORE_H
+#endif //DREAM_ENGINE_CORE_API_H

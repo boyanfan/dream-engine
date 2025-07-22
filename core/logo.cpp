@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/25.
 //
 
-#include "../core/include/logo.h"
+#include "logo.h"
 
 namespace DreamEngine {
     OpeningPresentation::OpeningPresentation(const Camera* camera, const GeometryProxy& geometry) {

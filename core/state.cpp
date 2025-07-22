@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/7/2.
 //
 
-#include "../core/include/state.h"
+#include "state.h"
 
 namespace DreamEngine {
     bool FiniteStateMachine::switchCurrentState(State* state) {

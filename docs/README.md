@@ -19,6 +19,8 @@ This section provides a complete index of all
 classes, data types, and interfaces available in the Dream Engine
 Core Library. These components form the foundation of the engine, 
 offering essential functionality for game development.
+All the components listed below are included 
+in the `engine/core.h` header file.
 
 ### Interfaces
 
@@ -58,3 +60,16 @@ offering essential functionality for game development.
 - [VideoRepresentable](VideoRepresentable.md)
 - [TextureRepresentable](TextureRepresentable.md)
 - [Vector2](Vector2.md)
+
+---
+
+## UI API Reference
+This section provides a complete index of all
+classes, data types, and interfaces available in the Dream Engine
+UI Library. Whether you're implementing simple buttons or
+complex view hierarchies, this reference serves as your
+go-to resource. All the components listed below are included
+in the `engine/ui.h` header file.
+
+### Data Types
+- [Color](Color.md)

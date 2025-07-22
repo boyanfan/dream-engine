@@ -2,7 +2,7 @@
 // Created by fanboyan on 2025/6/23.
 //
 
-#include "../core/include/texture.h"
+#include "texture.h"
 
 namespace DreamEngine {
     TextureRepresentable::TextureRepresentable(SDL_Texture* texture, const SDL_FRect source) : texture(texture), source(source) { omitted }
