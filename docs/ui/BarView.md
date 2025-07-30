@@ -4,8 +4,14 @@ A UI component that displays a progress bar with optional
 trailing animation and title support.
 
 ```c++
-class BarView : public View;
+class BarView : public View, public Observer<float> ;
 ```
+
+It displays the current progress of an 
+`Observable<float>` object, 
+see [Observable\<T\>](../core/Observable.md) documentation,
+and be registered as an [Observer](../core/Observer.md) of the data source.
+The data source must call `notify()` whenever it changes.
 
 **Fields:**
 - `float maxProgress`: The maximum progress value this bar can represent.
@@ -76,10 +82,12 @@ from it and which base classes it derives from.
 ### Confirms To
 [View](View.md) <br>
 [Updatable](../core/Updatable.md) <br>
+[Observer\<T\>](../core/Observer.md) <br>
 [Renderable](../core/Renderable.md)
 
 ### See Also
 [Color](Color.md) <br>
 [Alignment](Alignment.md) <br>
 [EdgeInsets](EdgeInsets.md) <br>
+[Observable\<T\>](../core/Observable.md) <br>
 [Camera](../core/Camera.md)

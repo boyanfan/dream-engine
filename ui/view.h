@@ -14,7 +14,7 @@ namespace DreamEngine {
     ///
     interface View : public Updatable, public Renderable {
         /// The bounding rectangle of the view in floating-point coordinates.
-        public: SDL_FRect frame = {NONE, NONE, NONE, NONE};
+        public: SDL_FRect frame = { NONE, NONE, NONE, NONE };
 
         /// Determines whether the view should be rendered.
         public: bool isVisible = true;

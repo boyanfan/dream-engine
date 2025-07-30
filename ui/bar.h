@@ -12,7 +12,9 @@
 
 namespace DreamEngine {
     /// A UI component that displays a progress bar with optional trailing animation and title support.
-    class BarView final : public View {
+    /// It automatically updates its progress when bound to an Observable<float> object.
+    ///
+    class BarView final : public View, public Observer<float> {
         /// Maximum value for the progress bar.
         public: float maxProgress = NONE;
 
@@ -87,6 +89,11 @@ namespace DreamEngine {
         /// @param camera Camera reference for coordinate transformation.
         ///
         public: void onRender(const Camera& camera) const override;
+
+        /// Called when the observed value changes and update the current progress representation.
+        /// @param newValue The new float value from the observable source.
+        ///
+        public: void onNotified(const float& newValue) override;
     };
 }
 

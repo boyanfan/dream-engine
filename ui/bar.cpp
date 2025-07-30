@@ -87,4 +87,6 @@ namespace DreamEngine {
             SDL_DestroySurface(surface);
         }
     }
+
+    void BarView::onNotified(const float &newValue) { currentProgress = newValue; }
 }
