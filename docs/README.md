@@ -24,42 +24,42 @@ in the `engine/core.h` header file.
 
 ### Interfaces
 
-- [Copyable](Copyable.md)
-- [Identifiable\<ID\>](Identifiable.md)
-- [Renderable](Renderable.md)
-- [Updatable](Updatable.md)
-- [Interactable](Interactable.md)
-- [Singleton\<T\>](Singleton.md)
-- [Scene](Scene.md)
-- [Observable\<T\>](Observable.md)
-- [Observer\<T\>](Observer.md)
-- [State](State.md)
-- [GameObject](Interactable.md)
+- [Copyable](core/Copyable.md)
+- [Identifiable\<ID\>](core/Identifiable.md)
+- [Renderable](core/Renderable.md)
+- [Updatable](core/Updatable.md)
+- [Interactable](core/Interactable.md)
+- [Singleton\<T\>](core/Singleton.md)
+- [Scene](core/Scene.md)
+- [Observable\<T\>](core/Observable.md)
+- [Observer\<T\>](core/Observer.md)
+- [State](core/State.md)
+- [GameObject](core/Interactable.md)
 
 ### Classes
 
-- [Application](Application.md)
-- [ResourceManager](ResourceManager.md)
-- [SceneManager](SceneManager.md)
-- [CollisionManager](CollisionManager.md)
-- [FiniteStateMachine](FiniteStateMachine.md)
-- [Camera](Camera.md)
-- [Animation](Animation.md)
-- [Logger](Logger.md)
-- [Timer](Timer.md)
-- [TextureSequence](TextureSequence.md)
-- [VideoDecoder](VideoDecoder.md)
+- [Application](core/Application.md)
+- [ResourceManager](core/ResourceManager.md)
+- [SceneManager](core/SceneManager.md)
+- [CollisionManager](core/CollisionManager.md)
+- [FiniteStateMachine](core/FiniteStateMachine.md)
+- [Camera](core/Camera.md)
+- [Animation](core/Animation.md)
+- [Logger](core/Logger.md)
+- [Timer](core/Timer.md)
+- [TextureSequence](core/TextureSequence.md)
+- [VideoDecoder](core/VideoDecoder.md)
 
 ### Data Types
-- [WindowConfiguration](WindowConfiguration.md)
-- [GeometryProxy](GeometryProxy.md)
-- [Transform](Transform.md)
-- [CollisionBox](CollisionBox.md)
-- [Mathematics\<T\>](Mathematics.md)
-- [FontRepresentable](FontRepresentable.md)
-- [VideoRepresentable](VideoRepresentable.md)
-- [TextureRepresentable](TextureRepresentable.md)
-- [Vector2](Vector2.md)
+- [WindowConfiguration](core/WindowConfiguration.md)
+- [GeometryProxy](core/GeometryProxy.md)
+- [Transform](core/Transform.md)
+- [CollisionBox](core/CollisionBox.md)
+- [Mathematics\<T\>](core/Mathematics.md)
+- [FontRepresentable](core/FontRepresentable.md)
+- [VideoRepresentable](core/VideoRepresentable.md)
+- [TextureRepresentable](core/TextureRepresentable.md)
+- [Vector2](core/Vector2.md)
 
 ---
 
@@ -71,5 +71,13 @@ complex view hierarchies, this reference serves as your
 go-to resource. All the components listed below are included
 in the `engine/ui.h` header file.
 
+### Interfaces
+- [View](ui/View.md)
+
+### Classes
+- [BarView](ui/BarView.md)
+
 ### Data Types
-- [Color](Color.md)
+- [Color](ui/Color.md)
+- [Alignment](ui/Alignment.md)
+- [EdgeInsets](ui/EdgeInsets.md)

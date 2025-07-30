@@ -42,13 +42,13 @@ each cached font to prevent memory leaks.
 ### getSizedFont()
 
 ```c++
-TTF_Font* getSizedFont(int fontSize);
+TTF_Font* getSizedFont(float fontSize);
 ```
 
 Returns a pointer to a font of the specified size.
 
 **Parameters:**
-- `fontSize`: The desired integer font size in points.
+- `fontSize`: The desired float font size in points.
 
 **Returns:** 
 A `TTF_Font*` for rendering text at the specified size. 

@@ -24,9 +24,6 @@ namespace DreamEngine {
         /// SDL renderer used for drawing textures.
         private: SDL_Renderer* renderer;
 
-        /// The window geometry for building elements on the screen.
-        private: GeometryProxy geometry = GeometryProxy();
-
         /// The current transform of the camera.
         public: Transform transform = Transform();
 
@@ -95,16 +92,6 @@ namespace DreamEngine {
 
         /// Disables the target following behavior.
         public: void disableTargetFollowing();
-
-        /// Binds the proxy to an existing SDL window and updates geometry.
-        /// @param window The window to capture its geometry.
-        ///
-        public: void bindWindowGeometry(SDL_Window* window);
-
-        /// Gets the proxy that captures the current window geometry.
-        /// @return The proxy that captures the current window geometry.
-        ///
-        public: const GeometryProxy& getWindowGeometry() const;
 
         /// Called when the followed transform changes.
         /// @param newValue The new value of the observed transform.

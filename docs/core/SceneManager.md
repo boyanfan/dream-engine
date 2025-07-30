@@ -44,6 +44,14 @@ Schedules a scene to become the next active scene.
 **Parameters:**
 - `nextScene`: Pointer to the new [Scene](Scene.md) to activate.
 
+### destroyCurrentScene()
+
+```c++
+void destroyCurrentScene();
+```
+
+Destroy the current scene.
+
 ---
 
 ## Reflection

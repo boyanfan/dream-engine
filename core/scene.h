@@ -65,6 +65,9 @@ namespace DreamEngine {
         ///
         public: void switchCurrentScene(Scene* nextScene);
 
+        /// Destroy the current scene.
+        public: void destroyCurrentScene();
+
         /// Performs the actual scene transition if a scene is queued. It exits the current scene if it is ready to
         /// transition, enters the next scene if there is no active scene or the previous one finished.
         ///

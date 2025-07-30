@@ -34,6 +34,7 @@ namespace DreamEngine {
         /// Predefined Dream Engine Colors
         static const Color White;
         static const Color Black;
+        static const Color Grey;
         static const Color Red;
         static const Color Green;
         static const Color Blue;

@@ -43,4 +43,5 @@ from it and which base classes it derives from.
 [Animation](Animation.md) <br>
 [State](State.md) <br>
 [FiniteStateMachine](FiniteStateMachine.md) <br>
+[View](../ui/View.md) <br>
 [Timer](Timer.md)

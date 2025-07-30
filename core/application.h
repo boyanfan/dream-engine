@@ -62,7 +62,7 @@ namespace DreamEngine {
         public: static inline std::string self = APPLICATION_TYPE;
 
         /// Pointer to the SDL window created by the application.
-        public: SDL_Window* window = nullptr;
+        private: SDL_Window* window = nullptr;
 
         /// Pointer to the SDL renderer used for rendering.
         public: SDL_Renderer* renderer = nullptr;

@@ -20,8 +20,8 @@ namespace DreamEngine {
         /// Path to the font file, with an extension of ".ttf".
         private: std::string filepath;
 
-        /// A pool that caches TTF_Font* objects for different font sizes, keyed by an integer font size.
-        private: std::unordered_map<int, TTF_Font*> fontSizePool;
+        /// A pool that caches TTF_Font* objects for different font sizes, keyed by a float font size.
+        private: std::unordered_map<float, TTF_Font*> fontSizePool;
 
         // Constructs a Font object with the given font file path.
         /// @param filepath Path to the font file, with an extension of ".ttf".
@@ -37,7 +37,7 @@ namespace DreamEngine {
         /// @param fontSize The desired font size in points.
         /// @return A pointer to the loaded TTF_Font, or nullptr if loading failed.
         ///
-        TTF_Font* getSizedFont(int fontSize);
+        TTF_Font* getSizedFont(float fontSize);
     };
 }
 

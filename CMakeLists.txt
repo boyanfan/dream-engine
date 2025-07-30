@@ -25,6 +25,7 @@ add_library(${PROJECT_NAME} STATIC
 
     # UI Library
     ui/color.cpp
+    ui/bar.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

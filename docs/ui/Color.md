@@ -45,13 +45,13 @@ Constructs a Color from a hexadecimal string representation.
 
 ## Macros
 
-To allow convenient usage of `Color` objects with APIs 
+To allow convenient usage of color objects with APIs 
 that require separate red, green, blue, and alpha parameters,
-the macro
+the macro:
 
 - `COLOR_TO_ARGS(color)`
 
-Expands a Color object into its individual RGBA components as arguments.
+Expands a `Color` object into its individual RGBA components as arguments.
 
 **Example:**
 

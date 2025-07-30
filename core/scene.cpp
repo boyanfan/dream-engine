@@ -36,6 +36,12 @@ namespace DreamEngine {
         }
     }
 
+    void SceneManager::destroyCurrentScene() {
+        if (currentScene) {
+            if (currentScene->isAllowingSceneTransition()) { delete currentScene; currentScene = nullptr; }
+        }
+    }
+
     bool Scene::isAllowingSceneTransition() const { return sceneWillTransition; }
 
     void Scene::unlockSceneTransition() { sceneWillTransition = true; }

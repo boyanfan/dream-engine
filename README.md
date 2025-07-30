@@ -56,7 +56,6 @@ configuration may include the following fields.
 ```cmake
 add_subdirectory(dream-engine)
 target_link_libraries(${PROJECT_NAME} PRIVATE dream_engine)
-target_include_directories(${PROJECT_NAME} PRIVATE dream-engine/core/include)
 ```
 
 ---

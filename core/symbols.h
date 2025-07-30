@@ -64,6 +64,7 @@
 #define FIRST_FREE_CHANNEL (-1)
 #define ONE_SECOND 1.0f
 #define MILLISECONDS_PER_SECOND 1000
+#define ONE_TENTH 0.1f
 #define SOLID_COLOR 255
 #define HEX_REPRESENTATION_PREFIX '#'
 #define DREAM_ENGINE_OPENING_RESOURCES "resources"
@@ -78,7 +79,6 @@
 #define DREAM_ENGINE_TTF_EXTENSION ".ttf"
 
 // DreamEngine::Camera Utility
-#define NO_SCALE 1.0f
 #define NO_PARALLEX 1.0f
 #define CAMERA_DEFAULT_INERTIA 1.5f
 
@@ -93,5 +93,14 @@
 
 // Dream Engine Color Utilities
 #define COLOR_TO_ARGS(color) (color).red, (color).green, (color).blue, (color).alpha
+
+// Dream Engine BarView Utilities
+#define DEFAULT_TRAILING_SPEED 0.10f
+#define DEFAULT_TRAILING_DELAY 0.70f
+#define DEFAULT_TITLE_PADDING 2.0f
+
+// Dream Engine TextView Utilities
+#define DEFAULT_TITLE_SIZE 18.0f
+#define NO_SCALE 1.0f
 
 #endif //DREAM_ENGINE_SYMBOLS_H

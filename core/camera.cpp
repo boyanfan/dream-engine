@@ -20,11 +20,9 @@ namespace DreamEngine {
         return screenSpace;
     }
 
-    void Camera::enableVirtualResolution(const Vector2& resolution) {
-        isVirtualResolution = true, virtualResolution = resolution;
-    }
+    void Camera::enableVirtualResolution(const Vector2& resolution) { isVirtualResolution = true, virtualResolution = resolution; }
 
-    void Camera::disableVirtualResolution() { isVirtualResolution = false; }
+    void Camera::disableVirtualResolution() { isVirtualResolution = false; virtualResolution = Vector2(); }
 
     void Camera::enableTargetFollowing(const Transform& target, const float inertia) {
         isTargetFollowingEnabled = true;
@@ -37,10 +35,6 @@ namespace DreamEngine {
         isTargetFollowingEnabled = false;
         targetTransform = Transform(), targetDifference = Transform();
     }
-
-    void Camera::bindWindowGeometry(SDL_Window* window) { geometry.bind(window); }
-
-    const GeometryProxy& Camera::getWindowGeometry() const { return geometry; }
 
     void Camera::onNotified(const Transform& newValue) { if (isTargetFollowingEnabled) targetTransform = newValue + targetDifference; }
 

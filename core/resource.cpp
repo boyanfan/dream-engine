@@ -95,7 +95,7 @@ namespace DreamEngine {
         ConstIterator iterator = texturePool.find(textureName);
 
         // Return texture or a nullptr if nothing is found
-        if (iterator != texturePool.end())  return iterator->second;
+        if (iterator != texturePool.end()) return iterator->second;
 
         LOG_ERROR(Logger::onFileLoad(self, textureName, LOG_FAILURE));
         return nullptr;

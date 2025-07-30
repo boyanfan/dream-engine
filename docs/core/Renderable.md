@@ -37,6 +37,7 @@ from it and which base classes it derives from.
 [GameObject](Interactable.md) <br>
 [Scene](Scene.md) <br>
 [Animation](Animation.md) <br>
+[View](../ui/View.md) <br>
 [VideoDecoder](VideoDecoder.md)
 
 ### See Also 

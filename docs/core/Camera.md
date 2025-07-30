@@ -121,26 +121,6 @@ Enables following a target with optional inertia smoothing.
 - `target`: The target's [Transform](Transform.md) to follow.
 - `inertia`: The smoothing inertia for movement.
 
-### bindWindowGeometry()
-
-```c++
-void bindWindowGeometry(SDL_Window* window);
-```
-
-Binds the [GeometryProxy](GeometryProxy.md) to an existing SDL window and updates geometry.
-
-**Parameters:**
-- `window`: The window to capture its geometry.
-
-### getWindowGeometry()
-
-```c++
-const GeometryProxy& getWindowGeometry() const;
-```
-
-**Returns:** The proxy that captures the current window geometry.
-
-
 ### onUpdate()
 
 ```c++

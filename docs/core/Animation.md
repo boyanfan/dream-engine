@@ -22,6 +22,8 @@ provide a way to be drawn onto the screen.
 
 ---
 
+## Methods
+
 Below is a list and explanation of all public methods
 provided by the [Animation](Animation.md) class.
 
