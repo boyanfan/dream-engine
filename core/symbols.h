@@ -95,8 +95,8 @@
 #define COLOR_TO_ARGS(color) (color).red, (color).green, (color).blue, (color).alpha
 
 // Dream Engine BarView Utilities
-#define DEFAULT_TRAILING_SPEED 0.10f
-#define DEFAULT_TRAILING_DELAY 0.70f
+#define DEFAULT_TRAILING_SPEED 0.06f
+#define DEFAULT_TRAILING_DELAY 0.80f
 #define DEFAULT_TITLE_PADDING 2.0f
 
 // Dream Engine TextView Utilities

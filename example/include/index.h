@@ -1,0 +1,115 @@
+//
+// Created by fanboyan on 2025/6/19.
+//
+
+#ifndef REVENANTS_INDEX_H
+#define REVENANTS_INDEX_H
+
+// Global Setup
+#define WINDOW_CONFIGURATION_FILE "../config/window.config"
+#define RESOURCES_PATH "../resources"
+#define DEFAULT_FONT "default-font"
+#define ANY_PLAYER_ID "id-player-any"
+
+#define GRAVITY 0
+#define WORLD_LEVEL 2
+
+#define HEALTH_BAR_FOREGROUND_COLOR "#a92e2c"
+#define HEALTH_BAR_BACKGROUND_COLOR "#292929"
+#define HEALTH_BAR_TRAILING_COLOR "#c5c5c5"
+#define BOSS_HEALTH_BAR_POSITION_X 195
+#define BOSS_HEALTH_BAR_POSITION_Y 10
+#define BOSS_HEALTH_BAR_WIDTH 185
+#define BOSS_HEALTH_BAR_HEIGHT 4
+#define BOSS_HEALTH_BAR_OUTLINE_WIDTH 0.7f
+#define BOSS_HEALTH_BAR_TITLE_SCALE_FACTOR 0.2f
+
+// Sword Master Character Properties
+#define SWORD_MASTER_HEALTH_POINTS 10.0f
+
+#define SWORD_MASTER_WALKING_VELOCITY 17.0f
+#define SWORD_MASTER_RUNNING_VELOCITY 70.0f
+#define SWORD_MASTER_ROLLING_VELOCITY 110.0f
+
+#define SWORD_MASTER_LOOK_AHEAD_DISTANCE 50.0f
+#define SWORD_MASTER_ROLLING_COOL_DOWN 0.6f
+#define SWORD_MASTER_CAN_ATTACK_COMBO_WINDOW 0.1f
+
+#define SWORD_MASTER_WIDTH 12
+#define SWORD_MASTER_HEIGHT 24
+#define SWORD_MASTER_TEXTURE_HEIGHT 34
+#define SWORD_MASTER_TEXTURE_WIDTH 90
+
+#define SWORD_MASTER_HURT_BOX_OFFSET_X (-24)
+#define SWORD_MASTER_HURT_BOX_OFFSET_Y (-24)
+
+#define SWORD_MASTER_HIT_BOX_WIDTH 45
+#define SWORD_MASTER_HIT_BOX_RIGHT_OFFSET_X (-12)
+#define SWORD_MASTER_HIT_BOX_LEFT_OFFSET_X (-68)
+#define SWORD_MASTER_HIT_BOX_OFFSET_Y (-24)
+
+#define SWORD_MASTER_ANIMATION_BASIC_FRAME_RATE 6
+#define SWORD_MASTER_ANIMATION_FAST_FRAME_RATE 10
+
+#define SWORD_MASTER_IDLE_ANIMATION_ID "id-animation-sword-master-idle"
+#define SWORD_MASTER_WALK_ANIMATION_ID "id-animation-sword-master-walk"
+#define SWORD_MASTER_RUN_ANIMATION_ID "id-animation-sword-master-run"
+#define SWORD_MASTER_ROLL_ANIMATION_ID "id-animation-sword-master-roll"
+#define SWORD_MASTER_FIRST_STRIKE_ATTACK_ID "id-animation-sword-master-first-strike-attack"
+#define SWORD_MASTER_SECOND_STRIKE_ATTACK_ID "id-animation-sword-master-second-strike-attack"
+#define SWORD_MASTER_THIRD_STRIKE_ATTACK_ID "id-animation-sword-master-third-strike-attack"
+#define SWORD_MASTER_FORTH_STRIKE_ATTACK_ID "id-animation-sword-master-forth-strike-attack"
+
+#define SWORD_MASTER_FIRST_STRIKE_ATTACK_DAMAGE 2
+#define SWORD_MASTER_SECOND_STRIKE_ATTACK_DAMAGE 4
+#define SWORD_MASTER_THIRD_STRIKE_ATTACK_DAMAGE 12
+#define SWORD_MASTER_FORTH_STRIKE_ATTACK_DAMAGE 4
+
+#define SWORD_MASTER_ATTACK_COMBO_INDEX_MAX 4
+#define SWORD_MASTER_ANIMATION_OFFSET 10
+
+#define SWORD_MASTER_IDLE_STATE_ID "id-state-sword-master-idle"
+#define SWORD_MASTER_WALKING_STATE_ID "id-state-sword-master-walking"
+#define SWORD_MASTER_RUNNING_STATE_ID "id-state-sword-master-running"
+#define SWORD_MASTER_ROLLING_STATE_ID "id-state-sword-master-rolling"
+#define SWORD_MASTER_ATTACKING_STATE_ID "id-state-sword-master-attacking"
+
+// Ember Lord Boss Properties
+#define EMBER_LORD_HEALTH_POINTS 60
+
+#define EMBER_LORD_WIDTH 24
+#define EMBER_LORD_HEIGHT 32
+#define EMBER_LORD_TEXTURE_WIDTH 145
+#define EMBER_LORD_TEXTURE_HEIGHT 45
+
+#define EMBER_LORD_HURT_BOX_OFFSET_X (-50)
+#define EMBER_LORD_HURT_BOX_OFFSET_Y (-32)
+
+#define EMBER_LORD_ANIMATION_BASIC_FRAME_RATE 12
+#define EMBER_LORD_ANIMATION_SLOW_FRAME_RATE 8
+#define EMBER_LORD_ANIMATION_OFFSET (-5)
+
+#define EMBER_LORD_IDLE_ANIMATION_ID "id-animation-ember-lord-idle"
+#define EMBER_LORD_DEATH_ANIMATION_ID "id-animation-ember-lord-death"
+
+// Ember Lord Boss Fight Scene
+#define EMBER_LORD_TITLE "The Ember Lord"
+#define EMBER_SCENE_IDENTIFIER "id-scene-ember"
+#define EMBER_SCENE_BACKGROUND "ember-scene-background"
+#define EMBER_SCENE_BACKGROUND_HEIGHT 128
+#define EMBER_SCENE_BACKGROUND_WIDTH 576
+#define EMBER_SCENE_FLOOR_BOUNDARY 31
+#define EMBER_SCENE_PLAYABLE_LEFT_BOUNDARY 30
+#define EMBER_SCENE_PLAYABLE_RIGHT_BOUNDARY 580
+#define EMBER_SCENE_CAMERA_LEFT_BOUNDARY (-170)
+#define EMBER_SCENE_CAMERA_RIGHT_BOUNDARY 170
+#define EMBER_SCENE_INITIAL_BOSS_PLAYABLE_DISTANCE 150
+#define EMBER_SCENE_FOREGROUND_SPEED (-0.5f)
+
+// Collision Layers
+#define COLLISION_LAYER_ENEMY_HURT "id-layer-enemy-hurt"
+
+// Log
+#define REVENANTS_LOG(message) DreamEngine::Logger::getInstance()->log(DreamEngine::LogScope::Warning, message)
+
+#endif //REVENANTS_INDEX_H

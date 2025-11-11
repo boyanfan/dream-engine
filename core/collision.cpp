@@ -39,7 +39,10 @@ namespace DreamEngine {
                     const bool isVerticalCollision = std::abs(sourceCentre.y - destinationCentre.y) <= sourceHalf.y + destinationHalf.y;
 
                     // Collision only if both horizontal and vertical directions are collided
-                    if (isHorizontalCollision && isVerticalCollision && destinationCollisionBox->onCollision) destinationCollisionBox->onCollision();
+                    if (isHorizontalCollision && isVerticalCollision && destinationCollisionBox->onCollision) {
+                        sourceCollisionBox->onCollision();
+                        destinationCollisionBox->onCollision();
+                    }
             }
         }
     }
