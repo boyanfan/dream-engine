@@ -8,6 +8,7 @@
 // Global Setup
 #define WINDOW_CONFIGURATION_FILE "../config/window.config"
 #define RESOURCES_PATH "../resources"
+#define MANIFEST_PATH "../resources/.dreamengine.manifest"
 #define DEFAULT_FONT "default-font"
 #define ANY_PLAYER_ID "id-player-any"
 

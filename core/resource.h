@@ -18,6 +18,10 @@
 #include <string>
 #include <filesystem>
 #include <functional>
+#include <openssl/evp.h>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
 
 namespace DreamEngine {
     /// ResourceManager is a singleton class responsible for loading image and audio files from a given directory
@@ -95,6 +99,35 @@ namespace DreamEngine {
         /// @return VideoRepresentable* pointer if found, nullptr otherwise.
         ///
         public: VideoRepresentable* getVideo(const std::string& videoName) const;
+
+        /// Generates an integrity manifest for all regular files under a resource directory.
+        /// This function recursively scans the specified resource directory, computes a cryptographic SHA-256 hash
+        /// and file size for each asset, and writes the results to a manifest file. The manifest can later be used
+        /// to verify asset integrity at runtime and detect corruption, partial writes, or unauthorized modification.
+        ///
+        /// @param directory Root directory containing resource files (e.g., "../resources").
+        /// @param path Output path of the generated manifest file (e.g., "../resources/.dreamengine.manifest").
+        /// @return true if the manifest was successfully generated; false otherwise.
+        ///
+        public: static bool generateResourceManifest(const std::filesystem::path& directory, const std::filesystem::path& path);
+
+        /// Converts an absolute filesystem path to a normalized relative resource key.
+        ///
+        /// @param absolutePath Absolute path of the resource file.
+        /// @param rootDirectory Root directory against which the relative path is computed.
+        /// @return Normalized relative path string suitable for use as a resource key.
+        ///
+        private: static std::string toRelativeKey(const std::filesystem::path& absolutePath,  const std::filesystem::path& rootDirectory);
+
+        /// Computes the SHA-256 hash of a file's contents.
+        /// This function reads the specified file in binary mode and computes its SHA-256 cryptographic hash using a
+        /// streaming interface, allowing it to handle large files efficiently. The resulting hash is returned as a
+        /// lowercase hexadecimal string.
+        ///
+        /// @param filePath Path to the file whose hash is to be computed.
+        /// @return Lowercase hexadecimal SHA-256 digest of the file, or an empty string if the file cannot be read.
+        ///
+        private: static std::string computeSHA256(const std::filesystem::path& filePath);
     };
 }
 

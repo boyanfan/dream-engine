@@ -34,6 +34,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 find_package(PkgConfig REQUIRED)
+
 pkg_check_modules(SDL3 REQUIRED IMPORTED_TARGET sdl3)
 pkg_check_modules(SDL3_IMAGE REQUIRED IMPORTED_TARGET sdl3-image)
 pkg_check_modules(SDL3_MIXER REQUIRED IMPORTED_TARGET sdl3-mixer)
@@ -45,6 +46,8 @@ pkg_check_modules(AVUTIL REQUIRED IMPORTED_TARGET libavutil)
 pkg_check_modules(SWSCALE REQUIRED IMPORTED_TARGET libswscale)
 pkg_check_modules(SWRESAMPLE REQUIRED IMPORTED_TARGET libswresample)
 
+pkg_check_modules(OPENSSL REQUIRED IMPORTED_TARGET openssl)
+
 target_link_libraries(${PROJECT_NAME} PUBLIC
     PkgConfig::SDL3
     PkgConfig::SDL3_IMAGE
@@ -55,6 +58,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     PkgConfig::AVUTIL
     PkgConfig::SWSCALE
     PkgConfig::SWRESAMPLE
+    PkgConfig::OPENSSL
 )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

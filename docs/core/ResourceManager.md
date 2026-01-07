@@ -99,6 +99,24 @@ Retrieve a loaded video from the video pool.
 **Returns:**
 Pointer to [VideoRepresentable](VideoRepresentable.md) if found, or nullptr.
 
+### generateResourceManifest()
+
+```c++
+static bool generateResourceManifest(const std::filesystem::path& directory, const std::filesystem::path& path);
+```
+
+Generates an integrity manifest for all regular files under a resource directory.
+This function recursively scans the specified resource directory, computes a cryptographic SHA-256 hash
+and file size for each asset and writes the results to a manifest file. The manifest can later be used
+to verify asset integrity at runtime and detect corruption, partial writes or unauthorized modification.
+
+**Parameters:**
+- `directory`: Root directory containing resource files.
+- `path`: Output path of the generated manifest file.
+
+**Returns:**
+True if the manifest was successfully generated; false otherwise.
+
 ---
 
 ## Relationships

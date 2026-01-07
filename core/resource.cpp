@@ -139,4 +139,84 @@ namespace DreamEngine {
         LOG_ERROR(Logger::onFileLoad(self, videoName, LOG_FAILURE));
         return nullptr;
     }
+
+    bool ResourceManager::generateResourceManifest(const std::filesystem::path &directory, const std::filesystem::path &path) {
+        std::error_code errorCode;
+        if (!std::filesystem::exists(directory, errorCode) || errorCode) return false;
+
+        std::ofstream stream(path, std::ios::trunc);
+        if (!stream.is_open()) return false;
+
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(directory, errorCode)) {
+            if (errorCode) return false;
+            if (!entry.is_regular_file(errorCode) || errorCode) continue;
+
+            const std::filesystem::path& absolutePath = entry.path();
+            if (std::filesystem::equivalent(absolutePath, path, errorCode) && !errorCode) continue;
+
+            const uintmax_t sizeBytes = entry.file_size(errorCode);
+            if (errorCode) return false;
+
+            const std::string relativeKey = toRelativeKey(absolutePath, directory);
+            const std::string hashing = computeSHA256(absolutePath);
+            if (hashing.empty()) return false;
+
+            stream << hashing << " " << sizeBytes << " " << relativeKey << "\n";
+        }
+
+        return true;
+    }
+
+    std::string ResourceManager::toRelativeKey(const std::filesystem::path &absolutePath, const std::filesystem::path &rootDirectory) {
+        return std::filesystem::relative(absolutePath, rootDirectory).generic_string();
+    }
+
+    std::string ResourceManager::computeSHA256(const std::filesystem::path &filePath) {
+        std::ifstream in(filePath, std::ios::binary);
+        if (!in.is_open()) return std::string();
+
+        EVP_MD_CTX* context = EVP_MD_CTX_new();
+        if (!context) return std::string();
+
+        const EVP_MD* hasher = EVP_sha256();
+        if (!hasher) {
+            EVP_MD_CTX_free(context);
+            return std::string();
+        }
+
+        if (EVP_DigestInit_ex(context, hasher, nullptr) != 1) {
+            EVP_MD_CTX_free(context);
+            return std::string();
+        }
+
+        std::vector<unsigned char> buffer(1024 * 1024);
+
+        while (in.good()) {
+            in.read(reinterpret_cast<char*>(buffer.data()), static_cast<std::streamsize>(buffer.size()));
+            std::streamsize count = in.gcount();
+
+            if (count > 0) {
+                if (EVP_DigestUpdate(context, buffer.data(), static_cast<size_t>(count)) != 1) {
+                    EVP_MD_CTX_free(context);
+                    return std::string();
+                }
+            }
+        }
+
+        unsigned char digest[EVP_MAX_MD_SIZE];
+        unsigned int digestLength = 0;
+
+        if (EVP_DigestFinal_ex(context, digest, &digestLength) != 1) {
+            EVP_MD_CTX_free(context);
+            return std::string();
+        }
+
+        EVP_MD_CTX_free(context);
+
+        std::ostringstream stream;
+        stream << std::hex << std::setfill('0');
+        for (unsigned int i = 0; i < digestLength; ++i) stream << std::setw(2) << static_cast<int>(digest[i]);
+
+        return stream.str();
+    }
 }
