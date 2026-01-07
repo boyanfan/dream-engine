@@ -167,6 +167,49 @@ namespace DreamEngine {
         return true;
     }
 
+    bool ResourceManager::verifyResourceManifest(const std::filesystem::path &directory, const std::filesystem::path &path) {
+        std::unordered_map<std::string, std::pair<std::string, uintmax_t>> manifest;
+
+        std::ifstream stream(path);
+        if (!stream.is_open()) return false;
+
+        while (true) {
+            std::string hash;
+            uintmax_t size = 0;
+            if (!(stream >> hash >> size)) break;
+
+            std::string relativePath;
+            std::getline(stream, relativePath);
+
+            if (!relativePath.empty() && relativePath[0] == ' ') relativePath.erase(0, 1);
+            if (!hash.empty() && !relativePath.empty()) manifest.emplace(relativePath, std::pair{hash, size});
+        }
+
+        std::error_code errorCode;
+
+        for (const std::filesystem::directory_entry& entry : std::filesystem::recursive_directory_iterator(directory, errorCode)) {
+            if (errorCode) return false;
+            if (!entry.is_regular_file(errorCode) || errorCode) continue;
+
+            const std::filesystem::path& absolutePath = entry.path();
+            if (std::filesystem::equivalent(absolutePath, path, errorCode)) continue;
+
+            const std::string key = toRelativeKey(absolutePath, directory);
+
+            std::unordered_map<std::string, std::pair<std::string, uintmax_t>>::iterator iterator = manifest.find(key);
+
+            if (iterator == manifest.end()) return false;
+            const uintmax_t actualSize = entry.file_size(errorCode);
+
+            if (errorCode || actualSize != iterator->second.second) return false;
+
+            const std::string actualHash = computeSHA256(absolutePath);
+            if (actualHash.empty() || actualHash != iterator->second.first) return false;
+        }
+
+        return true;
+    }
+
     std::string ResourceManager::toRelativeKey(const std::filesystem::path &absolutePath, const std::filesystem::path &rootDirectory) {
         return std::filesystem::relative(absolutePath, rootDirectory).generic_string();
     }

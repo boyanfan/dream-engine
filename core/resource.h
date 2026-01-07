@@ -105,11 +105,22 @@ namespace DreamEngine {
         /// and file size for each asset, and writes the results to a manifest file. The manifest can later be used
         /// to verify asset integrity at runtime and detect corruption, partial writes, or unauthorized modification.
         ///
-        /// @param directory Root directory containing resource files (e.g., "../resources").
-        /// @param path Output path of the generated manifest file (e.g., "../resources/.dreamengine.manifest").
+        /// @param directory Root directory containing resource files.
+        /// @param path Output path of the generated manifest file.
         /// @return true if the manifest was successfully generated; false otherwise.
         ///
         public: static bool generateResourceManifest(const std::filesystem::path& directory, const std::filesystem::path& path);
+
+        /// Verifies the integrity of all resource files in a directory against a manifest file.
+        /// This function loads the specified resource manifest and validates every regular file under the given
+        /// directory by comparing its relative path, file size, and cryptographic hash against the manifest entries.
+        /// The manifest file itself is excluded from verification.
+        ///
+        /// @param directory Root directory containing resource files.
+        /// @param path Path to the resource manifest file.
+        /// @return true if all resources match the manifest; false if any file is missing, corrupted, or fails verification.
+        ///
+        public: static bool verifyResourceManifest(const std::filesystem::path& directory, const std::filesystem::path& path);
 
         /// Converts an absolute filesystem path to a normalized relative resource key.
         ///

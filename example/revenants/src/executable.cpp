@@ -9,7 +9,9 @@ namespace Revenants {
         // Developer tool only: generate the manifest file
         DreamEngine::ResourceManager::generateResourceManifest(RESOURCES_PATH, MANIFEST_PATH);
 
-        // Preload game resources
+        // Verify and preload game resources
+        DreamEngine::ResourceManager::verifyResourceManifest(RESOURCES_PATH, MANIFEST_PATH);
+
         DreamEngine::ResourceManager* resourceManager = DreamEngine::ResourceManager::getInstance();
         resourceManager->loadFromDirectory(renderer, RESOURCES_PATH);
 

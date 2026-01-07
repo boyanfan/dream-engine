@@ -117,6 +117,24 @@ to verify asset integrity at runtime and detect corruption, partial writes or un
 **Returns:**
 True if the manifest was successfully generated; false otherwise.
 
+### verifyResourceManifest()
+
+```c++
+static bool verifyResourceManifest(const std::filesystem::path& directory, const std::filesystem::path& path);
+```
+
+Verifies the integrity of all resource files in a directory against a manifest file.
+This function loads the specified resource manifest and validates every regular file under the given
+directory by comparing its relative path, file size and cryptographic hash against the manifest entries.
+The manifest file itself is excluded from verification.
+
+**Parameters:**
+- `directory`: Root directory containing resource files.
+- `path`: Output path of the generated manifest file.
+
+**Returns:**
+True if all resources match the manifest; false if any file is missing, corrupted or fails verification.
+
 ---
 
 ## Relationships
