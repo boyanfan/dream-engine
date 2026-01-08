@@ -135,6 +135,50 @@ The manifest file itself is excluded from verification.
 **Returns:**
 True if all resources match the manifest; false if any file is missing, corrupted or fails verification.
 
+### signResourceManifest()
+
+```c++
+static bool signResourceManifest(
+    const std::filesystem::path& manifestPath, const std::filesystem::path& signaturePath,
+    const std::array<unsigned char, 64>& secretKey
+);
+```
+
+Signs a resource manifest file using an Ed25519 detached digital signature.
+This function reads the raw binary contents of the manifest file located and produces a detached Ed25519
+signature over those exact bytes using the provided secret key. The manifest file must be written
+deterministically (stable ordering, formatting and line endings) prior to signing; any modification to the
+manifest after signing will cause signature verification to fail.
+
+**Parameters:**
+
+- `manifestPath`: Path to the manifest file to be signed.
+- `signaturePath`: Output path for the detached signature file.
+- `secretKey`: 64-byte Ed25519 secret key used to generate the signature.
+
+**Returns:**
+True if the manifest was successfully signed and the signature written, false otherwise.
+
+### verifyResourceManifestSignature()
+```c++
+static bool verifyResourceManifestSignature(
+    const std::filesystem::path& manifestPath, const std::filesystem::path& signaturePath,
+    const std::array<unsigned char, 32>& publicKey
+);
+```
+
+Verifies the detached digital signature of a resource manifest file.
+This function loads the raw contents of the manifest file and verifies its detached Ed25519 signature
+using the provided public key. Verification succeeds only if the manifest has not been modified since
+signing and the signature was produced by the holder of the corresponding secret key.
+
+- `manifestPath`: Path to the manifest file whose signature is to be verified.
+- `signaturePath`: Path to the detached signature file.
+- `publicKey`: 32-byte Ed25519 public key used for verification.
+
+**Returns:**
+True if the signature is valid; false if verification fails or files cannot be read.
+
 ---
 
 ## Relationships

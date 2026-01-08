@@ -47,6 +47,7 @@ pkg_check_modules(SWSCALE REQUIRED IMPORTED_TARGET libswscale)
 pkg_check_modules(SWRESAMPLE REQUIRED IMPORTED_TARGET libswresample)
 
 pkg_check_modules(OPENSSL REQUIRED IMPORTED_TARGET openssl)
+pkg_check_modules(SODIUM REQUIRED IMPORTED_TARGET libsodium)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
     PkgConfig::SDL3
@@ -59,6 +60,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     PkgConfig::SWSCALE
     PkgConfig::SWRESAMPLE
     PkgConfig::OPENSSL
+    PkgConfig::SODIUM
 )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

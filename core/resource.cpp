@@ -262,4 +262,77 @@ namespace DreamEngine {
 
         return stream.str();
     }
+
+    bool ResourceManager::signResourceManifest(
+        const std::filesystem::path& manifestPath, const std::filesystem::path& signaturePath,
+        const std::array<unsigned char, 64>& secretKey
+    ) {
+        if (sodium_init() < 0) return false;
+
+        std::vector<unsigned char> manifestBytes;
+        if (!readFileBytes(manifestPath, manifestBytes)) return false;
+
+        std::array<unsigned char, crypto_sign_BYTES> signature{};
+        unsigned long long signatureLength = 0;
+
+        if (crypto_sign_detached(
+            signature.data(), &signatureLength, manifestBytes.data(), manifestBytes.size(), secretKey.data()) != 0
+        ) return false;
+
+        std::vector signatureResult(signature.begin(), signature.begin() + static_cast<size_t>(signatureLength));
+        return writeFileBytes(signaturePath, signatureResult);
+    }
+
+    bool ResourceManager::verifyResourceManifestSignature(
+        const std::filesystem::path& manifestPath, const std::filesystem::path& signaturePath,
+        const std::array<unsigned char, 32>& publicKey
+    ) {
+        if (sodium_init() < 0) return false;
+
+        std::vector<unsigned char> manifestBytes;
+        if (!readFileBytes(manifestPath, manifestBytes)) return false;
+
+        std::vector<unsigned char> signatureBytes;
+        if (!readFileBytes(signaturePath, signatureBytes)) return false;
+
+        if (signatureBytes.size() != crypto_sign_BYTES) return false;
+
+        const int result = crypto_sign_verify_detached(
+            signatureBytes.data(), manifestBytes.data(), manifestBytes.size(), publicKey.data()
+        );
+
+        return result == 0;
+    }
+
+    bool ResourceManager::readFileBytes(const std::filesystem::path& path, std::vector<unsigned char>& output) {
+        output.clear();
+
+        std::ifstream input(path, std::ios::binary);
+        if (!input.is_open()) return false;
+
+        input.seekg(0, std::ios::end);
+        const std::streamoff size = input.tellg();
+        if (size < 0) return false;
+        input.seekg(0, std::ios::beg);
+
+        output.resize(size);
+        if (!output.empty()) {
+            input.read(reinterpret_cast<char*>(output.data()), size);
+            if (!input) return false;
+        }
+
+        return true;
+    }
+
+    bool ResourceManager::writeFileBytes(const std::filesystem::path& path, const std::vector<unsigned char>& data) {
+        std::ofstream output(path, std::ios::binary | std::ios::trunc);
+        if (!output.is_open()) return false;
+
+        if (!data.empty()) {
+            output.write(reinterpret_cast<const char*>(data.data()), static_cast<std::streamsize>(data.size()));
+            if (!output) return false;
+        }
+
+        return true;
+    }
 }

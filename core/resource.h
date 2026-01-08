@@ -22,6 +22,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <sodium.h>
 
 namespace DreamEngine {
     /// ResourceManager is a singleton class responsible for loading image and audio files from a given directory
@@ -118,9 +119,40 @@ namespace DreamEngine {
         ///
         /// @param directory Root directory containing resource files.
         /// @param path Path to the resource manifest file.
-        /// @return true if all resources match the manifest; false if any file is missing, corrupted, or fails verification.
+        /// @return true if all resources match the manifest; false if any file is corrupted or fails verification.
         ///
         public: static bool verifyResourceManifest(const std::filesystem::path& directory, const std::filesystem::path& path);
+
+        /// Signs a resource manifest file using an Ed25519 detached digital signature.
+        /// This function reads the raw binary contents of the manifest file located and produces a detached Ed25519
+        /// signature over those exact bytes using the provided secret key. The manifest file must be written
+        /// deterministically (stable ordering, formatting, and line endings) prior to signing; any modification to the
+        /// manifest after signing will cause signature verification to fail.
+        ///
+        /// @param manifestPath Path to the manifest file to be signed.
+        /// @param signaturePath Output path for the detached signature file.
+        /// @param secretKey 64-byte Ed25519 secret key used to generate the signature.
+        /// @return true if the manifest was successfully signed and the signature written, false otherwise.
+        ///
+        public: static bool signResourceManifest(
+            const std::filesystem::path& manifestPath, const std::filesystem::path& signaturePath,
+            const std::array<unsigned char, 64>& secretKey
+        );
+
+        /// Verifies the detached digital signature of a resource manifest file.
+        /// This function loads the raw contents of the manifest file and verifies its detached Ed25519 signature
+        /// using the provided public key. Verification succeeds only if the manifest has not been modified since
+        /// signing and the signature was produced by the holder of the corresponding secret key.
+        ///
+        /// @param manifestPath Path to the manifest file whose signature is to be verified.
+        /// @param signaturePath Path to the detached signature file.
+        /// @param publicKey 32-byte Ed25519 public key used for verification.
+        /// @return true if the signature is valid; false if verification fails or files cannot be read.
+        ///
+        public: static bool verifyResourceManifestSignature(
+            const std::filesystem::path& manifestPath, const std::filesystem::path& signaturePath,
+            const std::array<unsigned char, 32>& publicKey
+        );
 
         /// Converts an absolute filesystem path to a normalized relative resource key.
         ///
@@ -139,6 +171,22 @@ namespace DreamEngine {
         /// @return Lowercase hexadecimal SHA-256 digest of the file, or an empty string if the file cannot be read.
         ///
         private: static std::string computeSHA256(const std::filesystem::path& filePath);
+
+        /// Reads the full contents of a file into a byte buffer.
+        ///
+        /// @param path Path to the file to read.
+        /// @param output Byte buffer that receives the file contents.
+        /// @return true if the file was successfully read; false if the file cannot be opened, or an error occurs.
+        ///
+        private: static bool readFileBytes(const std::filesystem::path& path, std::vector<unsigned char>& output);
+
+        /// Writes a byte buffer to a file in binary mode.
+        ///
+        /// @param path Path to the file to write.
+        /// @param data Byte buffer to be written to the file.
+        /// @return true if the file was successfully written; false if the file cannot be opened, or an error occurs.
+        ///
+        private: static bool writeFileBytes(const std::filesystem::path& path, const std::vector<unsigned char>& data);
     };
 }
 
