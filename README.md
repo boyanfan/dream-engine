@@ -16,10 +16,9 @@ git clone https://github.com/boyanfan/dream-engine.git
 cd dream-engine
 ```
 
-Before building Dream Engine, make sure **SDL3**, 
-**CMake**, and **PkgConfig** have been installed. 
-You can check them from your terminal using the
-following commands.
+DreamEngine uses `CMake` and `PkgConfig` to locate dependencies.
+Before building Dream Engine, make sure the following dependencies 
+are installed, where You can check them from your terminal using the following commands.
 
 ```bash
 cmake --version
@@ -35,6 +34,9 @@ pkg-config --modversion libavcodec
 pkg-config --modversion libavutil
 pkg-config --modversion libswscale
 pkg-config --modversion libswresample
+
+pkg-config --modversion openssl
+pkg-config --modversion libsodium
 ```
 
 Then you can build it using the following commands.
